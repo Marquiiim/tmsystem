@@ -4,7 +4,7 @@ const queries = {
 
     getUserById: async (userId) => {
         const users = await db.query(
-            'SELECT id, name, email, created_at FROM users WHERE id = ?', [userId]
+            'SELECT id, username, email, password, role, position, created_at FROM users WHERE id = ?', [userId]
         )
         return users[0] || null
     }
