@@ -8,10 +8,16 @@ function Authpage() {
     // VARIÁVEIS DE CONTROLE
     const [typeForm, setTypeForm] = useState(true)
 
+    function authType(e) {
+        e.preventDefault()
+
+        
+    }
+
     return (
         <section className={styles.container}>
             <form className={styles.container_form}
-                onSubmit={(e) => e.preventDefault()}>
+                onSubmit={(e) => authType(e)}>
                 <h1 className={styles.container_form_title}>
                     Ticket Management System - {typeForm ? 'Logar' : 'Registrar'}
                 </h1>
@@ -36,7 +42,7 @@ function Authpage() {
                     <button type="submit">
                         {typeForm ? 'LOGAR' : 'REGISTRAR'}
                     </button>
-                    <button onClick={(e) => !typeForm ? setTypeForm(true) : setTypeForm(false)}>
+                    <button onClick={() => !typeForm ? setTypeForm(true) : setTypeForm(false)}>
                         {typeForm ? 'NÃO TENHO UMA CONTA' : 'VOLTAR PARA LOGAR'}
                     </button>
                 </div>
