@@ -4,23 +4,40 @@ import { useState } from 'react';
 import styles from './authpage.module.css';
 
 function Authpage() {
+
+    // VARIÁVEIS DE CONTROLE
+    const [typeForm, setTypeForm] = useState(true)
+
     return (
         <section className={styles.container}>
             <form className={styles.container_form}
                 onSubmit={(e) => e.preventDefault()}>
                 <h1 className={styles.container_form_title}>
-                    Ticket Management System
+                    Ticket Management System - {typeForm ? 'Logar' : 'Registrar'}
                 </h1>
                 <div className={styles.container_form_inputs}>
-                    <input type="text" placeholder="E-mail" />
-                    <input type="password" placeholder="Senha" />
+                    {typeForm ? (
+                        <>
+                            <input type="email" placeholder="E-mail" required />
+                            <input type="password" placeholder="Senha" required />
+                        </>
+                    ) : (
+                        <>
+                            <input type="number" placeholder="Código da empresa" required />
+                            <input type="text" placeholder="Nome" required />
+                            <input type="email" placeholder="E-mail" required />
+                            <input type="password" placeholder="Senha" required />
+                            <input type="password" placeholder="Confirmar senha" required />
+                        </>
+                    )
+                    }
                 </div>
                 <div className={styles.container_form_buttons}>
                     <button type="submit">
-                        LOGIN
+                        {typeForm ? 'LOGAR' : 'REGISTRAR'}
                     </button>
-                    <button>-
-                        NÃO TENHO UMA CONTA
+                    <button onClick={(e) => !typeForm ? setTypeForm(true) : setTypeForm(false)}>
+                        {typeForm ? 'NÃO TENHO UMA CONTA' : 'VOLTAR PARA LOGAR'}
                     </button>
                 </div>
             </form>
