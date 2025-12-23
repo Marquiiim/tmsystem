@@ -1,7 +1,7 @@
-require('dotenv').config()
-const mysql = require('mysql2')
+require('dotenv').config();
+const mysql = require('mysql2');
 
-const dbConfig = {
+const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
@@ -10,20 +10,18 @@ const dbConfig = {
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
-}
+});
 
-const pool = mysql.createPool(dbConfig)
-
-function query(sql, params = []) {
+const query = (sql, params) => {
     return new Promise((resolve, reject) => {
         pool.execute(sql, params, (error, results) => {
-            if (error) reject(error)
-            else resolve(results)
-        })
-    })
-}
+            if (error) reject(error);
+            else resolve(results);
+        });
+    });
+};
 
 module.exports = {
     query,
     pool
-}
+};
