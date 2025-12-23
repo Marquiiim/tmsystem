@@ -23,17 +23,7 @@ function query(sql, params = []) {
     })
 }
 
-function getConnection() {
-    return new Promise((resolve, reject) => {
-        pool.getConnection((error, connection) => {
-            if (error) reject(error)
-            else resolve(connection)
-        })
-    })
-}
-
 module.exports = {
     query,
-    getConnection,
     pool
 }
