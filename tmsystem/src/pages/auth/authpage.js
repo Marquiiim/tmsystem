@@ -1,3 +1,6 @@
+import axios from 'axios'
+import { useState } from 'react';
+
 import styles from './authpage.module.css';
 
 function Authpage() {
@@ -14,10 +17,10 @@ function Authpage() {
                 </div>
                 <div className={styles.container_form_buttons}>
                     <button type="submit">
-                        Login
+                        LOGIN
                     </button>
-                    <button>
-                        Não tenho uma conta
+                    <button>-
+                        NÃO TENHO UMA CONTA
                     </button>
                 </div>
             </form>
