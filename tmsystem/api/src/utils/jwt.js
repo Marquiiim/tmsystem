@@ -16,7 +16,7 @@ const JWT_CONFIG = {
 }
 
 const jwttokens = {
-    generateAccessToken: (payload) => {
+    generateAccessToken: async (payload) => {
         return jwt.sign(payload, JWT_CONFIG.accessToken.secret, {
             expiresIn: JWT_CONFIG.accessToken.expiresIn,
             issuer: JWT_CONFIG.accessToken.issuer,
@@ -24,7 +24,7 @@ const jwttokens = {
         })
     },
 
-    generateRefreshToken: (payload) => {
+    generateRefreshToken: async (payload) => {
         return jwt.sign(payload, jwt.CONFIG.refreshToken.secret, {
             expiresIn: JWT_CONFIG.refreshToken.expiresIn,
             issuer: JWT_CONFIG.refreshToken.issuer,
@@ -32,7 +32,7 @@ const jwttokens = {
         })
     },
 
-    verifyAccessToken: (token) => {
+    verifyAccessToken: async (token) => {
         try {
             return jwt.verify(token, JWT_CONFIG.accessToken.secret, {
                 issuer: JWT_CONFIG.accessToken.issuer,
@@ -43,7 +43,7 @@ const jwttokens = {
         }
     },
 
-    verifyRefreshToken: (token) => {
+    verifyRefreshToken: async (token) => {
         try {
             return jwt.verify(token, jwt.CONFIG.refreshToken.secret, {
                 issuer: JWT_CONFIG.refreshToken.issuer,

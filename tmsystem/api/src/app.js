@@ -1,14 +1,28 @@
 const express = require('express');
 const cors = require('cors')
+const rateLimit = require('express-rate-limit')
 const authRoutes = require('./routes/authroutes');
+require('dotenv').config()
+
 
 const app = express();
 
-app.use(express.json());
 app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true
 }))
+
+app.use(express.json());
+
+const globalLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 20,
+    message: {
+        error: '[TMSYSTEM] Muitas requisições, tente novamente mais tarde.'
+    }
+})
+
+app.use(globalLimiter)
 
 app.use('/api/auth', authRoutes);
 
