@@ -8,10 +8,21 @@ function Authpage() {
     // VARIÁVEIS DE CONTROLE
     const [typeForm, setTypeForm] = useState(true)
 
-    function authType(e) {
+    async function authType(e) {
         e.preventDefault()
 
-        
+        const form = e.currentTarget
+        const formData = new FormData(form)
+        const authData = Object.fromEntries(formData)
+
+        try {
+            const endpoint = typeForm ? '/login' : '/register'
+            const response = await axios.post(`http://localhost:5000/api/auth${endpoint}`, authData)
+            console.log(response)
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -24,16 +35,16 @@ function Authpage() {
                 <div className={styles.container_form_inputs}>
                     {typeForm ? (
                         <>
-                            <input type="email" placeholder="E-mail" required />
-                            <input type="password" placeholder="Senha" required />
+                            <input type="email" name='email' placeholder="E-mail" required />
+                            <input type="password" name='password' placeholder="Senha" required />
                         </>
                     ) : (
                         <>
-                            <input type="number" placeholder="Código da empresa" required />
-                            <input type="text" placeholder="Nome" required />
-                            <input type="email" placeholder="E-mail" required />
-                            <input type="password" placeholder="Senha" required />
-                            <input type="password" placeholder="Confirmar senha" required />
+                            <input type="number" name='companyCode' placeholder="Código da empresa" required />
+                            <input type="text" name='name' placeholder="Nome" required />
+                            <input type="email" name='email' placeholder="E-mail" required />
+                            <input type="password" name='password' placeholder="Senha" required />
+                            <input type="password" name='confirmPassword' placeholder="Confirmar senha" required />
                         </>
                     )
                     }
@@ -42,7 +53,7 @@ function Authpage() {
                     <button type="submit">
                         {typeForm ? 'LOGAR' : 'REGISTRAR'}
                     </button>
-                    <button onClick={() => !typeForm ? setTypeForm(true) : setTypeForm(false)}>
+                    <button onClick={() => setTypeForm(!typeForm)}>
                         {typeForm ? 'NÃO TENHO UMA CONTA' : 'VOLTAR PARA LOGAR'}
                     </button>
                 </div>

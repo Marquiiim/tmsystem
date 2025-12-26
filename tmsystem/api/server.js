@@ -1,7 +1,7 @@
 require('dotenv').config();
 const app = require('./src/app');
 const { pool } = require('./src/config/database');
-const PORT = process.env.PORT || 3306;
+const PORT = process.env.PORT || 5000;
 
 pool.getConnection((err, connection) => {
     if (err) {
