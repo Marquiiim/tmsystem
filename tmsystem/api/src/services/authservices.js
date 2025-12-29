@@ -8,9 +8,11 @@ async function serviceLogin(email, password) {
 
         if (!user) throw new Error('[TMSYSTEM] Usuário não existe.')
 
+        if (!user.is_active) throw new Error('[TMSYSTEM] Usuário inativo.')
+
         if (await bcrypt.compare(password, user.password_hash)) throw new Error('[TMSYSTEM] Senha incorreta.')
 
-        console.log('[TEST] Dados corretos.')
+
 
     } catch (error) {
         throw new Error(error)
@@ -31,10 +33,10 @@ async function serviceRegister(name, email, password) {
             role: 'user'
         }
 
-        await usermodels.create(userData)
+        const createdUser = await usermodels.create(userData)
 
         const accessToken = await jwttokens.generateAccessToken({
-            userId: userData.id,
+            userId: createdUser.insertId,
             name: userData.name,
             email: userData.email,
             token_version: userData.token_version,
@@ -42,7 +44,7 @@ async function serviceRegister(name, email, password) {
         })
 
         const refreshToken = await jwttokens.generateRefreshToken({
-            userId: userData.id,
+            userId: createdUser.insertId,
             name: userData.name,
             email: userData.email,
             token_version: userData.token_version,
@@ -51,7 +53,12 @@ async function serviceRegister(name, email, password) {
 
         delete userData.password_hash
         return {
-            ...userData,
+            user: {
+                id: createdUser.insertId,
+                name: userData.name,
+                email: userData.email,
+                role: userData.role
+            },
             tokens: {
                 accessToken,
                 refreshToken

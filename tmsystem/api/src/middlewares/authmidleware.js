@@ -14,8 +14,6 @@ function middlewareLogin(req, res, next) {
 
     if (!regex.password.test(password)) return res.status(400).json({ error: '[TMSYSTEM] A senha não atende as política de regras do sistema.' })
 
-    // VERIFICAR JWT & ARMAZENAR EM COOKIES
-
     next()
 }
 

@@ -2,7 +2,6 @@ const { serviceLogin, serviceRegister } = require('../services/authservices')
 
 async function controllerLogin(req, res) {
     try {
-        console.log(`[CONTROLLER] Dados de entrada: ${JSON.stringify(req.body)}`)
         const { email, password } = req.body
 
         const response = await serviceLogin(email, password)
@@ -21,8 +20,6 @@ async function controllerRegister(req, res) {
 
         const response = await serviceRegister(name, email, password)
 
-        console.log(response)
-
         res.cookie('acces_token', response.tokens.accessToken, {
             httpOnly: true,
             secure: false,
@@ -35,6 +32,13 @@ async function controllerRegister(req, res) {
             secure: false,
             sameSite: 'strict',
             maxAge: 7 * 24 * 60 * 60 * 1000
+        })
+
+        res.status(201).json({
+            success: true,
+            message: '[TMSYSTEM] Usuário registrado com sucesso.',
+            user: response.user,
+            redirectTo: '/home'
         })
 
     } catch (error) {

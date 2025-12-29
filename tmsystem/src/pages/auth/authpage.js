@@ -1,12 +1,13 @@
 import axios from 'axios'
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 
 import styles from './authpage.module.css';
 
 function Authpage() {
 
-    // VARIÁVEIS DE CONTROLE
     const [typeForm, setTypeForm] = useState(true)
+    const navigate = useNavigate()
 
     async function authType(e) {
         e.preventDefault()
@@ -18,7 +19,8 @@ function Authpage() {
         try {
             const endpoint = typeForm ? '/login' : '/register'
             const response = await axios.post(`http://localhost:5000/api/auth${endpoint}`, authData)
-            console.log(response)
+            console.log(response.data)
+            if (response?.data?.redirectTo) navigate(response.data.redirectTo)
 
         } catch (error) {
             console.log(error)
