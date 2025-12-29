@@ -13,8 +13,33 @@ async function controllerLogin(req, res) {
 }
 
 async function controllerRegister(req, res) {
-    console.log("Register user called");
-    res.json({ message: "Register endpoint funcionando!" });
+    try {
+        const {
+            name,
+            email,
+            password } = req.body
+
+        const response = await serviceRegister(name, email, password)
+
+        console.log(response)
+
+        res.cookie('acces_token', response.tokens.accessToken, {
+            httpOnly: true,
+            secure: false,
+            sameSite: 'strict',
+            maxAge: 15 * 60 * 1000
+        })
+
+        res.cookie('refresh_token', response.tokens.refreshToken, {
+            httpOnly: true,
+            secure: false,
+            sameSite: 'strict',
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        })
+
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 module.exports = {

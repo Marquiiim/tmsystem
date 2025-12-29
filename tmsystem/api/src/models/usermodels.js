@@ -4,8 +4,8 @@ const user = {
 
     create: async (userData) => {
         const result = await query(
-            'INSERT INTO users (name, email, password_hash, role, created_at, is_active) VALUES (?, ?, ?, ?, ?, ?)',
-            [userData.name, userData.email, userData.password_hash, userData.role, userData.created_at, userData.is_active]
+            'INSERT INTO users (name, email, password_hash, token_version, role) VALUES (?, ?, ?, ?, ?)',
+            [userData.name, userData.email, userData.password_hash, userData.token_version, userData.role]
         )
         return result
     },

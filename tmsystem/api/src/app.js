@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors')
 const rateLimit = require('express-rate-limit')
+const cookieParser = require('cookie-parser')
 const authRoutes = require('./routes/authroutes');
 require('dotenv').config()
 
@@ -22,6 +23,7 @@ const globalLimiter = rateLimit({
     }
 })
 
+app.use(cookieParser())
 app.use(globalLimiter)
 
 app.use('/api/auth', authRoutes);
