@@ -1,9 +1,15 @@
+import styles from './homepage.module.css'
+
+import Layout from '../../layout/layout'
+
 function Homepage() {
 
     return (
-        <div>
-            <h1>Welcome to the Home Page</h1>
-        </div>
+        <Layout>
+            <div className={styles.container}>
+                <h1>TMSYSTEM TESTE HOME</h1>
+            </div>
+        </Layout>
     )
 }
 

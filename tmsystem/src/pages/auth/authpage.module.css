@@ -120,41 +120,4 @@
 }
 .container_form_buttons button:last-child:hover {
   background: rgba(106, 17, 203, 0.08);
-}
-
-.container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
-}
-
-@media (max-height: 750px) {
-  .container_form {
-    padding: 1.5rem;
-    max-height: 90vh;
-  }
-  .container_form_title {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-  .container_form_inputs {
-    gap: 0.7rem;
-  }
-  .container_form_inputs input {
-    padding: 0.7rem 0.9rem;
-    min-height: 44px;
-    font-size: 0.95rem;
-  }
-  .container_form_buttons {
-    gap: 0.7rem;
-  }
-  .container_form_buttons button {
-    padding: 0.75rem 1.3rem;
-    min-height: 46px;
-    font-size: 0.95rem;
-  }
 }/*# sourceMappingURL=authpage.module.css.map */

@@ -1,0 +1,28 @@
+.container {
+  padding: 2.5rem;
+  text-align: center;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: #f8fafc;
+}
+.container .content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+}
+ul li {
+  font-size: 1.05rem;
+  padding: 0.6rem;
+  border-bottom: 2px solid transparent;
+  transition: border 0.3s ease-in-out;
+}
+ul li:hover {
+  border-bottom: 2px solid #f8fafc;
+  cursor: pointer;
+}/*# sourceMappingURL=header.module.css.map */

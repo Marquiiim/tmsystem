@@ -12,7 +12,31 @@ async function serviceLogin(email, password) {
 
         if (await bcrypt.compare(password, user.password_hash)) throw new Error('[TMSYSTEM] Senha incorreta.')
 
+        const accessToken = await jwttokens.generateAccessToken({
+            userId: user.id,
+            name: user.name,
+            email: user.email,
+            token_version: user.token_version,
+            role: user.role
+        })
 
+        const refreshToken = await jwttokens.generateRefreshToken({
+            userId: user.id,
+            token_version: user.token_version
+        })
+
+        return {
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                role: user.role
+            },
+            tokens: {
+                accessToken,
+                refreshToken
+            }
+        }
 
     } catch (error) {
         throw new Error(error)
@@ -45,10 +69,7 @@ async function serviceRegister(name, email, password) {
 
         const refreshToken = await jwttokens.generateRefreshToken({
             userId: createdUser.insertId,
-            name: userData.name,
-            email: userData.email,
-            token_version: userData.token_version,
-            role: userData.role
+            token_version: userData.token_version
         })
 
         delete userData.password_hash

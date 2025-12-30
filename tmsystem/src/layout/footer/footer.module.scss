@@ -1,0 +1,18 @@
+$dark-gray: #1a1a2e;
+$dark-gray-variant: #16213e;
+$purple-primary: #6d28d9;
+$purple-secondary: #8b5cf6;
+$purple-light: #a78bfa;
+$frost-white: #f8fafc;
+$frost-white-transparent: rgba(248, 250, 252, 0.95);
+
+.container {
+    padding: 1rem;
+    text-align: center;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: $frost-white;
+
+    .content {
+        width: 100%;
+    }
+}

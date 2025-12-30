@@ -1,0 +1,9 @@
+.container {
+  padding: 1rem;
+  text-align: center;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: #f8fafc;
+}
+.container .content {
+  width: 100%;
+}/*# sourceMappingURL=footer.module.css.map */
