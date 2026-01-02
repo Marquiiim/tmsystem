@@ -9,14 +9,14 @@ async function controllerLogin(req, res) {
         res.cookie('access_token', response.tokens.accessToken, {
             httpOnly: true,
             secure: false,
-            sameSite: 'strict',
+            sameSite: 'lax',
             maxAge: 15 * 60 * 1000
         })
 
         res.cookie('refresh_token', response.tokens.refreshToken, {
             httpOnly: true,
             secure: false,
-            sameSite: 'strict',
+            sameSite: 'lax',
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
 
@@ -44,14 +44,14 @@ async function controllerRegister(req, res) {
         res.cookie('access_token', response.tokens.accessToken, {
             httpOnly: true,
             secure: false,
-            sameSite: 'strict',
+            sameSite: 'lax',
             maxAge: 15 * 60 * 1000
         })
 
         res.cookie('refresh_token', response.tokens.refreshToken, {
             httpOnly: true,
             secure: false,
-            sameSite: 'strict',
+            sameSite: 'lax',
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
 

@@ -9,12 +9,20 @@ const ProtectedRoutes = () => {
 
 
     useEffect(() => {
-        try {
-            const response = axios.post('http://localhost:5000/api/auth/verify-token', {}, { withCredentials: true })
-            console.log('Resposta:', response.data);
-        } catch (error) {
-            console.log(error)
+        const verifyToken = () => {
+            try {
+                const response = axios.post('http://localhost:5000/api/auth/verify-token', {}, {
+                    withCredentials: true,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                console.log('Resposta:', response.data);
+            } catch (error) {
+                console.error('❌ Erro:', error.response?.data || error.message);
+            }
         }
+        verifyToken()
     }, [])
 
 }
