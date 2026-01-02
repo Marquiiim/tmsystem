@@ -1,4 +1,4 @@
-const { serviceLogin, serviceRegister } = require('../services/authservices')
+const { serviceLogin, serviceRegister, verifyTokensLogin } = require('../services/authservices')
 
 async function controllerLogin(req, res) {
     try {
@@ -41,7 +41,7 @@ async function controllerRegister(req, res) {
 
         const response = await serviceRegister(name, email, password)
 
-        res.cookie('acces_token', response.tokens.accessToken, {
+        res.cookie('access_token', response.tokens.accessToken, {
             httpOnly: true,
             secure: false,
             sameSite: 'strict',
@@ -67,7 +67,18 @@ async function controllerRegister(req, res) {
     }
 }
 
+async function controllerTokens(req, res) {
+    try {
+        const { accessToken, refreshToken } = req.body
+
+        await verifyTokensLogin(accessToken, refreshToken)
+    } catch (error) {
+        throw new Error('[TMSYSTEM] Tokens inválidos.')
+    }
+}
+
 module.exports = {
     controllerLogin,
-    controllerRegister
+    controllerRegister,
+    controllerTokens
 };

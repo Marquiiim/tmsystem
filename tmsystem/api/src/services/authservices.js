@@ -1,6 +1,6 @@
-const usermodels = require('../models/usermodels')
-const jwttokens = require('../utils/jwt')
-const bcrypt = require('../utils/bcrypt')
+const usermodels = require('../models/userModels')
+const jwttokens = require('../utils/Jwt')
+const bcrypt = require('../utils/Bcrypt')
 
 async function serviceLogin(email, password) {
     try {
@@ -91,7 +91,17 @@ async function serviceRegister(name, email, password) {
     }
 }
 
+async function verifyTokensLogin(accessToken, refreshToken) {
+    try {
+        await jwttokens.verifyAccessToken(accessToken)
+        await jwttokens.verifyRefreshToken(refreshToken)
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
 module.exports = {
     serviceLogin,
-    serviceRegister
+    serviceRegister,
+    verifyTokensLogin
 }

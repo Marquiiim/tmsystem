@@ -19,7 +19,7 @@ function Authpage() {
         try {
             const endpoint = typeForm ? '/login' : '/register'
             const response = await axios.post(`http://localhost:5000/api/auth${endpoint}`, authData)
-            if (response?.data?.redirectTo) navigate(response.data.redirectTo)
+            if (response?.data?.redirectTo) navigate(response.data.redirectTo, { replace: true })
 
         } catch (error) {
             console.log(error)

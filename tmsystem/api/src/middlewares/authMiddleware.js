@@ -52,7 +52,20 @@ function middlewareRegister(req, res, next) {
 
 }
 
+function middlewareTokens(req, res, next) {
+    console.log('=== DEBUG COOKIES ===');
+    console.log('Cookies:', req.cookies);
+    console.log(req.cookies.access_token);
+    console.log(req.cookies.refresh_token);
+
+    // next()
+}
+
+
+
+
 module.exports = {
     middlewareLogin,
-    middlewareRegister
+    middlewareRegister,
+    middlewareTokens
 }

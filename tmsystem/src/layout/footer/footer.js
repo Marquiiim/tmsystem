@@ -6,7 +6,7 @@ function Footer() {
         <footer className={styles.container}>
             <div className={styles.content}>
                 <h4>TMSystem</h4>
-                <p>Beta | © 2024</p>
+                <p>Beta | © 2026</p>
                 <p>suporte@tmsystem.com</p>
                 <p className={styles.status}>
                     Sistema Operacional
