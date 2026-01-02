@@ -53,10 +53,18 @@ function middlewareRegister(req, res, next) {
 }
 
 function middlewareTokens(req, res, next) {
-    console.log('=== DEBUG COOKIES ===');
-    console.log('Cookies:', req.cookies);
-    console.log(req.cookies.access_token);
-    console.log(req.cookies.refresh_token);
+    console.log('=== VERIFICANDO COOKIES ===');
+
+    // 🎯 ISSO VAI FUNCIONAR MESMO COM httpOnly!
+    console.log('access_token recebido?', req.cookies.access_token ? 'SIM' : 'NÃO');
+    console.log('refresh_token recebido?', req.cookies.refresh_token ? 'SIM' : 'NÃO');
+
+    // Mostra os valores (ou se estão vazios)
+    console.log('Valor access_token:', req.cookies.access_token || 'VAZIO');
+    console.log('Valor refresh_token:', req.cookies.refresh_token || 'VAZIO');
+
+    // Mostra TODOS os cookies
+    console.log('Todos cookies:', req.cookies);
 
     // next()
 }
