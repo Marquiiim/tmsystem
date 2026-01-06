@@ -53,20 +53,10 @@ function middlewareRegister(req, res, next) {
 }
 
 function middlewareTokens(req, res, next) {
-    console.log('=== VERIFICANDO COOKIES ===');
 
-    // 🎯 ISSO VAI FUNCIONAR MESMO COM httpOnly!
-    console.log('access_token recebido?', req.cookies.access_token ? 'SIM' : 'NÃO');
-    console.log('refresh_token recebido?', req.cookies.refresh_token ? 'SIM' : 'NÃO');
+    if (!req.cookies.access_token || !req.cookies.refresh_token) return res.status(401).json({ valid: false, message: '[TMSYSTEM] Acesso negado, token não encontrado.' })
 
-    // Mostra os valores (ou se estão vazios)
-    console.log('Valor access_token:', req.cookies.access_token || 'VAZIO');
-    console.log('Valor refresh_token:', req.cookies.refresh_token || 'VAZIO');
-
-    // Mostra TODOS os cookies
-    console.log('Todos cookies:', req.cookies);
-
-    // next()
+    next()
 }
 
 

@@ -10,7 +10,7 @@ async function serviceLogin(email, password) {
 
         if (!user.is_active) throw new Error('[TMSYSTEM] Usuário inativo.')
 
-        if (await bcrypt.compare(password, user.password_hash)) throw new Error('[TMSYSTEM] Senha incorreta.')
+        if (!(await bcrypt.compare(password, user.password_hash))) throw new Error('[TMSYSTEM] Senha incorreta.')
 
         const accessToken = await jwttokens.generateAccessToken({
             userId: user.id,

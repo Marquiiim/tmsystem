@@ -5,20 +5,18 @@ const cookieParser = require('cookie-parser')
 const authRoutes = require('./routes/authRoutes');
 require('dotenv').config()
 
-
 const app = express();
 
-app.use(cookieParser())
-app.use(express.json());
 app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }))
+app.use(cookieParser())
+app.use(express.json());
 
 const globalLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 20,
+    max: 100,
     message: {
         error: '[TMSYSTEM] Muitas requisições, tente novamente mais tarde.'
     }
