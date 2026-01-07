@@ -14,7 +14,7 @@ const ProtectedRoutes = () => {
                 const response = await axios.post('http://localhost:5000/api/auth/verify-token', {}, {
                     withCredentials: true
                 })
-                setIsAuthenticated(response?.data?.valid === false)
+                setIsAuthenticated(response?.data?.valid || false)
             } catch (error) {
                 console.error('❌ Erro:', error.response?.data || error.message);
                 setIsAuthenticated(false)
