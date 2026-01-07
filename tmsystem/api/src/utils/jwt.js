@@ -45,7 +45,7 @@ const jwttokens = {
 
     verifyRefreshToken: async (token) => {
         try {
-            return jwt.verify(token, jwt.CONFIG.refreshToken.secret, {
+            return jwt.verify(token, JWT_CONFIG.refreshToken.secret, {
                 issuer: JWT_CONFIG.refreshToken.issuer,
                 audience: JWT_CONFIG.refreshToken.audience
             })

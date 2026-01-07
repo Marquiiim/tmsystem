@@ -16,6 +16,12 @@ const cookies_options = {
         sameSite: 'lax',
         path: '/',
         maxAge: 7 * 24 * 60 * 60 * 1000
+    },
+    clear_options: {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'lax',
+        path: '/'
     }
 }
 
@@ -75,25 +81,17 @@ async function controllerRegister(req, res) {
 
 async function controllerTokens(req, res) {
     try {
-        console.log('🔍 Cookies recebidos:', req.cookies);
         const accessToken = req.cookies.access_token
         const refreshToken = req.cookies.refresh_token
 
-        console.log('✅ Access Token recebido:', accessToken ? 'SIM' : 'NÃO');
-        console.log('✅ Refresh Token recebido:', refreshToken ? 'SIM' : 'NÃO');
-        console.log('🔑 Access Token (primeiros 20 chars):', accessToken?.substring(0, 20) + '...');
-        console.log('🔑 Refresh Token (primeiros 20 chars):', refreshToken?.substring(0, 20) + '...');
-
-        if (accessToken) {
-            const parts = accessToken.split('.');
-            console.log('📝 Access Token tem', parts.length, 'partes');
-        }
-
         await verifyTokensLogin(accessToken, refreshToken)
-        console.log('🎯 Resultado da verificação:', result);
+
         return res.status(200).json({ valid: true })
     } catch (error) {
-        return res.status(401).json({ valid: false, error: '[TMSYSTEM] Tokens inválidos.' })
+        res.clearCookie('access_token', cookies_options.clear_options)
+        res.clearCookie('refresh_token', cookies_options.clear_options)
+
+        return res.status(401).json({ valid: false, error: error.message })
     }
 }
 

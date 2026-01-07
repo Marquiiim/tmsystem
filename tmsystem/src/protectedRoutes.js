@@ -8,7 +8,6 @@ const ProtectedRoutes = () => {
     const [isAutheticated, setIsAuthenticated] = useState(null)
     const [loading, setLoading] = useState(true)
 
-
     useEffect(() => {
         const verifyToken = async () => {
             try {

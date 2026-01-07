@@ -39,7 +39,7 @@ async function serviceLogin(email, password) {
         }
 
     } catch (error) {
-        throw new Error(error)
+        throw error
     }
 }
 
@@ -95,8 +95,10 @@ async function verifyTokensLogin(accessToken, refreshToken) {
     try {
         await jwttokens.verifyAccessToken(accessToken)
         await jwttokens.verifyRefreshToken(refreshToken)
+
+        return true
     } catch (error) {
-        throw new Error(error)
+        throw error
     }
 }
 

@@ -38,7 +38,6 @@ function middlewareRegister(req, res, next) {
         !password ||
         !confirmPassword) return res.status(400).json({ error: '[TMSYSTEM] Usuário inválido' })
 
-
     // CÓDIGO PADRÃO TEMPORÁRIO DA EMPRESA (180)
     if (companyCode !== '180') return res.status(400).json({ error: '[TMSYSTEN] Empresa inexistente.' })
 
