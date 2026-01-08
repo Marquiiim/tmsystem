@@ -46,7 +46,7 @@ async function controllerLogin(req, res) {
     } catch (error) {
         return res.status(401).json({
             success: false,
-            message: error.message 
+            message: error.message
         })
     }
 }
@@ -77,6 +77,10 @@ async function controllerRegister(req, res) {
             message: error.message
         })
     }
+}
+
+async function controllerLogout(req, res) {
+
 }
 
 async function controllerTokens(req, res) {

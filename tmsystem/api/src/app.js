@@ -3,6 +3,7 @@ const cors = require('cors')
 const rateLimit = require('express-rate-limit')
 const cookieParser = require('cookie-parser')
 const authRoutes = require('./routes/authRoutes');
+const sessionsRoutes = require('./routes/sessionsRoutes')
 require('dotenv').config()
 
 const app = express();
@@ -25,5 +26,6 @@ const globalLimiter = rateLimit({
 app.use(globalLimiter)
 
 app.use('/api/auth', authRoutes);
+app.use('api/sessions', sessionsRoutes)
 
 module.exports = app;

@@ -91,6 +91,10 @@ async function serviceRegister(name, email, password) {
     }
 }
 
+async function controllerLogout(accessToken, refreshToken) {
+
+}
+
 async function verifyTokensLogin(accessToken, refreshToken) {
     try {
         await jwttokens.verifyAccessToken(accessToken)
