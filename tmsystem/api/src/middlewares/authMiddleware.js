@@ -8,11 +8,11 @@ function middlewareLogin(req, res, next) {
 
     if (typeof email !== 'string' || typeof password !== 'string') return res.status(400).json({ error: '[TMSYSTEM] Os dados informados não correspondem aos tipos esperados para cada campo.' })
 
-    if (!email || !password) return res.status(400).json({ error: '[TMSYSTEM] Usuário inválido.' })
+    if (!email || !password) return res.status(400).json({ error: '[TMSYSTEM] Preencha todos os campos existentes.' })
 
-    if (!regex.email.test(email)) return res.status(400).json({ error: '[TMSYSTEM] O email não atende as política de regras do sistema.' })
+    if (!regex.email.test(email)) return res.status(400).json({ error: '[TMSYSTEM] Email incorreto.' })
 
-    if (!regex.password.test(password)) return res.status(400).json({ error: '[TMSYSTEM] A senha não atende as política de regras do sistema.' })
+    if (!regex.password.test(password)) return res.status(400).json({ error: '[TMSYSTEM] Senha incorreta.' })
 
     next()
 }
@@ -36,7 +36,7 @@ function middlewareRegister(req, res, next) {
         !name ||
         !email ||
         !password ||
-        !confirmPassword) return res.status(400).json({ error: '[TMSYSTEM] Usuário inválido' })
+        !confirmPassword) return res.status(400).json({ error: '[TMSYSTEM] Preencha todos os campos existentes.' })
 
     // CÓDIGO PADRÃO TEMPORÁRIO DA EMPRESA (180)
     if (companyCode !== '180') return res.status(400).json({ error: '[TMSYSTEN] Empresa inexistente.' })

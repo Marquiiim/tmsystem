@@ -16,7 +16,6 @@ const ProtectedRoutes = () => {
                 })
                 setIsAuthenticated(response?.data?.valid || false)
             } catch (error) {
-                console.error('❌ Erro:', error.response?.data || error.message);
                 setIsAuthenticated(false)
             } finally {
                 setLoading(false)

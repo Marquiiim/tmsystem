@@ -7,11 +7,15 @@ import styles from './authpage.module.css';
 function Authpage() {
 
     const [typeForm, setTypeForm] = useState(true)
+    const [typeError, setTypeError] = useState('')
+    const [error, setError] = useState(false)
     const navigate = useNavigate()
 
     async function authType(e) {
         e.preventDefault()
 
+        setTypeError('')
+        setError(false)
         const form = e.currentTarget
         const formData = new FormData(form)
         const authData = Object.fromEntries(formData)
@@ -21,7 +25,8 @@ function Authpage() {
             const response = await axios.post(`http://localhost:5000/api/auth${endpoint}`, authData, { withCredentials: true })
             if (response?.data?.redirectTo) navigate(response.data.redirectTo, { replace: true })
         } catch (error) {
-            console.log(error)
+            setTypeError(error?.response?.data?.error)
+            setError(true)
         }
     }
 
@@ -32,6 +37,11 @@ function Authpage() {
                 <h1 className={styles.container_form_title}>
                     Ticket Management System - {typeForm ? 'Logar' : 'Registrar'}
                 </h1>
+                {error &&
+                    <p className={styles.error_message}>
+                        {typeError}
+                    </p>
+                }
                 <div className={styles.container_form_inputs}>
                     {typeForm ? (
                         <>

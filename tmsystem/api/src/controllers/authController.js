@@ -35,7 +35,7 @@ async function controllerLogin(req, res) {
 
         res.cookie('refresh_token', response.tokens.refreshToken, cookies_options.refresh_token)
 
-        res.status(201).json({
+        res.status(200).json({
             success: true,
             message: '[TMSYSTEM] Usuário logado com sucesso.',
             user: response.user,
@@ -46,7 +46,7 @@ async function controllerLogin(req, res) {
     } catch (error) {
         return res.status(401).json({
             success: false,
-            message: `[TMSYSTEM] ${error}`
+            message: error.message 
         })
     }
 }
@@ -64,7 +64,7 @@ async function controllerRegister(req, res) {
 
         res.cookie('refresh_token', response.tokens.refreshToken, cookies_options.refresh_token)
 
-        return res.status(200).json({
+        return res.status(201).json({
             success: true,
             message: '[TMSYSTEM] Usuário registrado com sucesso.',
             user: response.user,
@@ -74,7 +74,7 @@ async function controllerRegister(req, res) {
     } catch (error) {
         return res.status(409).json({
             success: false,
-            message: `[TMSYSTEM] ${error}`
+            message: error.message
         })
     }
 }
@@ -91,7 +91,7 @@ async function controllerTokens(req, res) {
         res.clearCookie('access_token', cookies_options.clear_options)
         res.clearCookie('refresh_token', cookies_options.clear_options)
 
-        return res.status(401).json({ valid: false, error: error.message })
+        return res.status(401).json({ valid: false, error: '[TMSYSTEM] Sessão expirada. Por favor, faça login novamente.' })
     }
 }
 

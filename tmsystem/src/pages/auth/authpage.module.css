@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .container {
   display: flex;
   flex-direction: column;
@@ -41,6 +42,30 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   padding: 0 0.5rem;
+}
+
+.error_message {
+  display: block;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-left: 4px solid #ef4444;
+  border-radius: 0.5rem;
+  color: #dc2626;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.3s ease-out;
+}
+.error_message::before {
+  content: "⚠ ";
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+.error_message:first-letter {
+  text-transform: uppercase;
 }
 
 .container_form_inputs {

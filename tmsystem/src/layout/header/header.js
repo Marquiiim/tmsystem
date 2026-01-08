@@ -9,7 +9,7 @@ function Header() {
         <header className={styles.container}>
             <div className={styles.content}>
                 <h1>
-                    TMSYSTEM
+                    Ticket Management System
                 </h1>
                 <ul>
                     <li>
