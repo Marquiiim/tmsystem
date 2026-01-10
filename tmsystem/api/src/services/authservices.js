@@ -26,12 +26,6 @@ async function serviceLogin(email, password) {
         })
 
         return {
-            user: {
-                id: user.id,
-                name: user.name,
-                email: user.email,
-                role: user.role
-            },
             tokens: {
                 accessToken,
                 refreshToken
@@ -74,12 +68,6 @@ async function serviceRegister(name, email, password) {
 
         delete userData.password_hash
         return {
-            user: {
-                id: createdUser.insertId,
-                name: userData.name,
-                email: userData.email,
-                role: userData.role
-            },
             tokens: {
                 accessToken,
                 refreshToken
@@ -91,18 +79,17 @@ async function serviceRegister(name, email, password) {
     }
 }
 
-async function controllerLogout(accessToken, refreshToken) {
-
-}
-
 async function verifyTokensLogin(accessToken, refreshToken) {
     try {
         await jwttokens.verifyAccessToken(accessToken)
-        await jwttokens.verifyRefreshToken(refreshToken)
-
         return true
-    } catch (error) {
-        throw error
+    } catch (accessError) {
+        try {
+            await jwttokens.verifyRefreshToken(refreshToken)
+            return true
+        } catch (error) {
+            throw error
+        }
     }
 }
 

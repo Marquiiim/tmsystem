@@ -39,7 +39,7 @@ const jwttokens = {
                 audience: JWT_CONFIG.accessToken.audience
             })
         } catch (error) {
-            throw new Error('[TMSYSTEM] Token inválido ou expirado, tente novamente.')
+            throw new Error('[TMSYSTEM] Sessão expirada, tente novamente.')
         }
     },
 
@@ -50,7 +50,7 @@ const jwttokens = {
                 audience: JWT_CONFIG.refreshToken.audience
             })
         } catch (error) {
-            throw new Error('[TMSYSTEM] Token inválido ou expirado, tente novamente.')
+            throw new Error('[TMSYSTEM] Sessão expirada, tente novamente.')
         }
     }
 }

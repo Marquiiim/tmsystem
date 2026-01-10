@@ -6,6 +6,6 @@ const { middlewareLogin, middlewareRegister, middlewareTokens } = require('../mi
 
 router.post('/login', middlewareLogin, controllerLogin);
 router.post('/register', middlewareRegister, controllerRegister);
-router.post('/verify-token', middlewareTokens, controllerTokens)
+router.get('/verify-token', middlewareTokens, controllerTokens)
 
 module.exports = router;

@@ -4,6 +4,7 @@ const rateLimit = require('express-rate-limit')
 const cookieParser = require('cookie-parser')
 const authRoutes = require('./routes/authRoutes');
 const sessionsRoutes = require('./routes/sessionsRoutes')
+const usersRoutes = require('./routes/usersRoutes')
 require('dotenv').config()
 
 const app = express();
@@ -15,17 +16,30 @@ app.use(cors({
 app.use(cookieParser())
 app.use(express.json());
 
+const authLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 50,
+    skipSuccessfulRequests: true
+});
+
 const globalLimiter = rateLimit({
     windowMs: 15 * 60 * 1000,
-    max: 100,
+    max: 1000,
+    skip: (req) => {
+        return req.path.startsWith('/api/auth')
+    },
     message: {
-        error: '[TMSYSTEM] Muitas requisições, tente novamente mais tarde.'
+        error: '[TMSYSTEM] Muitas tentativas, tente novamente mais tarde.'
     }
 })
 
 app.use(globalLimiter)
 
+app.use('/api/auth/login', authLimiter)
+app.use('/api/auth/register', authLimiter)
+
 app.use('/api/auth', authRoutes);
 app.use('/api/sessions', sessionsRoutes)
+app.use('/api/users', usersRoutes)
 
 module.exports = app;

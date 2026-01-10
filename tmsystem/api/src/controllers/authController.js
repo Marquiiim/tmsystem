@@ -79,10 +79,6 @@ async function controllerRegister(req, res) {
     }
 }
 
-async function controllerLogout(req, res) {
-
-}
-
 async function controllerTokens(req, res) {
     try {
         const accessToken = req.cookies.access_token
