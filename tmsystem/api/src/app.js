@@ -26,6 +26,6 @@ const globalLimiter = rateLimit({
 app.use(globalLimiter)
 
 app.use('/api/auth', authRoutes);
-app.use('api/sessions', sessionsRoutes)
+app.use('/api/sessions', sessionsRoutes)
 
 module.exports = app;

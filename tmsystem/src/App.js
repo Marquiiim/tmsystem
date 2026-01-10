@@ -5,6 +5,7 @@ import Authpage from './pages/auth/authpage';
 import ProtectedRoutes from './protectedRoutes'
 
 import Homepage from './pages/home/homepage';
+import Profilepage from './pages/profile/profilepage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
 
       <Route element={<ProtectedRoutes />}>
         <Route path="/home" element={<Homepage />} />
+        <Route path="/profile" element={<Profilepage />} />
       </Route>
     </Routes>
   );

@@ -39,6 +39,7 @@
 }
 .list_tickets li:hover {
   opacity: 0.8;
+  cursor: pointer;
 }
 .list_tickets li:hover h3 {
   color: #6a11cb;
