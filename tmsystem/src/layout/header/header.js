@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import styles from './header.module.css'
 
-import { FiLogOut, FiHome } from "react-icons/fi";
+import { FiLogOut, FiHome, FiTag, FiSettings } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 
 function Header() {
@@ -22,7 +22,7 @@ function Header() {
         <header className={styles.container}>
             <div className={styles.content}>
                 <h1>
-                    Ticket Management System
+                    <FiSettings /> Ticket Management System
                 </h1>
                 <ul className={styles.list_header}>
                     <li>
@@ -39,6 +39,14 @@ function Header() {
                             navigate('/profile')
                         }}>
                             <CgProfile /> Perfil
+                        </button>
+                    </li>
+                    <li>
+                        <button type='button' onClick={(e) => {
+                            e.preventDefault()
+                            navigate('/profile')
+                        }}>
+                            <FiTag /> Meus Chamados
                         </button>
                     </li>
                     <li>
