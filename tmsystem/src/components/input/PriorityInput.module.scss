@@ -1,0 +1,156 @@
+.priority {
+    width: 100%;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+    background-color: #fff;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    appearance: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+    padding-right: 48px;
+    margin-top: 1.5rem;
+}
+
+.priority:focus {
+    outline: none;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.15);
+}
+
+.priority:hover {
+    border-color: #3182ce;
+}
+
+.priority option[value=""] {
+    color: #a0aec0;
+    font-style: italic;
+}
+
+.priority option {
+    padding: 12px;
+    background-color: #fff;
+    color: #333;
+}
+
+.priority option.prority_option {
+    padding: 12px;
+    background-color: #fff;
+    color: #333;
+}
+
+.priority option.green {
+    background-color: #c6f6d5;
+    color: #22543d;
+}
+
+.priority option.orange {
+    background-color: #fed7d7;
+    color: #742a2a;
+}
+
+.priority option.yellow {
+    background-color: #feebc8;
+    color: #744210;
+}
+
+.priority option.red {
+    background-color: #fed7d7;
+    color: #742a2a;
+}
+
+.priority option[value="urgent"].red,
+.priority option[value="critical"].red {
+    background-color: #fed7d7;
+    color: #742a2a;
+}
+
+.priority:has(option.prority_option.green:checked) {
+    border-color: #38a169;
+    background-color: #f0fff4;
+}
+
+.priority:has(option.prority_option.orange:checked) {
+    border-color: #ed8936;
+    background-color: #fffaf0;
+}
+
+.priority:has(option.prority_option.yellow:checked) {
+    border-color: #d69e2e;
+    background-color: #fffff0;
+}
+
+.priority:has(option.prority_option.red:checked) {
+    border-color: #e53e3e;
+    background-color: #fff5f5;
+}
+
+.priority:has(option.prority_option.green:checked):focus {
+    outline: none;
+    border-color: #2f855a;
+    box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.15);
+}
+
+.priority:has(option.prority_option.orange:checked):focus {
+    outline: none;
+    border-color: #dd6b20;
+    box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.15);
+}
+
+.priority:has(option.prority_option.yellow:checked):focus {
+    outline: none;
+    border-color: #b7791f;
+    box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.15);
+}
+
+.priority:has(option.prority_option.red:checked):focus {
+    outline: none;
+    border-color: #c53030;
+    box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.15);
+}
+
+.priority:has(option.prority_option.green:checked):hover {
+    border-color: #2f855a;
+}
+
+.priority:has(option.prority_option.orange:checked):hover {
+    border-color: #dd6b20;
+}
+
+.priority:has(option.prority_option.yellow:checked):hover {
+    border-color: #b7791f;
+}
+
+.priority:has(option.prority_option.red:checked):hover {
+    border-color: #c53030;
+}
+
+.priority:has(option.prority_option.green:checked) {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2338a169' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+.priority:has(option.prority_option.orange:checked) {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ed8936' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+.priority:has(option.prority_option.yellow:checked) {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23d69e2e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+.priority:has(option.prority_option.red:checked) {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e53e3e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+.priority:has(option[value=""]:checked) {
+    border-color: #e2e8f0;
+    background-color: #fff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%234a5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+}

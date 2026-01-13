@@ -11,7 +11,7 @@ const ProtectedRoutes = () => {
     useEffect(() => {
         const verifyToken = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/auth/verify-token', { withCredentials: true })
+                const response = await axios.get('http://localhost:5000/api/sessions/private-routes', { withCredentials: true })
                 setIsAuthenticated(response?.data?.valid || false)
             } catch (error) {
                 setIsAuthenticated(false)

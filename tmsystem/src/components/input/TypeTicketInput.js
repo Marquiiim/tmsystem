@@ -1,3 +1,4 @@
+import styles from './TypeTicketInput.module.css'
 import { useState } from "react"
 
 function TypeTicketInput({ data }) {
@@ -5,8 +6,8 @@ function TypeTicketInput({ data }) {
     const [selectedCategory, setSelectedCategory] = useState('')
 
     return (
-        <div>
-            <select name='type-ticket' value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} required>
+        <div className={styles.info_tickets}>
+            <select className={styles.type_ticket} name='type-ticket' value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} required>
                 <option value=''>Selecione uma categoria</option>
                 {categories.map(({ value, label }, index) => (
                     <option key={index} value={value}>
@@ -14,7 +15,7 @@ function TypeTicketInput({ data }) {
                     </option>
                 ))}
             </select>
-            <select name='sub-type-ticket' required disabled={!selectedCategory}>
+            <select className={styles.sub_type_ticket} name='sub-type-ticket' required disabled={!selectedCategory}>
                 <option value=''>{selectedCategory ? 'Selecione uma subcategoria' : 'Primeiro selecione uma categoria'}</option>
                 {selectedCategory &&
                     subcategories[selectedCategory]?.map(({ value, label }, index) => (
@@ -23,6 +24,14 @@ function TypeTicketInput({ data }) {
                         </option>
                     ))}
             </select>
+
+            <input placeholder='Seu acesso remoto AnyDesk/TeamViewer' required />
+
+            <input placeholder='(OPCIONAL) Descreve seu erro ou problema' />
+
+            {selectedCategory === 'improvements' &&
+                <input placeholder='Descreva sua sugestão de melhoria para o módulo' />
+            }
         </div>
     )
 }

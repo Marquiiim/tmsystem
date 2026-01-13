@@ -4,7 +4,7 @@
   justify-self: center;
   align-items: center;
   flex-direction: column;
-  background-color: #fff;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
   width: 100%;
   min-height: 100vh;
 }
@@ -31,26 +31,32 @@
 }
 .list_tickets li {
   display: flex;
+  min-height: 200px;
+}
+.list_tickets li a {
+  text-decoration: none;
+  display: flex;
   flex-direction: column;
   gap: 0.7rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  color: black;
   padding: 1.5rem 3rem;
   transition: opacity ease-in-out 0.2s;
 }
-.list_tickets li:hover {
+.list_tickets li a:hover {
   opacity: 0.8;
   cursor: pointer;
 }
-.list_tickets li:hover h3 {
+.list_tickets li a:hover h3 {
   color: #6a11cb;
 }
-.list_tickets li:hover h3::before {
+.list_tickets li a:hover h3::before {
   left: 0;
 }
-.list_tickets li:active {
+.list_tickets li a:active {
   opacity: 0.9;
 }
-.list_tickets li h3 {
+.list_tickets li a h3 {
   position: relative;
   overflow: hidden;
   letter-spacing: 0.8px;
@@ -58,7 +64,7 @@
   border-left: 2px solid;
   transition: color ease-in-out 0.2s;
 }
-.list_tickets li h3::before {
+.list_tickets li a h3::before {
   content: "";
   position: absolute;
   top: 0;
@@ -69,6 +75,6 @@
   transition: left 0.3s ease-in-out;
   z-index: -1;
 }
-.list_tickets li p {
+.list_tickets li a p {
   font-size: 1rem;
 }/*# sourceMappingURL=homepage.module.css.map */
