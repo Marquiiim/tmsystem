@@ -79,22 +79,7 @@ async function serviceRegister(name, email, password) {
     }
 }
 
-async function verifyTokensLogin(accessToken, refreshToken) {
-    try {
-        await jwttokens.verifyAccessToken(accessToken)
-        return true
-    } catch (accessError) {
-        try {
-            await jwttokens.verifyRefreshToken(refreshToken)
-            return true
-        } catch (error) {
-            throw error
-        }
-    }
-}
-
 module.exports = {
     serviceLogin,
-    serviceRegister,
-    verifyTokensLogin
+    serviceRegister
 }

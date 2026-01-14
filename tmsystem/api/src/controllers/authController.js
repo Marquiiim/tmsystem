@@ -1,4 +1,4 @@
-const { serviceLogin, serviceRegister, verifyTokensLogin } = require('../services/authservices')
+const { serviceLogin, serviceRegister } = require('../services/authservices')
 
 const cookies_options = {
 
@@ -79,24 +79,7 @@ async function controllerRegister(req, res) {
     }
 }
 
-async function controllerTokens(req, res) {
-    try {
-        const accessToken = req.cookies.access_token
-        const refreshToken = req.cookies.refresh_token
-
-        await verifyTokensLogin(accessToken, refreshToken)
-
-        return res.status(200).json({ valid: true })
-    } catch (error) {
-        res.clearCookie('access_token', cookies_options.clear_options)
-        res.clearCookie('refresh_token', cookies_options.clear_options)
-
-        return res.status(401).json({ valid: false, error: '[TMSYSTEM] Sessão expirada. Por favor, faça login novamente.' })
-    }
-}
-
 module.exports = {
     controllerLogin,
-    controllerRegister,
-    controllerTokens
+    controllerRegister
 };
