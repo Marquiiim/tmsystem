@@ -1,7 +1,5 @@
 import styles from './homepage.module.css'
 
-import { Link } from 'react-router-dom';
-
 import Layout from '../../layout/layout'
 import CardHome from '../../components/cards/cardsHome'
 
