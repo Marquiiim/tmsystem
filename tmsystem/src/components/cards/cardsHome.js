@@ -1,9 +1,20 @@
-function cardsHome() {
+import { Link } from 'react-router-dom';
+
+import styles from './cardsHome.module.css'
+
+function cardsHome({ title, description, path }) {
 
     return (
-        <div>
-            IMPLEMENTAÇÃO PARA FAZER FUTURAMENTE PARA O CARDS DA HOME
-        </div>
+        <li className={styles.card}>
+            <Link to={path}>
+                <h3>
+                    {title}
+                </h3>
+                <p>
+                    {description}
+                </p>
+            </Link>
+        </li>
     )
 }
 

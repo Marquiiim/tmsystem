@@ -1,29 +1,5 @@
 const { serviceLogin, serviceRegister } = require('../services/authservices')
-
-const cookies_options = {
-
-    access_token: {
-        httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
-        path: '/',
-        maxAge: 15 * 60 * 1000
-    },
-
-    refresh_token: {
-        httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
-        path: '/',
-        maxAge: 7 * 24 * 60 * 60 * 1000
-    },
-    clear_options: {
-        httpOnly: true,
-        secure: false,
-        sameSite: 'lax',
-        path: '/'
-    }
-}
+const { cookies_options } = require('../../data/cookieOptions')
 
 async function controllerLogin(req, res) {
     try {

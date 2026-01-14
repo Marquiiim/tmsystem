@@ -3,16 +3,16 @@ import { departmentOptions } from '../../../data/ticketOptions'
 import Layout from '../../../layout/layout'
 import TicketForm from '../../../components/form/ticketForm'
 
-function tiPage() {
+function rhPage() {
 
     return (
         <Layout>
             <TicketForm
-                typeTicket={departmentOptions.ti}
-                priority={departmentOptions.ti}
-                departmentKey={departmentOptions.ti.name} />
+                typeTicket={departmentOptions.rh}
+                priority={departmentOptions.rh}
+                departmentKey={departmentOptions.rh.name} />
         </Layout>
     )
 }
 
-export default tiPage
+export default rhPage

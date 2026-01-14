@@ -8,9 +8,9 @@ function tiPage() {
     return (
         <Layout>
             <TicketForm
-                typeTicket={departmentOptions.ti}
-                priority={departmentOptions.ti}
-                departmentKey={departmentOptions.ti.name} />
+                typeTicket={departmentOptions.maintenance}
+                priority={departmentOptions.maintenance}
+                departmentKey={departmentOptions.maintenance.name} />
         </Layout>
     )
 }

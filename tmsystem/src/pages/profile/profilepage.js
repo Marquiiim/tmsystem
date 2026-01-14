@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+
 import Layout from '../../layout/layout'
 import styles from './profilepage.module.css'
 import axios from 'axios'
 
 function Profilepage() {
 
+    const location = useLocation()
     const [userData, setUserData] = useState([])
 
     useEffect(() => {
@@ -17,7 +20,7 @@ function Profilepage() {
             }
         }
         fetchUserProfile()
-    }, [])
+    }, [location.pathname])
 
     return (
         <Layout>
