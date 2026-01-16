@@ -4,10 +4,19 @@ import { useState } from "react"
 function TypeTicketInput({ data }) {
     const { categories, subcategories } = data
     const [selectedCategory, setSelectedCategory] = useState('')
+    const [selectedSubCategory, setSelectedSubCategory] = useState('')
+
+    const currentSub = selectedCategory && selectedSubCategory ? subcategories[selectedCategory]?.find(sub => sub.value === selectedSubCategory) : null
 
     return (
         <div className={styles.info_tickets}>
-            <select className={styles.type_ticket} name='type-ticket' value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} required>
+            <select className={styles.type_ticket}
+                name='type-ticket' value={selectedCategory}
+                onChange={(e) => {
+                    setSelectedCategory(e.target.value)
+                    setSelectedSubCategory('')
+                }}
+                required>
                 <option value=''>Selecione uma categoria</option>
                 {categories.map(({ value, label }, index) => (
                     <option key={index} value={value}>
@@ -15,23 +24,41 @@ function TypeTicketInput({ data }) {
                     </option>
                 ))}
             </select>
-            <select className={styles.sub_type_ticket} name='sub-type-ticket' required disabled={!selectedCategory}>
+
+            <select className={styles.sub_type_ticket}
+                name='sub-type-ticket'
+                onChange={(e) => setSelectedSubCategory(e.target.value)}
+                disabled={!selectedCategory}
+                required>
                 <option value=''>{selectedCategory ? 'Selecione uma subcategoria' : 'Primeiro selecione uma categoria'}</option>
                 {selectedCategory &&
-                    subcategories[selectedCategory]?.map(({ value, label }, index) => (
+                    subcategories[selectedCategory]?.map(({ value, label, requiresDescription, requireAnyDesk }, index) => (
                         <option key={index} value={value}>
                             {label}
                         </option>
                     ))}
             </select>
 
-            <input placeholder='Seu acesso remoto AnyDesk/TeamViewer' required />
+            {currentSub?.requiresDescription && (
+                <div className={styles.description_container}>
+                    <textarea
+                        className={styles.description_input}
+                        placeholder="Descreva o seu problema."
+                        rows={6}
+                        required
+                        name="subcategory-description"
+                    />
+                </div>
+            )}
 
-            <input placeholder='(OPCIONAL) Descreve seu erro ou problema' />
-
-            {selectedCategory === 'improvements' &&
-                <input placeholder='Descreva sua sugestão de melhoria para o módulo' />
-            }
+            {currentSub?.requiresDescription && (
+                <input
+                    className={styles.remote_access_input}
+                    placeholder="Digite seu acesso remoto AnyDesk"
+                    required
+                    name="subcategory-description"
+                />
+            )}
         </div>
     )
 }
