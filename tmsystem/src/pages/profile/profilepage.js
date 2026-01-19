@@ -15,7 +15,6 @@ function Profilepage() {
             try {
                 const response = await axios.get('http://localhost:5000/api/users/search-profile', { withCredentials: true })
                 setUserData(response.data.user)
-                console.log(response.data)
             } catch (error) {
                 console.log(error)
             }
@@ -59,7 +58,7 @@ function Profilepage() {
                             <li>
                                 SETOR
                                 <span>
-                                    {userData.sector || 'N/A'}
+                                    {userData.departments || 'N/A'}
                                 </span>
                             </li>
                             <li>

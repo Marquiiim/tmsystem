@@ -12,7 +12,13 @@ const user = {
 
     findByEmail: async (email) => {
         const rows = await query(
-            'SELECT * FROM users WHERE email = ?',
+            `SELECT 
+                u.*, 
+                d.slug as departments
+            from users u
+            LEFT JOIN user_departments ud ON u.id = ud.user_id 
+            LEFT JOIN departments d ON ud.department_id = d.id
+            WHERE u.email = ?`,
             [email]
         )
         return rows[0] || null
@@ -20,10 +26,27 @@ const user = {
 
     findById: async (id) => {
         const rows = await query(
-            'SELECT * FROM users WHERE id = ?',
+            `SELECT 
+                u.*, 
+                d.slug as departments
+            from users u
+            LEFT JOIN user_departments ud ON u.id = ud.user_id 
+            LEFT JOIN departments d ON ud.department_id = d.id
+            WHERE u.id = ?`,
             [id]
         )
+
         return rows[0] || null
+    },
+
+    createTicket: async (ticketData) => {
+        const result = await query(
+            `INSERT INTO open_tickets (title, description, category, user_id, created_by, department, limit_date)
+            VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [ticketData.title, ticketData.description, ticketData.category, ticketData.user_id, ticketData.created_by, ticketData.department, ticketData.limit_date]
+        )
+
+        return result
     }
 }
 

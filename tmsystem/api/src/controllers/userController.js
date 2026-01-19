@@ -14,6 +14,7 @@ async function searchProfileController(req, res) {
                 id: userInfo.id,
                 name: userInfo.name,
                 email: userInfo.email,
+                departments: userInfo.departments,
                 role: userInfo.role,
                 created_at: userInfo.created_at,
                 is_active: userInfo.is_active
@@ -47,6 +48,7 @@ async function searchProfileController(req, res) {
                     id: reloadNewUserInfo.id,
                     name: reloadNewUserInfo.name,
                     email: reloadNewUserInfo.email,
+                    departments: reloadNewUserInfo.departments,
                     role: reloadNewUserInfo.role,
                     created_at: reloadNewUserInfo.created_at,
                     is_active: reloadNewUserInfo.is_active

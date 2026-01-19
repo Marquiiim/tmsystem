@@ -40,16 +40,6 @@ function Homepage() {
                             description='Direcione para este setor todas as solicitações relacionadas à segurança, saúde e bem-estar no ambiente laboral. Inclui inspeções de segurança, análise de riscos, treinamentos de EPI/EPC, investigação de acidentes, programas de prevenção, monitoramento ambiental, ergonomia, saúde ocupacional e compliance com normas regulatórias.'
                             path='/safety-ticket'
                         />
-                        <CardHome
-                            title='Gerência'
-                            description='Utilize este canal para demandas estratégicas, decisões administrativas de alto nível e direcionamento organizacional. Inclui aprovação de orçamentos, definição de políticas, planejamento estratégico, gestão de resultados, tomada de decisões corporativas, alinhamento de metas e supervisão geral das operações da empresa.'
-                            path='/management-ticket'
-                        />
-                        <CardHome
-                            title='Supervisão'
-                            description='Encaminhe para este setor questões operacionais, acompanhamento de equipes e controle de processos diários. Inclui coordenação de atividades, monitoramento de desempenho, solução de problemas operacionais, orientação técnica, fiscalização de normas, avaliação de produtividade e garantia da qualidade dos serviços executados.'
-                            path='/supervision-ticket'
-                        />
                     </ul>
                 </div>
             </div >
