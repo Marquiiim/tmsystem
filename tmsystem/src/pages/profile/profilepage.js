@@ -58,7 +58,7 @@ function Profilepage() {
                             <li>
                                 SETOR
                                 <span>
-                                    {userData.departments || 'N/A'}
+                                    {userData.department_slug || 'N/A'}
                                 </span>
                             </li>
                             <li>

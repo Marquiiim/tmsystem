@@ -12,13 +12,7 @@ const user = {
 
     findByEmail: async (email) => {
         const rows = await query(
-            `SELECT 
-                u.*, 
-                d.slug as departments
-            from users u
-            LEFT JOIN user_departments ud ON u.id = ud.user_id 
-            LEFT JOIN departments d ON ud.department_id = d.id
-            WHERE u.email = ?`,
+            `SELECT * FROM users WHERE email = ?`,
             [email]
         )
         return rows[0] || null
@@ -27,12 +21,15 @@ const user = {
     findById: async (id) => {
         const rows = await query(
             `SELECT 
-                u.*, 
-                d.slug as departments
-            from users u
-            LEFT JOIN user_departments ud ON u.id = ud.user_id 
+                u.*,
+                d.slug AS department_slug,
+                d.name AS department_name,
+                ud.is_manager,
+                ud.assigned_at
+            FROM users u
+            LEFT JOIN user_department ud ON u.id = ud.user_id
             LEFT JOIN departments d ON ud.department_id = d.id
-            WHERE u.id = ?`,
+            WHERE u.id = ?;`,
             [id]
         )
 
