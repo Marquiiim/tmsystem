@@ -9,17 +9,30 @@
 
     .content {
         margin: 0 auto;
+        padding: 2rem;
     }
 
-    &::before {
-        content: 'CENTRAL DE SERVIÇOS';
-        font-size: 2rem;
-        font-weight: bold;
-        margin-top: 2.5rem;
-        border-bottom: 2px solid;
-        border-image: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-        border-image-slice: 1;
-        padding: 1rem 3.5rem;
+}
+
+.title_home {
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 1rem 3.5rem;
+    color: #333;
+    text-align: center;
+    position: relative;
+    text-transform: uppercase;
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+        height: 3px;
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        border-radius: 2px;
     }
 }
 

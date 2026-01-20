@@ -3,42 +3,30 @@ import styles from './homepage.module.css'
 import Layout from '../../layout/layout'
 import CardHome from '../../components/cards/cardsHome'
 
-function Homepage() {
+function HomePage() {
 
     return (
         <Layout>
             <div className={styles.container}>
                 <div className={styles.content}>
+                    <h3 className={styles.title_home}>
+                        CENTRAL DE SERVIÇOS
+                    </h3>
                     <ul className={styles.list_tickets}>
                         <CardHome
                             title='Suporte de TI'
                             description='Utilize este canal para solicitar apoio técnico relacionado à tecnologia da informação. Aqui você pode registrar chamados para problemas em computadores, notebooks, sistemas, e-mail, internet, acessos, senhas, softwares, equipamentos de TI, além de solicitações de novos recursos tecnológicos.'
-                            path='/ti-ticket'
-                        />
-                        <CardHome
-                            title='Administrativo'
-                            description='Este canal atende demandas administrativas e corporativas da empresa. Abra tickets para compras, contratos, financeiro, contas a pagar/receber, documentos, patrimônio, almoxarifado, notas fiscais, processos internos e solicitações administrativas em geral.'
-                            path='/administrative-ticket'
+                            path='/ticket/ti'
                         />
                         <CardHome
                             title='Recursos Humanos'
                             description='Use este canal para tratar de assuntos relacionados à vida funcional do colaborador. Aqui você pode solicitar informações ou suporte sobre folha de pagamento, benefícios, férias, ponto eletrônico, admissões, desligamentos, treinamentos, documentos, afastamentos e políticas internas.'
-                            path='/hr-ticket'
-                        />
-                        <CardHome
-                            title='Manutenção Predial'
-                            description='Este setor é responsável por manter a estrutura física da empresa em pleno funcionamento. Abra um ticket para problemas elétricos, hidráulicos, ar-condicionado, iluminação, portas, fechaduras, mobiliário, pintura, elevadores, áreas comuns ou qualquer necessidade de manutenção corretiva ou preventiva nas instalações.'
-                            path='/maintenance-ticket'
-                        />
-                        <CardHome
-                            title='Serviços e Apoio'
-                            description='Utilize este setor para solicitar serviços de apoio ao funcionamento diário da empresa. Inclui limpeza, conservação, copa, portaria, vigilância, controle de acesso, jardinagem, coleta de resíduos, organização de ambientes e outros serviços essenciais ao bem-estar e à operação do espaço físico.'
-                            path='/services-ticket'
+                            path='/ticket/rh'
                         />
                         <CardHome
                             title='Segurança do Trabalho'
                             description='Direcione para este setor todas as solicitações relacionadas à segurança, saúde e bem-estar no ambiente laboral. Inclui inspeções de segurança, análise de riscos, treinamentos de EPI/EPC, investigação de acidentes, programas de prevenção, monitoramento ambiental, ergonomia, saúde ocupacional e compliance com normas regulatórias.'
-                            path='/safety-ticket'
+                            path='/ticket/sesmt'
                         />
                     </ul>
                 </div>
@@ -47,4 +35,4 @@ function Homepage() {
     )
 }
 
-export default Homepage;
+export default HomePage;

@@ -4,16 +4,11 @@ import Authpage from './pages/auth/authpage';
 
 import ProtectedRoutes from './protectedRoutes'
 
-import Homepage from './pages/home/homepage';
-import Profilepage from './pages/profile/profilepage';
+import HomePage from './pages/home/homepage';
+import ProfilePage from './pages/profile/profilepage';
 
-import Tipage from './pages/pages-tickets/TI/ti'
-import Rhpage from './pages/pages-tickets/RH/rh'
-import Admpage from './pages/pages-tickets/ADM/adm'
-import Mppage from './pages/pages-tickets/MP/mp'
-import Sapage from './pages/pages-tickets/SA/sa'
-import Sesmtpage from './pages/pages-tickets/SESMT/sesmt'
-
+import ListTicket from './components/list-ticket/listTicket';
+import TicketForm from './components/ticket-form/ticketForm'
 
 function App() {
   return (
@@ -23,15 +18,11 @@ function App() {
       <Route path="/auth" element={<Authpage />} />
 
       <Route element={<ProtectedRoutes />}>
-        <Route path="/home" element={<Homepage />} />
-        <Route path="/profile" element={<Profilepage />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
 
-        <Route path="/ti-ticket" element={<Tipage />} />
-        <Route path="/administrative-ticket" element={<Admpage />} />
-        <Route path="/hr-ticket" element={<Rhpage />} />
-        <Route path="/maintenance-ticket" element={<Mppage />} />
-        <Route path="/services-ticket" element={<Sapage />} />
-        <Route path="/safety-ticket" element={<Sesmtpage />} />
+        <Route path="/ticket/:department" element={<ListTicket />} />
+        <Route path="/ticket/:department/new" element={<TicketForm />} />
       </Route>
     </Routes>
   );

@@ -3,13 +3,14 @@
     min-height: 200px;
 
     a {
+        background: white;
         text-decoration: none;
         display: flex;
         flex-direction: column;
         gap: .7rem;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         color: black;
-        padding: 1.5rem 3rem;
+        padding: 1.5rem 2rem;
         transition: opacity ease-in-out 0.2s;
 
         &:hover {

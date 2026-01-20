@@ -1,9 +1,9 @@
 import styles from './ticketForm.module.css'
 
-import PriorityInput from '../../components/input/PriorityInput'
-import TypeTicketInput from '../../components/input/TypeTicketInput'
+import PriorityInput from '../input/PriorityInput'
+import TypeTicketInput from '../input/TypeTicketInput'
 
-function ticketForm({ typeTicket, priority, departmentKey }) {
+function TicketForm({ typeTicket, priority, departmentKey }) {
 
     return (
         <section className={styles.container}>
@@ -21,4 +21,4 @@ function ticketForm({ typeTicket, priority, departmentKey }) {
     )
 }
 
-export default ticketForm
+export default TicketForm

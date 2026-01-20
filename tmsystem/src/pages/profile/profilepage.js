@@ -5,7 +5,7 @@ import Layout from '../../layout/layout'
 import styles from './profilepage.module.css'
 import axios from 'axios'
 
-function Profilepage() {
+function ProfilePage() {
 
     const location = useLocation()
     const [userData, setUserData] = useState([])
@@ -75,4 +75,4 @@ function Profilepage() {
     )
 }
 
-export default Profilepage
+export default ProfilePage
