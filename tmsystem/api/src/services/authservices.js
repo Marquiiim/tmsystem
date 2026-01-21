@@ -1,5 +1,5 @@
 const usermodels = require('../models/userModels')
-const jwttokens = require('../utils/Jwt')
+const jwttokens = require('../utils/jwt')
 const bcrypt = require('../utils/Bcrypt')
 
 async function serviceLogin(email, password) {
@@ -10,7 +10,7 @@ async function serviceLogin(email, password) {
 
         if (!user.is_active) throw new Error('[TMSYSTEM] Usuário inativo.')
 
-        if (!(await bcrypt.compare(password, user.password_hash))) throw new Error('[TMSYSTEM] Senha incorreta.')
+        if (!await bcrypt.compare(password, user.password_hash)) throw new Error('[TMSYSTEM] Senha incorreta.')
 
         const accessToken = await jwttokens.generateAccessToken({
             userId: user.id,

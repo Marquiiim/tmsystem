@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { departmentOptions } from '../../data/ticketOptions';
 import Layout from '../../layout/layout'
 import styles from './listTicket.module.css'
@@ -11,15 +11,24 @@ function ListTicket() {
     const [departmentData, setDepartmentData] = useState(null)
 
     useEffect(() => {
-        if (departmentOptions[department]) {
-            setDepartmentData(departmentOptions[department])
+
+        const deptData = departmentOptions[department]
+
+        if (deptData) {
+            setDepartmentData(deptData)
         } else {
-            navigate('/ticket')
+            navigate('/home')
         }
     }, [department, navigate])
 
     const handleCategoryClick = (categoryValue) => {
-        navigate(`/ticket/${department}/new?category=${categoryValue}`)
+        navigate(`/ticket/${department}/new`, {
+            state: {
+                department: department,
+                category: categoryValue,
+                departmentData: departmentData
+            }
+        })
     }
 
     if (!departmentData) {
