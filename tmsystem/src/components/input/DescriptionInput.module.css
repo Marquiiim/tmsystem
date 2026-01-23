@@ -1,0 +1,31 @@
+.description_input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #3182ce;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  transition: all 0.2s ease;
+  resize: vertical;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+.description_input:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 1px #3182ce;
+}
+.description_input:hover {
+  border-color: #3182ce;
+}
+.description_input::-moz-placeholder {
+  color: #a0aec0;
+  font-style: italic;
+}
+.description_input::placeholder {
+  color: #a0aec0;
+  font-style: italic;
+}/*# sourceMappingURL=DescriptionInput.module.css.map */
