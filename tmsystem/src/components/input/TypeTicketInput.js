@@ -1,7 +1,6 @@
 import styles from './TypeTicketInput.module.css'
 
 import { useLocation } from 'react-router-dom'
-import { useState } from 'react'
 
 function TypeTicketInput() {
 
