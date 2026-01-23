@@ -12,7 +12,6 @@ import DescriptionInput from '../input/DescriptionInput'
 function TicketForm() {
     const location = useLocation()
     const { category, department } = location.state
-    const [dataFormatted, setDataFormatted] = useState(null)
     const [config, setConfig] = useState(() => {
         const dataStorage = localStorage.getItem('additionalInputs')
         return dataStorage ? JSON.parse(dataStorage) : null
@@ -27,10 +26,10 @@ function TicketForm() {
 
                     if (JSON.stringify(parsedData) !== JSON.stringify(config)) setConfig(parsedData)
                 } else {
-                    setDataFormatted(null)
+                    setConfig(null)
                 }
             } catch (error) {
-                setDataFormatted(null)
+                setConfig(null)
                 console.log(error)
             }
         }
@@ -55,11 +54,11 @@ function TicketForm() {
 
                     <PriorityInput />
 
-                    {dataFormatted?.requireAnyDesk &&
+                    {config?.requireAnyDesk &&
                         <RemoteInput />
                     }
 
-                    {dataFormatted?.requiresDescription &&
+                    {config?.requiresDescription &&
                         <DescriptionInput />
                     }
 
