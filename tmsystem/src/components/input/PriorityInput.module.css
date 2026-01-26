@@ -43,7 +43,7 @@
   color: #333;
 }
 
-.priority option.prority_option {
+.priority option.priority_option {
   padding: 12px;
   background-color: #fff;
   color: #333;
@@ -75,79 +75,79 @@
   color: #742a2a;
 }
 
-.priority:has(option.prority_option.green:checked) {
+.priority:has(option.priority_option.green:checked) {
   border-color: #38a169;
   background-color: #f0fff4;
 }
 
-.priority:has(option.prority_option.orange:checked) {
+.priority:has(option.priority_option.orange:checked) {
   border-color: #ed8936;
   background-color: #fffaf0;
 }
 
-.priority:has(option.prority_option.yellow:checked) {
+.priority:has(option.priority_option.yellow:checked) {
   border-color: #d69e2e;
   background-color: #fffff0;
 }
 
-.priority:has(option.prority_option.red:checked) {
+.priority:has(option.priority_option.red:checked) {
   border-color: #e53e3e;
   background-color: #fff5f5;
 }
 
-.priority:has(option.prority_option.green:checked):focus {
+.priority:has(option.priority_option.green:checked):focus {
   outline: none;
   border-color: #2f855a;
   box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.15);
 }
 
-.priority:has(option.prority_option.orange:checked):focus {
+.priority:has(option.priority_option.orange:checked):focus {
   outline: none;
   border-color: #dd6b20;
   box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.15);
 }
 
-.priority:has(option.prority_option.yellow:checked):focus {
+.priority:has(option.priority_option.yellow:checked):focus {
   outline: none;
   border-color: #b7791f;
   box-shadow: 0 0 0 3px rgba(237, 137, 54, 0.15);
 }
 
-.priority:has(option.prority_option.red:checked):focus {
+.priority:has(option.priority_option.red:checked):focus {
   outline: none;
   border-color: #c53030;
   box-shadow: 0 0 0 3px rgba(245, 101, 101, 0.15);
 }
 
-.priority:has(option.prority_option.green:checked):hover {
+.priority:has(option.priority_option.green:checked):hover {
   border-color: #2f855a;
 }
 
-.priority:has(option.prority_option.orange:checked):hover {
+.priority:has(option.priority_option.orange:checked):hover {
   border-color: #dd6b20;
 }
 
-.priority:has(option.prority_option.yellow:checked):hover {
+.priority:has(option.priority_option.yellow:checked):hover {
   border-color: #b7791f;
 }
 
-.priority:has(option.prority_option.red:checked):hover {
+.priority:has(option.priority_option.red:checked):hover {
   border-color: #c53030;
 }
 
-.priority:has(option.prority_option.green:checked) {
+.priority:has(option.priority_option.green:checked) {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2338a169' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
 }
 
-.priority:has(option.prority_option.orange:checked) {
+.priority:has(option.priority_option.orange:checked) {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ed8936' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
 }
 
-.priority:has(option.prority_option.yellow:checked) {
+.priority:has(option.priority_option.yellow:checked) {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23d69e2e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
 }
 
-.priority:has(option.prority_option.red:checked) {
+.priority:has(option.priority_option.red:checked) {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e53e3e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
 }
 

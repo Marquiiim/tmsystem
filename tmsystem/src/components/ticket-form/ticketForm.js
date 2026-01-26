@@ -12,35 +12,52 @@ import DescriptionInput from '../input/DescriptionInput'
 function TicketForm() {
     const location = useLocation()
     const { category, department } = location.state
-    const [config, setConfig] = useState(() => {
-        const dataStorage = localStorage.getItem('additionalInputs')
-        return dataStorage ? JSON.parse(dataStorage) : null
+    const [config, setConfig] = useState(null)
+    const [formData, setFormData] = useState({
+        category: category,
+        subcategory: '',
+        priority: '',
+        anydesk: '',
+        description: ''
     })
 
     useEffect(() => {
-        const loadData = () => {
-            try {
-                const dataStorage = localStorage.getItem('additionalInputs')
-                if (dataStorage) {
-                    const parsedData = JSON.parse(dataStorage)
+        localStorage.removeItem('additionalInputs')
+    }, [])
 
-                    if (JSON.stringify(parsedData) !== JSON.stringify(config)) setConfig(parsedData)
-                } else {
-                    setConfig(null)
-                }
+    useEffect(() => {
+        const updateConfig = () => {
+            try {
+                const data = localStorage.getItem('additionalInputs')
+                setConfig(data ? JSON.parse(data) : null)
             } catch (error) {
                 setConfig(null)
-                console.log(error)
             }
         }
 
-        loadData()
-    }, [config])
+        updateConfig()
+
+        const interval = setInterval(updateConfig, 1000)
+
+        return () => clearInterval(interval)
+    }, [])
+
+    const handleChange = (fieldName, value) => {
+        setFormData(prev => ({
+            ...prev,
+            [fieldName]: value
+        }))
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(formData)
+    }
 
     return (
         <Layout>
             <section className={styles.container}>
-                <form className={styles.content}>
+                <form className={styles.content} onSubmit={handleSubmit}>
                     <div className={styles.titles_content}>
                         <h3 className={styles.title_form}>
                             CENTRAL DE CHAMADOS - {department.toUpperCase()}
@@ -50,17 +67,13 @@ function TicketForm() {
                         </p>
                     </div>
 
-                    <TypeTicketInput />
+                    <TypeTicketInput value={formData.subcategory} onChange={(value) => handleChange('subcategory', value)} />
 
-                    <PriorityInput />
+                    <PriorityInput value={formData.priority} onChange={(value) => handleChange('priority', value)} />
 
-                    {config?.requireAnyDesk &&
-                        <RemoteInput />
-                    }
+                    {config?.requireAnyDesk && <RemoteInput value={formData.anydesk} onChange={(value) => handleChange('anydesk', value)} />}
 
-                    {config?.requiresDescription &&
-                        <DescriptionInput />
-                    }
+                    {config?.requiresDescription && <DescriptionInput value={formData.description} onChange={(value) => handleChange('description', value)} />}
 
                     <button className={styles.button_submit} type='submit'>
                         Abrir ticket

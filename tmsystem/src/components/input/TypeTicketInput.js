@@ -2,18 +2,29 @@ import styles from './TypeTicketInput.module.css'
 
 import { useLocation } from 'react-router-dom'
 
-function TypeTicketInput() {
+function TypeTicketInput({ value, onChange }) {
 
     const location = useLocation()
     const { departmentData, category } = location.state
-
     const subCategoryForSelectedCategory = departmentData.subcategories[category] || []
 
     const handleTicketSelected = (e) => {
+        const selectedValue = e.target.value
+
+        if (!selectedValue) {
+            localStorage.removeItem('additionalInputs')
+            onChange('')
+            return
+        }
+
         const selectedOption = e.target.options[e.target.selectedIndex]
         const jsonData = selectedOption.getAttribute('data-fullobject')
 
-        if (!jsonData) throw new Error('[TMSYSTEM] Ticket mal formatado, selecione as opções novamente.')
+        if (!jsonData) {
+            console.warn('[TMSYSTEM] Ticket mal formatado, selecione as opções novamente.')
+            onChange(selectedValue)
+            return
+        }
 
         try {
             const fullSubCategory = JSON.parse(jsonData)
@@ -25,16 +36,24 @@ function TypeTicketInput() {
             }
 
             localStorage.setItem('additionalInputs', JSON.stringify(additionalInputsData))
+            onChange(selectedValue)
         } catch (error) {
             console.log(error)
+            onChange(selectedValue)
         }
     }
 
     return (
 
         <div className={styles.info_tickets}>
-            <select onChange={(e) => handleTicketSelected(e)}>
-                <option value=''>Selecione uma subcategoria</option>
+            <select
+                onChange={handleTicketSelected}
+                value={value}
+                required>
+                <option
+                    value=''
+                    disabled>Selecione uma subcategoria
+                </option>
                 {subCategoryForSelectedCategory.map((subcategory) => (
                     <option
                         key={subcategory.value}
