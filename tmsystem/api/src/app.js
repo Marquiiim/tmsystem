@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser')
 const authRoutes = require('./routes/authRoutes');
 const sessionsRoutes = require('./routes/sessionsRoutes')
 const usersRoutes = require('./routes/usersRoutes')
+const ticketsRoutes = require('./routes/ticketsRoutes')
 require('dotenv').config()
 
 const app = express();
@@ -41,5 +42,6 @@ app.use('/api/auth/register', authLimiter)
 app.use('/api/auth', authRoutes);
 app.use('/api/sessions', sessionsRoutes)
 app.use('/api/users', usersRoutes)
+app.use('/api/tickets', ticketsRoutes)
 
 module.exports = app;

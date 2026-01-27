@@ -1,4 +1,4 @@
-const jwttokens = require('../utils/Jwt')
+const jwttokens = require('../utils/jwt')
 const { cookies_options } = require('../../data/cookieOptions')
 const user = require('../models/userModels')
 

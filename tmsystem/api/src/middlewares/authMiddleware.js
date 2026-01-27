@@ -58,9 +58,6 @@ function middlewareTokens(req, res, next) {
     next()
 }
 
-
-
-
 module.exports = {
     middlewareLogin,
     middlewareRegister,

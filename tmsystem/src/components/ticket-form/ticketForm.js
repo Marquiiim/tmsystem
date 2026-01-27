@@ -3,6 +3,7 @@ import Layout from '../../layout/layout'
 
 import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 import PriorityInput from '../input/PriorityInput'
 import TypeTicketInput from '../input/TypeTicketInput'
@@ -49,9 +50,24 @@ function TicketForm() {
         }))
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        console.log(formData)
+
+        try {
+            const response = await axios.post('http://localhost:5000/api/tickets/create',
+                {
+                    category: formData.category,
+                    subcategory: formData.subcategory,
+                    priority: formData.priority,
+                    description: formData.description,
+                    anydesk: formData.anydesk
+                },
+                { withCredentials: true })
+
+            console.log(response.data)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (

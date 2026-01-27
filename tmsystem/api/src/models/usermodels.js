@@ -4,8 +4,17 @@ const user = {
 
     create: async (userData) => {
         const result = await query(
-            'INSERT INTO users (name, email, password_hash, token_version, role) VALUES (?, ?, ?, ?, ?)',
-            [userData.name, userData.email, userData.password_hash, userData.token_version, userData.role]
+            `INSERT INTO users (name, 
+            email, 
+            password_hash, 
+            token_version, 
+            role) 
+            VALUES (?, ?, ?, ?, ?)`,
+            [userData.name,
+            userData.email,
+            userData.password_hash,
+            userData.token_version,
+            userData.role]
         )
         return result
     },
@@ -38,9 +47,25 @@ const user = {
 
     createTicket: async (ticketData) => {
         const result = await query(
-            `INSERT INTO open_tickets (title, description, category, user_id, created_by, department, limit_date)
-            VALUES (?, ?, ?, ?, ?, ?, ?)`,
-            [ticketData.title, ticketData.description, ticketData.category, ticketData.user_id, ticketData.created_by, ticketData.department, ticketData.limit_date]
+            `INSERT INTO open_tickets (description, 
+            status, 
+            priority, 
+            category, 
+            subcategory, 
+            department_id, 
+            requester_id, 
+            created_by,
+            anydesk_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+            [ticketData.description,
+            ticketData.status,
+            ticketData.priority,
+            ticketData.category,
+            ticketData.subcategory,
+            ticketData.department_id,
+            ticketData.requester_id,
+            ticketData.created_by,
+            ticketData.anydesk_id]
         )
 
         return result
