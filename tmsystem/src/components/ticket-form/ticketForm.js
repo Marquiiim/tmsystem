@@ -5,16 +5,17 @@ import { useLocation } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-import PriorityInput from '../input/PriorityInput'
-import TypeTicketInput from '../input/TypeTicketInput'
-import RemoteInput from '../input/RemoteInput'
-import DescriptionInput from '../input/DescriptionInput'
+import PriorityInput from '../inputs/PriorityInput'
+import TypeTicketInput from '../inputs/TypeTicketInput'
+import RemoteInput from '../inputs/RemoteInput'
+import DescriptionInput from '../inputs/DescriptionInput'
 
 function TicketForm() {
     const location = useLocation()
-    const { category, department } = location.state
+    const { category, department, department_id } = location.state
     const [config, setConfig] = useState(null)
     const [formData, setFormData] = useState({
+        department_id: department_id,
         category: category,
         subcategory: '',
         priority: '',
@@ -54,8 +55,9 @@ function TicketForm() {
         e.preventDefault()
 
         try {
-            const response = await axios.post('http://localhost:5000/api/tickets/create',
+            await axios.post('http://localhost:5000/api/tickets/create',
                 {
+                    department_id: formData.department_id,
                     category: formData.category,
                     subcategory: formData.subcategory,
                     priority: formData.priority,
@@ -64,7 +66,6 @@ function TicketForm() {
                 },
                 { withCredentials: true })
 
-            console.log(response.data)
         } catch (error) {
             console.log(error)
         }

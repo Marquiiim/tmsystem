@@ -1,5 +1,6 @@
 export const departmentOptions = {
     ti: {
+        id: 1,
         name: "Suporte de TI",
         categories: [
             {
@@ -13,31 +14,31 @@ export const departmentOptions = {
                 description: 'Programas que não abrem, travam ou não funcionam direito'
             },
             {
-                value: 'network',
+                value: 'rede',
                 label: 'Internet e Rede',
                 description: 'Sem internet, Wi-Fi fraco ou problemas para acessar a rede da empresa'
             },
             {
-                value: 'access',
+                value: 'acesso',
                 label: 'Acesso e Senhas',
                 description: 'Esqueci minha senha, não consigo entrar ou preciso de um novo acesso'
             },
             {
-                value: 'system',
+                value: 'sistema',
                 label: 'Sistemas da Empresa',
                 description: 'Problemas com sistemas como ERP, CRM ou outros programas da empresa'
             }
         ],
         priorities: [
-            { value: 'urgent', label: 'Urgente - Não consigo trabalhar', color: 'red' },
-            { value: 'high', label: 'Alta - Problema importante', color: 'orange' },
-            { value: 'medium', label: 'Média - Problema que atrapalha', color: 'yellow' },
-            { value: 'low', label: 'Baixa - Dúvida ou problema leve', color: 'green' }
+            { value: 'urgente', label: 'Urgente - Não consigo trabalhar', color: 'red' },
+            { value: 'alto', label: 'Alta - Problema importante', color: 'orange' },
+            { value: 'médio', label: 'Média - Problema que atrapalha', color: 'yellow' },
+            { value: 'baixo', label: 'Baixa - Dúvida ou problema leve', color: 'green' }
         ],
         subcategories: {
             hardware: [
                 {
-                    value: 'computer',
+                    value: 'computador',
                     label: 'Computador/Notebook',
                     requiresDescription: true,
                     requireAnyDesk: true,
@@ -76,7 +77,7 @@ export const departmentOptions = {
                     ]
                 },
                 {
-                    value: 'printer',
+                    value: 'impressora',
                     label: 'Impressora',
                     requiresDescription: true,
                     dynamicFields: [
@@ -131,7 +132,7 @@ export const departmentOptions = {
                             label: 'Qual o tamanho?',
                             options: [
                                 { value: 'small', label: 'Pequeno (até 20")' },
-                                { value: 'medium', label: 'Médio (21" a 24")' },
+                                { value: 'médio', label: 'Médio (21" a 24")' },
                                 { value: 'large', label: 'Grande (mais de 24")' },
                                 { value: 'dontKnow', label: 'Não sei' }
                             ]
@@ -139,7 +140,7 @@ export const departmentOptions = {
                     ]
                 },
                 {
-                    value: 'peripheral',
+                    value: 'periféricos',
                     label: 'Mouse, Teclado ou Outros',
                     dynamicFields: [
                         {
@@ -250,7 +251,7 @@ export const departmentOptions = {
                     ]
                 },
                 {
-                    value: 'specific',
+                    value: 'especifico',
                     label: 'Outro Programa',
                     requiresDescription: true,
                     requireAnyDesk: true,
@@ -271,7 +272,7 @@ export const departmentOptions = {
                     ]
                 }
             ],
-            network: [
+            rede: [
                 {
                     value: 'internet',
                     label: 'Internet',
@@ -355,9 +356,9 @@ export const departmentOptions = {
                     ]
                 }
             ],
-            access: [
+            acesso: [
                 {
-                    value: 'password',
+                    value: 'senha',
                     label: 'Esqueci minha senha',
                     dynamicFields: [
                         {
@@ -382,7 +383,7 @@ export const departmentOptions = {
                     ]
                 },
                 {
-                    value: 'account',
+                    value: 'conta',
                     label: 'Preciso de um novo acesso',
                     dynamicFields: [
                         {
@@ -444,9 +445,9 @@ export const departmentOptions = {
                     ]
                 }
             ],
-            system: [
+            sistema: [
                 {
-                    value: 'tmsys',
+                    value: 'func',
                     label: 'Atualizar meu cargo/função',
                     dynamicFields: [
                         {
@@ -507,43 +508,44 @@ export const departmentOptions = {
     },
 
     rh: {
+        id: 3,
         name: "Recursos Humanos",
         categories: [
             {
-                value: 'payroll',
+                value: 'contracheque',
                 label: 'Salário e Pagamento',
                 description: 'Problemas com salário, horas extras, adiantamentos ou pagamento errado'
             },
             {
-                value: 'benefits',
+                value: 'benefícios',
                 label: 'Benefícios',
                 description: 'Plano de saúde, vale-refeição, vale-transporte ou outros benefícios'
             },
             {
-                value: 'documentation',
+                value: 'documentação',
                 label: 'Documentos',
                 description: 'Preciso de carteira de trabalho, certidões, contrato ou declarações'
             },
             {
-                value: 'vacation',
+                value: 'férias_licenças',
                 label: 'Férias e Licenças',
                 description: 'Agendar férias, atestado médico, licença maternidade/paternidade'
             },
             {
-                value: 'admission',
+                value: 'admissão',
                 label: 'Entrada/Saída da Empresa',
                 description: 'Sou novo na empresa ou estou me desligando'
             }
         ],
         priorities: [
-            { value: 'high', label: 'Alta - Resolver logo', color: 'orange' },
-            { value: 'medium', label: 'Média - Pode esperar um pouco', color: 'yellow' },
-            { value: 'low', label: 'Baixa - Sem pressa', color: 'green' }
+            { value: 'alto', label: 'Alta - Resolver logo', color: 'orange' },
+            { value: 'médio', label: 'Média - Pode esperar um pouco', color: 'yellow' },
+            { value: 'baixo', label: 'Baixa - Sem pressa', color: 'green' }
         ],
         subcategories: {
-            payroll: [
+            contracheque: [
                 {
-                    value: 'salary',
+                    value: 'salário',
                     label: 'Salário errado/atrasado',
                     requiresDescription: true,
                     dynamicFields: [
@@ -568,7 +570,7 @@ export const departmentOptions = {
                     ]
                 },
                 {
-                    value: 'overtime',
+                    value: 'horas extras',
                     label: 'Horas extras',
                     requiresDescription: true,
                     dynamicFields: [
@@ -586,9 +588,9 @@ export const departmentOptions = {
                     ]
                 }
             ],
-            benefits: [
+            benefícios: [
                 {
-                    value: 'health',
+                    value: 'plano de saúde',
                     label: 'Plano de Saúde',
                     requiresDescription: true,
                     dynamicFields: [
@@ -606,7 +608,7 @@ export const departmentOptions = {
                     ]
                 },
                 {
-                    value: 'meal',
+                    value: 'vale refeição',
                     label: 'Vale Refeição/Alimentação',
                     dynamicFields: [
                         {
@@ -623,9 +625,9 @@ export const departmentOptions = {
                     ]
                 }
             ],
-            documentation: [
+            documentação: [
                 {
-                    value: 'workcard',
+                    value: 'carteira de trabalho',
                     label: 'Carteira de Trabalho',
                     dynamicFields: [
                         {
@@ -642,9 +644,9 @@ export const departmentOptions = {
                     ]
                 }
             ],
-            vacation: [
+            férias_licenças: [
                 {
-                    value: 'schedule',
+                    value: 'agendar férias',
                     label: 'Agendar férias',
                     dynamicFields: [
                         {
@@ -656,7 +658,7 @@ export const departmentOptions = {
                     ]
                 },
                 {
-                    value: 'sick',
+                    value: 'atestado médico',
                     label: 'Atestado Médico',
                     dynamicFields: [
                         {
@@ -672,9 +674,9 @@ export const departmentOptions = {
                     ]
                 }
             ],
-            admission: [
+            admissão: [
                 {
-                    value: 'onboarding',
+                    value: 'integração',
                     label: 'Sou novo na empresa',
                     requiresDescription: true,
                     dynamicFields: [
@@ -697,10 +699,11 @@ export const departmentOptions = {
     },
 
     sesmt: {
+        id: 2,
         name: "Segurança do Trabalho",
         categories: [
             {
-                value: 'inspection',
+                value: 'inspeção',
                 label: 'Vistoria/Inspeção',
                 description: 'Preciso que verifiquem algum local ou equipamento de segurança'
             },
@@ -710,25 +713,25 @@ export const departmentOptions = {
                 description: 'Preciso de EPI novo, tamanho errado ou equipamento com defeito'
             },
             {
-                value: 'accident',
+                value: 'acidente',
                 label: 'Acidente ou Incidente',
                 description: 'Ocorreu um acidente, quase acidente ou situação de risco'
             },
             {
-                value: 'health',
+                value: 'saúde',
                 label: 'Saúde no Trabalho',
                 description: 'Exames médicos, problema ergonômico ou questão de saúde'
             }
         ],
         priorities: [
-            { value: 'high', label: 'Alta - Risco/Urgente', color: 'orange' },
-            { value: 'medium', label: 'Média - Importante', color: 'yellow' },
-            { value: 'low', label: 'Baixa - Preventivo', color: 'green' }
+            { value: 'alto', label: 'Alta - Risco/Urgente', color: 'orange' },
+            { value: 'médio', label: 'Média - Importante', color: 'yellow' },
+            { value: 'baixo', label: 'Baixa - Preventivo', color: 'green' }
         ],
         subcategories: {
-            inspection: [
+            inspeção: [
                 {
-                    value: 'routine',
+                    value: 'Vistoria',
                     label: 'Vistoria de rotina',
                     dynamicFields: [
                         {
@@ -742,7 +745,7 @@ export const departmentOptions = {
             ],
             epi: [
                 {
-                    value: 'request',
+                    value: 'solicitar',
                     label: 'Preciso de EPI novo',
                     dynamicFields: [
                         {
@@ -768,7 +771,7 @@ export const departmentOptions = {
                     ]
                 },
                 {
-                    value: 'defective',
+                    value: 'defeito',
                     label: 'EPI com defeito/estragou',
                     requiresDescription: true,
                     dynamicFields: [
@@ -781,9 +784,9 @@ export const departmentOptions = {
                     ]
                 }
             ],
-            accident: [
+            acidente: [
                 {
-                    value: 'register',
+                    value: 'registrar',
                     label: 'Registrar acidente',
                     requiresDescription: true,
                     dynamicFields: [
@@ -800,9 +803,9 @@ export const departmentOptions = {
                     ]
                 }
             ],
-            health: [
+            saúde: [
                 {
-                    value: 'medical',
+                    value: 'exames médicos',
                     label: 'Exames Médicos',
                     dynamicFields: [
                         {

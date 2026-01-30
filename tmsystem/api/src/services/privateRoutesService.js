@@ -1,4 +1,4 @@
-const jwttokens = require('../utils/Jwt')
+const jwttokens = require('../utils/jwt')
 
 async function verifyTokens(accessToken, refreshToken) {
     try {

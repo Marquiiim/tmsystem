@@ -43,32 +43,6 @@ const user = {
         )
 
         return rows[0] || null
-    },
-
-    createTicket: async (ticketData) => {
-        const result = await query(
-            `INSERT INTO open_tickets (description, 
-            status, 
-            priority, 
-            category, 
-            subcategory, 
-            department_id, 
-            requester_id, 
-            created_by,
-            anydesk_id)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-            [ticketData.description,
-            ticketData.status,
-            ticketData.priority,
-            ticketData.category,
-            ticketData.subcategory,
-            ticketData.department_id,
-            ticketData.requester_id,
-            ticketData.created_by,
-            ticketData.anydesk_id]
-        )
-
-        return result
     }
 }
 

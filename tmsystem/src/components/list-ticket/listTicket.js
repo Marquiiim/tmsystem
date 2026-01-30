@@ -24,6 +24,7 @@ function ListTicket() {
     const handleCategoryClick = (categoryValue) => {
         navigate(`/ticket/${department}/new`, {
             state: {
+                department_id: departmentData.id,
                 department: department,
                 category: categoryValue,
                 departmentData: departmentData
