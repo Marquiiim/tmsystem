@@ -6,6 +6,8 @@ import ProtectedRoutes from './protectedRoutes'
 
 import HomePage from './pages/home/homepage';
 import ProfilePage from './pages/profile/profilepage';
+import MyCallings from './pages/mycallings/myCallings';
+
 
 import ListTicket from './components/list-ticket/listTicket';
 import TicketForm from './components/ticket-form/ticketForm'
@@ -20,6 +22,7 @@ function App() {
       <Route element={<ProtectedRoutes />}>
         <Route path="/home" element={<HomePage />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/mycallings" element={<MyCallings />} />
 
         <Route path="/ticket/:department" element={<ListTicket />} />
         <Route path="/ticket/:department/new" element={<TicketForm />} />

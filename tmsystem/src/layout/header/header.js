@@ -44,7 +44,7 @@ function Header() {
                     <li>
                         <button type='button' onClick={(e) => {
                             e.preventDefault()
-                            navigate('/profile')
+                            navigate('/mycallings')
                         }}>
                             <FiTag /> Meus Chamados
                         </button>

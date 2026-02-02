@@ -29,7 +29,20 @@ async function createTicketService(tokens, dataForm) {
     }
 }
 
+async function searchMyTicketsService(tokens) {
+    const { access_token } = tokens
+    try {
+        const accessVerify = await jwttokens.verifyAccessToken(access_token)
+
+        const tickets = await ticketsmodels.searchMyTickets(accessVerify.userId)
+
+        return tickets
+    } catch (error) {
+        throw error
+    }
+}
 
 module.exports = {
-    createTicketService
+    createTicketService,
+    searchMyTicketsService
 }

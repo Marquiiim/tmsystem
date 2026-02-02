@@ -1,0 +1,381 @@
+$dark-gray: #1a1a2e;
+$dark-gray-variant: #16213e;
+$purple-primary: #6d28d9;
+$purple-secondary: #8b5cf6;
+$purple-light: #a78bfa;
+$frost-white: #f8fafc;
+$frost-white-transparent: rgba(248, 250, 252, 0.95);
+
+.container {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(135deg, $dark-gray 0%, $dark-gray-variant 100%);
+    padding: 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .content {
+        width: 100%;
+        max-width: 1200px;
+        flex-shrink: 0;
+        margin-bottom: 2.5rem;
+
+        .callings_type {
+            display: inline-flex;
+            gap: 1rem;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+                padding: 1.2rem 2.5rem;
+                background: rgba(255, 255, 255, 0.05);
+                border-radius: 14px;
+                color: $frost-white;
+                font-size: 1.15rem;
+                font-weight: 500;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                white-space: nowrap;
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                    border-color: rgba($purple-light, 0.4);
+                    transform: translateY(-2px);
+                }
+
+                &:active {
+                    transform: translateY(0);
+                }
+
+                &.active {
+                    background: linear-gradient(135deg, $purple-primary 0%, $purple-secondary 100%);
+                    color: white;
+                    border: none;
+                    box-shadow: 0 8px 20px rgba($purple-primary, 0.3);
+
+                    &:hover {
+                        background: linear-gradient(135deg, lighten($purple-primary, 5%) 0%, lighten($purple-secondary, 5%) 100%);
+                    }
+                }
+            }
+        }
+    }
+
+    .callings__list {
+        flex: 1;
+        width: 100%;
+        max-width: 1200px;
+        background: $frost-white-transparent;
+        backdrop-filter: blur(12px);
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        overflow: hidden;
+        display: flex;
+        min-height: 500px;
+
+        .emptyState {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            color: rgba($dark-gray, 0.6);
+
+            &::before {
+                content: '📋';
+                font-size: 4rem;
+                margin-bottom: 1.5rem;
+                opacity: 0.4;
+            }
+
+            &::after {
+                content: 'Nenhum chamado encontrado';
+                font-size: 1.3rem;
+                font-weight: 500;
+                text-align: center;
+            }
+        }
+
+        ul {
+            flex: 1;
+            list-style: none;
+            padding: 2rem;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            overflow-y: auto;
+            max-height: calc(100vh - 200px);
+
+            &::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: rgba(0, 0, 0, 0.05);
+                border-radius: 4px;
+                margin: 0.5rem;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: linear-gradient(to bottom, $purple-primary, $purple-secondary);
+                border-radius: 4px;
+
+                &:hover {
+                    background: linear-gradient(to bottom, lighten($purple-primary, 10%), lighten($purple-secondary, 10%));
+                }
+            }
+        }
+    }
+}
+
+.ticketCard {
+    background: white;
+    border-radius: 16px;
+    padding: 1.75rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba($purple-light, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+        border-color: rgba($purple-light, 0.3);
+    }
+
+    .cardHeader {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+
+        .ticketInfo {
+            flex: 1;
+            min-width: 0;
+
+            .ticketTitle {
+                margin: 0 0 0.75rem 0;
+                font-size: 1.25rem;
+                font-weight: 600;
+                color: $dark-gray;
+                line-height: 1.4;
+
+                .ticketId {
+                    color: $purple-primary;
+                    font-weight: 700;
+                    margin-right: 0.75rem;
+                    background: linear-gradient(135deg, $purple-primary, $purple-secondary);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                }
+            }
+
+            .anydeskId {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-size: 0.85rem;
+                color: rgba($dark-gray, 0.7);
+                background: rgba($purple-light, 0.1);
+                padding: 0.5rem 1rem;
+                border-radius: 12px;
+                border: 1px solid rgba($purple-light, 0.2);
+
+                &::before {
+                    content: '🖥️';
+                    font-size: 0.9rem;
+                }
+            }
+        }
+
+        .ticketMeta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.75rem;
+
+            .statusBadge {
+                padding: 0.5rem 1.25rem;
+                border-radius: 20px;
+                font-size: 0.85rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+                &[data-status="aberto"] {
+                    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+                    color: white;
+                }
+
+                &[data-status="em_andamento"] {
+                    background: linear-gradient(135deg, #4d96ff, #6bb2ff);
+                    color: white;
+                }
+
+                &[data-status="resolvido"] {
+                    background: linear-gradient(135deg, #6bcf7f, #8be09a);
+                    color: white;
+                }
+
+                &[data-status="fechado"] {
+                    background: linear-gradient(135deg, #95a5a6, #b8c7c8);
+                    color: white;
+                }
+            }
+
+            .priorityBadge {
+                padding: 0.4rem 1rem;
+                border-radius: 20px;
+                font-size: 0.85rem;
+                font-weight: 600;
+                background: white;
+                border: 2px solid;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+
+                &[data-priority="urgente"] {
+                    color: #c53030;
+                    border-color: #ff6b6b;
+                    background: rgba(255, 107, 107, 0.1);
+                }
+
+                &[data-priority="alta"] {
+                    color: #dd6b20;
+                    border-color: #ffa726;
+                    background: rgba(255, 167, 38, 0.1);
+                }
+
+                &[data-priority="media"] {
+                    color: #d69e2e;
+                    border-color: #ffd54f;
+                    background: rgba(255, 213, 79, 0.1);
+                }
+
+                &[data-priority="baixa"] {
+                    color: #38a169;
+                    border-color: #68d391;
+                    background: rgba(104, 211, 145, 0.1);
+                }
+            }
+        }
+    }
+
+    .cardDetails {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+        margin: 1.5rem 0;
+        padding: 1.5rem 0;
+        border-top: 2px solid rgba($purple-light, 0.1);
+        border-bottom: 2px solid rgba($purple-light, 0.1);
+
+        .detailRow {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            .detailLabel {
+                font-size: 0.85rem;
+                color: rgba($dark-gray, 0.6);
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+
+                &::before {
+                    content: '';
+                    width: 6px;
+                    height: 6px;
+                    background: $purple-secondary;
+                    border-radius: 50%;
+                    display: inline-block;
+                }
+            }
+
+            .detailValue {
+                font-size: 1rem;
+                color: $dark-gray;
+                font-weight: 500;
+            }
+        }
+    }
+
+    .cardFooter {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0.5rem;
+
+        .date {
+            font-size: 0.9rem;
+            color: rgba($dark-gray, 0.6);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            &::before {
+                content: '📅';
+                font-size: 1rem;
+            }
+        }
+
+        .viewButton {
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, $purple-primary, $purple-secondary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba($purple-primary, 0.2);
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba($purple-primary, 0.3);
+                background: linear-gradient(135deg, lighten($purple-primary, 5%), lighten($purple-secondary, 5%));
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ticketCard {
+    animation: fadeIn 0.4s ease-out forwards;
+
+    &:nth-child(odd) {
+        animation-delay: 0.1s;
+    }
+
+    &:nth-child(even) {
+        animation-delay: 0.2s;
+    }
+}

@@ -1,0 +1,326 @@
+@charset "UTF-8";
+.container {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  padding: 2rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container .content {
+  width: 100%;
+  max-width: 1200px;
+  flex-shrink: 0;
+  margin-bottom: 2.5rem;
+}
+.container .content .callings_type {
+  display: inline-flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.container .content .callings_type li {
+  padding: 1.2rem 2.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  color: #f8fafc;
+  font-size: 1.15rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+.container .content .callings_type li:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(167, 139, 250, 0.4);
+  transform: translateY(-2px);
+}
+.container .content .callings_type li:active {
+  transform: translateY(0);
+}
+.container .content .callings_type li.active {
+  background: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 8px 20px rgba(109, 40, 217, 0.3);
+}
+.container .content .callings_type li.active:hover {
+  background: linear-gradient(135deg, rgb(123.7154150198, 61.6699604743, 220.8300395257) 0%, rgb(156.1976744186, 116.1656976744, 247.3343023256) 100%);
+}
+.container .callings__list {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  background: rgba(248, 250, 252, 0.95);
+  -webkit-backdrop-filter: blur(12px);
+          backdrop-filter: blur(12px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  display: flex;
+  min-height: 500px;
+}
+.container .callings__list .emptyState {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: rgba(26, 26, 46, 0.6);
+}
+.container .callings__list .emptyState::before {
+  content: "📋";
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.4;
+}
+.container .callings__list .emptyState::after {
+  content: "Nenhum chamado encontrado";
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-align: center;
+}
+.container .callings__list ul {
+  flex: 1;
+  list-style: none;
+  padding: 2rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+  max-height: calc(100vh - 200px);
+}
+.container .callings__list ul::-webkit-scrollbar {
+  width: 8px;
+}
+.container .callings__list ul::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  margin: 0.5rem;
+}
+.container .callings__list ul::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #6d28d9, #8b5cf6);
+  border-radius: 4px;
+}
+.container .callings__list ul::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, rgb(138.4308300395, 83.3399209486, 224.6600790514), rgb(173.3953488372, 140.3313953488, 248.6686046512));
+}
+
+.ticketCard {
+  background: white;
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(167, 139, 250, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.ticketCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  border-color: rgba(167, 139, 250, 0.3);
+}
+.ticketCard .cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.ticketCard .cardHeader .ticketInfo {
+  flex: 1;
+  min-width: 0;
+}
+.ticketCard .cardHeader .ticketInfo .ticketTitle {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  line-height: 1.4;
+}
+.ticketCard .cardHeader .ticketInfo .ticketTitle .ticketId {
+  color: #6d28d9;
+  font-weight: 700;
+  margin-right: 0.75rem;
+  background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.ticketCard .cardHeader .ticketInfo .anydeskId {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: rgba(26, 26, 46, 0.7);
+  background: rgba(167, 139, 250, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(167, 139, 250, 0.2);
+}
+.ticketCard .cardHeader .ticketInfo .anydeskId::before {
+  content: "🖥️";
+  font-size: 0.9rem;
+}
+.ticketCard .cardHeader .ticketMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+.ticketCard .cardHeader .ticketMeta .statusBadge {
+  padding: 0.5rem 1.25rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.ticketCard .cardHeader .ticketMeta .statusBadge[data-status=aberto] {
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  color: white;
+}
+.ticketCard .cardHeader .ticketMeta .statusBadge[data-status=em_andamento] {
+  background: linear-gradient(135deg, #4d96ff, #6bb2ff);
+  color: white;
+}
+.ticketCard .cardHeader .ticketMeta .statusBadge[data-status=resolvido] {
+  background: linear-gradient(135deg, #6bcf7f, #8be09a);
+  color: white;
+}
+.ticketCard .cardHeader .ticketMeta .statusBadge[data-status=fechado] {
+  background: linear-gradient(135deg, #95a5a6, #b8c7c8);
+  color: white;
+}
+.ticketCard .cardHeader .ticketMeta .priorityBadge {
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: white;
+  border: 2px solid;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+.ticketCard .cardHeader .ticketMeta .priorityBadge[data-priority=urgente] {
+  color: #c53030;
+  border-color: #ff6b6b;
+  background: rgba(255, 107, 107, 0.1);
+}
+.ticketCard .cardHeader .ticketMeta .priorityBadge[data-priority=alta] {
+  color: #dd6b20;
+  border-color: #ffa726;
+  background: rgba(255, 167, 38, 0.1);
+}
+.ticketCard .cardHeader .ticketMeta .priorityBadge[data-priority=media] {
+  color: #d69e2e;
+  border-color: #ffd54f;
+  background: rgba(255, 213, 79, 0.1);
+}
+.ticketCard .cardHeader .ticketMeta .priorityBadge[data-priority=baixa] {
+  color: #38a169;
+  border-color: #68d391;
+  background: rgba(104, 211, 145, 0.1);
+}
+.ticketCard .cardDetails {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+  padding: 1.5rem 0;
+  border-top: 2px solid rgba(167, 139, 250, 0.1);
+  border-bottom: 2px solid rgba(167, 139, 250, 0.1);
+}
+.ticketCard .cardDetails .detailRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.ticketCard .cardDetails .detailRow .detailLabel {
+  font-size: 0.85rem;
+  color: rgba(26, 26, 46, 0.6);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.ticketCard .cardDetails .detailRow .detailLabel::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: #8b5cf6;
+  border-radius: 50%;
+  display: inline-block;
+}
+.ticketCard .cardDetails .detailRow .detailValue {
+  font-size: 1rem;
+  color: #1a1a2e;
+  font-weight: 500;
+}
+.ticketCard .cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+.ticketCard .cardFooter .date {
+  font-size: 0.9rem;
+  color: rgba(26, 26, 46, 0.6);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.ticketCard .cardFooter .date::before {
+  content: "📅";
+  font-size: 1rem;
+}
+.ticketCard .cardFooter .viewButton {
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(109, 40, 217, 0.2);
+}
+.ticketCard .cardFooter .viewButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(109, 40, 217, 0.3);
+  background: linear-gradient(135deg, rgb(123.7154150198, 61.6699604743, 220.8300395257), rgb(156.1976744186, 116.1656976744, 247.3343023256));
+}
+.ticketCard .cardFooter .viewButton:active {
+  transform: translateY(0);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.ticketCard {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+.ticketCard:nth-child(odd) {
+  animation-delay: 0.1s;
+}
+.ticketCard:nth-child(even) {
+  animation-delay: 0.2s;
+}/*# sourceMappingURL=myCallings.module.css.map */

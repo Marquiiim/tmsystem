@@ -21,6 +21,15 @@ function createTicketMiddleware(req, res, next) {
     next()
 }
 
+function ticketsMiddlewareGlobal(req, res, next) {
+    const { access_token, refresh_token } = req.cookies
+
+    if (!access_token, !refresh_token) return res.status(401).json({ error: '[TMSYSTEM] Sessão expirada, tente recarregar a página.' })
+
+    next()
+}
+
 module.exports = {
-    createTicketMiddleware
+    createTicketMiddleware,
+    ticketsMiddlewareGlobal
 }

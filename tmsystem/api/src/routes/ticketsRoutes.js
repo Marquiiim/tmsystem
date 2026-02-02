@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router()
 
-const { createTicketMiddleware } = require('../middlewares/ticketsMiddleware')
-const { createTicketController } = require('../controllers/ticketsController')
+const { createTicketMiddleware, ticketsMiddlewareGlobal } = require('../middlewares/ticketsMiddleware')
+const { createTicketController, viewMyTicketsController } = require('../controllers/ticketsController')
 
 router.post('/create', createTicketMiddleware, createTicketController)
-/*router.post('/view-tickets', viewTicketMiddleware, viewTicketController)
+router.get('/my-tickets', ticketsMiddlewareGlobal, viewMyTicketsController)
+/*router.post('/department-tickets', viewTicketMiddleware, viewTicketController)
 router.post('/cancel-ticket', cancelTicketMiddleware, cancelTicketController)
-router.post('assume-ticket')
-router.get('/my-tickets')*/
+router.post('assume-ticket')*/
 
 module.exports = router
