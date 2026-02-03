@@ -1,4 +1,4 @@
-const { createTicketService, searchMyTicketsService } = require('../services/ticketsServices')
+const { createTicketService, myTicketsService, myDepartmentTicketsService } = require('../services/ticketsServices')
 
 async function createTicketController(req, res) {
     try {
@@ -10,11 +10,21 @@ async function createTicketController(req, res) {
     }
 }
 
-async function viewMyTicketsController(req, res) {
+async function myTicketsController(req, res) {
     try {
-        const myTickets = await searchMyTicketsService(req.cookies)
+        const myTickets = await myTicketsService(req.cookies)
 
-        return res.status(200).json({ success: true, myTickets })
+        return res.status(200).json({ success: true, tickets: myTickets })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+async function myDepartmentTicketsController(req, res) {
+    try {
+        const ticketsDepartment = await myDepartmentTicketsService(req.cookies)
+
+        return res.status(200).json({ success: true, tickets: ticketsDepartment })
     } catch (error) {
         console.log(error)
     }
@@ -22,5 +32,6 @@ async function viewMyTicketsController(req, res) {
 
 module.exports = {
     createTicketController,
-    viewMyTicketsController
+    myTicketsController,
+    myDepartmentTicketsController
 }

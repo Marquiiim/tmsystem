@@ -1,19 +1,19 @@
-import Layout from '../../layout/layout'
 import styles from './myCallings.module.css'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 function MyCallings() {
 
-    const [typeEndpoint, setTypeEndpoint] = useState(true)
+    const navigate = useNavigate()
+    const [typeEndpoint, setTypeEndpoint] = useState('/department-tickets')
     const [ticketsData, setTicketsData] = useState([])
 
     useEffect(() => {
         async function searchTicket() {
             try {
-                const endpoint = typeEndpoint ? '/my-tickets' : '/department-tickets'
-                const response = await axios.get(`http://localhost:5000/api/tickets${endpoint}`, { withCredentials: true })
-                setTicketsData(response.data.myTickets)
+                const response = await axios.post(`http://localhost:5000/api/tickets${typeEndpoint}`, {}, { withCredentials: true })
+                setTicketsData(response.data.tickets)
             } catch (error) {
                 console.log(error)
             }
@@ -22,93 +22,100 @@ function MyCallings() {
     }, [typeEndpoint])
 
     return (
-        <Layout>
-            <section className={styles.container}>
-                <header className={styles.content}>
-                    <ul className={styles.callings_type}>
-                        <li onClick={() => setTypeEndpoint(false)}>
-                            Meu setor
-                        </li>
-                        <li onClick={() => setTypeEndpoint(true)}>
-                            Meus chamados
-                        </li>
-                    </ul>
-                </header>
-                <div className={styles.callings__list}>
-                    <ul>
-                        {ticketsData.map((ticket) => (
-                            <li key={ticket.ticket_id} className={styles.ticketCard}>
-                                <div className={styles.cardHeader}>
-                                    <div className={styles.ticketInfo}>
-                                        <h3 className={styles.ticketTitle}>
-                                            <span className={styles.ticketId}>#{ticket.ticket_id}</span>
-                                            {ticket.description.length > 60
-                                                ? `${ticket.description.substring(0, 60)}...`
-                                                : ticket.description}
-                                        </h3>
-                                        {ticket.anydesk_id && (
-                                            <span className={styles.anydeskId}>
-                                                Anydesk: {ticket.anydesk_id}
-                                            </span>
-                                        )}
-                                    </div>
-
-                                    <div className={styles.ticketMeta}>
-                                        <span
-                                            className={styles.statusBadge}
-                                            data-status={ticket.status}
-                                        >
-                                            {ticket.status}
+        <section className={styles.container}>
+            <header className={styles.content}>
+                <ul className={styles.callings_type}>
+                    <li onClick={() => setTypeEndpoint('/department-tickets')}>
+                        Chamados do meu setor
+                    </li>
+                    <li onClick={() => setTypeEndpoint('/my-tickets')}>
+                        Meus chamados abertos
+                    </li>
+                    <li onClick={() => setTypeEndpoint('/')}>
+                        Chamados assumidos por mim
+                    </li>
+                    <li onClick={() => navigate('/home', { replace: true })}>
+                        Voltar
+                    </li>
+                </ul>
+            </header>
+            <div className={styles.callings__list}>
+                <ul>
+                    {ticketsData.map((ticket) => (
+                        <li key={ticket.ticket_id} className={styles.ticketCard}>
+                            <div className={styles.cardHeader}>
+                                <div className={styles.ticketInfo}>
+                                    <h3 className={styles.ticketTitle}>
+                                        <span className={styles.ticketId}>#{ticket.ticket_id}</span>
+                                        {ticket.description.length > 60
+                                            ? `${ticket.description.substring(0, 60)}...`
+                                            : ticket.description}
+                                    </h3>
+                                    {ticket.anydesk_id && (
+                                        <span className={styles.anydeskId}>
+                                            Anydesk: {ticket.anydesk_id}
                                         </span>
-                                        <span
-                                            className={styles.priorityBadge}
-                                            data-priority={ticket.priority}
-                                        >
-                                            {ticket.priority}
-                                        </span>
-                                    </div>
+                                    )}
                                 </div>
 
-                                <div className={styles.cardDetails}>
-                                    <div className={styles.detailRow}>
-                                        <span className={styles.detailLabel}>Categoria:</span>
-                                        <span className={styles.detailValue}>
-                                            {ticket.category}
-                                            {ticket.subcategory && ` • ${ticket.subcategory}`}
-                                        </span>
-                                    </div>
-
-                                    <div className={styles.detailRow}>
-                                        <span className={styles.detailLabel}>Setor:</span>
-                                        <span className={styles.detailValue}>{ticket.department}</span>
-                                    </div>
-
-                                    <div className={styles.detailRow}>
-                                        <span className={styles.detailLabel}>Solicitante:</span>
-                                        <span className={styles.detailValue}>{ticket.requester}</span>
-                                    </div>
-
-                                    <div className={styles.detailRow}>
-                                        <span className={styles.detailLabel}>Atribuído:</span>
-                                        <span className={styles.detailValue}>
-                                            {ticket.assigned_to || 'Aguardando suporte'}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <div className={styles.cardFooter}>
-                                    <span className={styles.date}>
-                                        {new Date(ticket.created_at).toLocaleDateString('pt-BR')}
+                                <div className={styles.ticketMeta}>
+                                    <span
+                                        className={styles.statusBadge}
+                                        data-status={ticket.status}
+                                    >
+                                        {ticket.status}
                                     </span>
-                                    <button className={styles.viewButton}>
-                                        Ver detalhes
-                                    </button>
+                                    <span
+                                        className={styles.priorityBadge}
+                                        data-priority={ticket.priority}
+                                    >
+                                        {ticket.priority}
+                                    </span>
                                 </div>
-                            </li>))}
-                    </ul>
-                </div>
-            </section>
-        </Layout>
+                            </div>
+
+                            <div className={styles.cardDetails}>
+                                <div className={styles.detailRow}>
+                                    <span className={styles.detailLabel}>Categoria:</span>
+                                    <span className={styles.detailValue}>
+                                        {ticket.category}
+                                        {ticket.subcategory && ` • ${ticket.subcategory}`}
+                                    </span>
+                                </div>
+
+                                <div className={styles.detailRow}>
+                                    <span className={styles.detailLabel}>Setor:</span>
+                                    <span className={styles.detailValue}>{ticket.department}</span>
+                                </div>
+
+                                <div className={styles.detailRow}>
+                                    <span className={styles.detailLabel}>Solicitante:</span>
+                                    <span className={styles.detailValue}>{ticket.requester}</span>
+                                </div>
+
+                                <div className={styles.detailRow}>
+                                    <span className={styles.detailLabel}>Atribuído:</span>
+                                    <span className={styles.detailValue}>
+                                        {ticket.assigned_to || 'Aguardando suporte...'}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className={styles.cardFooter}>
+                                <span className={styles.date}>
+                                    {new Date(ticket.created_at).toLocaleDateString('pt-BR')}
+                                </span>
+                                <button className={styles.viewButton}>
+                                    Ver detalhes
+                                </button>
+                                <button className={styles.viewButton}>
+                                    Cancelar
+                                </button>
+                            </div>
+                        </li>))}
+                </ul>
+            </div>
+        </section>
     )
 }
 

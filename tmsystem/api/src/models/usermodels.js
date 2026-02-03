@@ -31,6 +31,7 @@ const user = {
         const rows = await query(
             `SELECT 
                 u.*,
+                d.id AS department_id,
                 d.slug AS department_slug,
                 d.name AS department_name,
                 ud.is_manager,

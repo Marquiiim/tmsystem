@@ -25,7 +25,7 @@ const ticket = {
         return result
     },
 
-    searchMyTickets: async (id) => {
+    myTickets: async (id) => {
         const result = await query(
             `SELECT 
                 t.id AS ticket_id,
@@ -48,6 +48,34 @@ const ticket = {
                 LEFT JOIN users uc ON t.created_by = uc.id
             WHERE t.status NOT IN ('fechado', 'resolvido', 'cancelado')
                 AND t.requester_id = ?
+            ORDER BY t.created_at DESC;`, [id]
+        )
+        return result
+    },
+
+    myDepartmentTickets: async (id) => {
+        const result = await query(
+            `SELECT 
+                t.id AS ticket_id,
+                t.description,
+                t.status,
+                t.priority,
+                t.category,
+                t.subcategory,
+                d.name AS department,
+                ur.name AS requester,
+                ua.name AS assigned_to,
+                uc.name AS created_by,
+                t.created_at,
+                t.updated_at,
+                t.anydesk_id
+            FROM tickets t
+                LEFT JOIN departments d ON t.department_id = d.id
+                LEFT JOIN users ur ON t.requester_id = ur.id
+                LEFT JOIN users ua ON t.assigned_to = ua.id
+                LEFT JOIN users uc ON t.created_by = uc.id
+            WHERE t.status NOT IN ('fechado', 'resolvido', 'cancelado')
+                AND t.department_id = ?
             ORDER BY t.created_at DESC;`, [id]
         )
         return result

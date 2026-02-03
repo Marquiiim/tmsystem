@@ -29,12 +29,12 @@ async function createTicketService(tokens, dataForm) {
     }
 }
 
-async function searchMyTicketsService(tokens) {
+async function myTicketsService(tokens) {
     const { access_token } = tokens
     try {
         const accessVerify = await jwttokens.verifyAccessToken(access_token)
 
-        const tickets = await ticketsmodels.searchMyTickets(accessVerify.userId)
+        const tickets = await ticketsmodels.myTickets(accessVerify.userId)
 
         return tickets
     } catch (error) {
@@ -42,7 +42,22 @@ async function searchMyTicketsService(tokens) {
     }
 }
 
+async function myDepartmentTicketsService(tokens) {
+    const { access_token } = tokens
+
+    try {
+        const accessVerify = await jwttokens.verifyAccessToken(access_token)
+        const departmentUser = await usermodels.findById(accessVerify.userId)
+        const departmentTickets = await ticketsmodels.myDepartmentTickets(departmentUser.department_id)
+
+        return departmentTickets
+    } catch (error) {
+        throw error
+    }
+}
+
 module.exports = {
     createTicketService,
-    searchMyTicketsService
+    myTicketsService,
+    myDepartmentTicketsService
 }
