@@ -25,7 +25,7 @@ function Authpage() {
             const response = await axios.post(`http://localhost:5000/api/auth${endpoint}`, authData, { withCredentials: true })
             if (response?.data?.redirectTo) navigate(response.data.redirectTo, { replace: true })
         } catch (error) {
-            setTypeError(error?.response?.data?.message)
+            setTypeError(error?.response?.data?.error)
             setError(true)
         }
     }

@@ -2,8 +2,8 @@ const jwttokens = require('../utils/jwt')
 const usermodels = require('../models/userModels')
 const ticketsmodels = require('../models/ticketsModels')
 
-async function createTicketService(tokens, dataForm) {
-    const { access_token } = tokens
+async function createTicketService(token, dataForm) {
+    const { access_token } = token
     const { department_id, category, subcategory, priority, description, anydesk } = dataForm
 
     try {
@@ -29,8 +29,8 @@ async function createTicketService(tokens, dataForm) {
     }
 }
 
-async function myTicketsService(tokens) {
-    const { access_token } = tokens
+async function myTicketsService(token) {
+    const { access_token } = token
     try {
         const accessVerify = await jwttokens.verifyAccessToken(access_token)
 
@@ -42,8 +42,8 @@ async function myTicketsService(tokens) {
     }
 }
 
-async function myDepartmentTicketsService(tokens) {
-    const { access_token } = tokens
+async function myDepartmentTicketsService(token) {
+    const { access_token } = token
 
     try {
         const accessVerify = await jwttokens.verifyAccessToken(access_token)
@@ -56,8 +56,22 @@ async function myDepartmentTicketsService(tokens) {
     }
 }
 
+async function cancelMyTicketService(token, ticket_id) {
+    const { access_token } = token
+    try {
+        const ticket = await ticketsmodels.findById(ticket_id)
+        const user = await jwttokens.verifyAccessToken(access_token)
+
+        console.log('Ticket a ser cancelado:', ticket.requester_id, ticket.created_by, ticket.assigned_to)
+        console.log('Usuário a cancelar o ticket:', user.userId)
+    } catch (error) {
+        throw error
+    }
+}
+
 module.exports = {
     createTicketService,
     myTicketsService,
-    myDepartmentTicketsService
+    myDepartmentTicketsService,
+    cancelMyTicketService
 }

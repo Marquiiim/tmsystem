@@ -21,6 +21,16 @@ function MyCallings() {
         searchTicket()
     }, [typeEndpoint])
 
+    const cancelTicket = async (ticket_id) => {
+        try {
+            const response = await axios.post(`http://localhost:5000/api/tickets/cancel-ticket`, { ticket_id: ticket_id }, { withCredentials: true })
+            console.log(response)
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <section className={styles.container}>
             <header className={styles.content}>
@@ -108,7 +118,7 @@ function MyCallings() {
                                 <button className={styles.viewButton}>
                                     Ver detalhes
                                 </button>
-                                <button className={styles.viewButton}>
+                                <button onClick={() => cancelTicket(ticket.ticket_id)} className={styles.viewButton}>
                                     Cancelar
                                 </button>
                             </div>

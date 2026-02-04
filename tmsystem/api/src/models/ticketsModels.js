@@ -22,7 +22,16 @@ const ticket = {
             ticketData.anydesk_id]
         )
 
-        return result
+        return result || null
+    },
+
+    findById: async (id) => {
+        const result = await query(
+            `SELECT * FROM tickets
+            WHERE id = ?
+            LIMIT 1`, [id]
+        )
+        return result[0] || null
     },
 
     myTickets: async (id) => {
@@ -50,7 +59,7 @@ const ticket = {
                 AND t.requester_id = ?
             ORDER BY t.created_at DESC;`, [id]
         )
-        return result
+        return result || null
     },
 
     myDepartmentTickets: async (id) => {
@@ -78,7 +87,7 @@ const ticket = {
                 AND t.department_id = ?
             ORDER BY t.created_at DESC;`, [id]
         )
-        return result
+        return result || null
     }
 }
 
