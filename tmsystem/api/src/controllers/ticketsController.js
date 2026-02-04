@@ -32,8 +32,6 @@ async function myDepartmentTicketsController(req, res) {
 
 async function cancelMyTicketController(req, res) {
     try {
-        console.log(req.body)
-
         await cancelMyTicketService(req.cookies, req.body.ticket_id)
 
         return res.status(200).json({ success: true, message: '[TMSYSTEM] Chamado cancelado com sucesso.' })

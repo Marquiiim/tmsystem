@@ -1,6 +1,7 @@
 const jwttokens = require('../utils/jwt')
 const usermodels = require('../models/userModels')
 const ticketsmodels = require('../models/ticketsModels')
+const user = require('../models/userModels')
 
 async function createTicketService(token, dataForm) {
     const { access_token } = token
@@ -60,10 +61,24 @@ async function cancelMyTicketService(token, ticket_id) {
     const { access_token } = token
     try {
         const ticket = await ticketsmodels.findById(ticket_id)
-        const user = await jwttokens.verifyAccessToken(access_token)
+        const userToken = await jwttokens.verifyAccessToken(access_token)
+        const userDepartment = await usermodels.findById(userToken.userId)
 
-        console.log('Ticket a ser cancelado:', ticket.requester_id, ticket.created_by, ticket.assigned_to)
-        console.log('Usuário a cancelar o ticket:', user.userId)
+        console.log('Ticket a ser cancelado:', ticket.requester_id, ticket.created_by, ticket.assigned_to, ticket.departmentTickets)
+        console.log('Demais informações do respectivo ticket a cancelar o ticket:', ticket)
+
+        console.log('======================================')
+
+        console.log('Usuário a cancelar o ticket:', userToken.userId)
+        console.log('Demais informações do usuário a cancelar o ticket:', userDepartment)
+
+        if (userToken.userId !== ticket.requester_id ||
+            userToken.userId !== ticket.created_by ||
+            userToken.userId !== ticket.assigned_to) throw new Error('[TMSYSTEM] Impossível cancelar chamado.')
+
+        if (userDepartment.department_id !== ticket.department_id) throw new Error('[TMSYSTEM] Impossível cancelar chamado.')
+
+        console.log('[SUCESSO NA EXCLUXÃO]')
     } catch (error) {
         throw error
     }
