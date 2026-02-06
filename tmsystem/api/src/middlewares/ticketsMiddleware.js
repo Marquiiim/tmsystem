@@ -4,19 +4,27 @@ function createTicketMiddleware(req, res, next) {
 
     if (!access_token || !refresh_token) return res.status(401).json({ error: '[TMSYSTEM] Sessão expirada, tente recarregar a página.' })
 
-    if (typeof department_id !== 'number' ||
-        typeof category !== 'string' ||
+    if (!department_id) return res.status(400).json({ error: '[TMSYSTEM] Erro ao tentar reconhecer departamento, volte a página e reabra o ticket.' })
+
+    if (!category ||
+        !subcategory ||
+        !priority) return res.status(400).json({ error: '[TMSYSTEM] Preencha e selecione todos os campos existentes.' })
+
+    if (typeof department_id !== 'number') return res.status(400).json({ error: '[TMSYSTEM] O departamento informado é inválido.' })
+
+    if (typeof category !== 'string' ||
         typeof subcategory !== 'string' ||
         typeof priority !== 'string' ||
         typeof description !== 'string' ||
         typeof anydesk !== 'string') return res.status(400).json({ error: '[TMSYSTEM] Os dados informados não correspondem aos tipos esperados para cada campo.' })
 
-    if (!department_id) return res.status(400).json({ error: '[TMSYSTEM] Erro ao tentar reconhecer departamento, volte a página e reabra o ticket.' })
+    if (anydesk !== undefined && typeof anydesk !== 'string') return res.status(400).json({ error: '[TMSYSTEM] Formato inválido no campo do anydesk' })
 
-    if (!category ||
-        !subcategory ||
-        !priority ||
-        !description) return res.status(400).json({ error: '[TMSYSTEM] Preencha e selecione todos os campos existentes.' })
+    if (description !== undefined && typeof description !== 'string') return res.status(400).json({ error: '[TMSYSTEM] Formato inválido no campo do anydesk' })
+
+    if (category.trim() === '' ||
+        subcategory.trim() === '' ||
+        priority.trim() === '') return res.status(400).json({ error: '[TMSYSTEM] Os campos não podem ser vazios.' })
 
     next()
 }
@@ -24,7 +32,7 @@ function createTicketMiddleware(req, res, next) {
 function ticketsMiddlewareGlobal(req, res, next) {
     const { access_token, refresh_token } = req.cookies
 
-    if (!access_token, !refresh_token) return res.status(401).json({ error: '[TMSYSTEM] Sessão expirada, tente recarregar a página.' })
+    if (!access_token || !refresh_token) return res.status(401).json({ error: '[TMSYSTEM] Sessão expirada, tente recarregar a página.' })
 
     next()
 }

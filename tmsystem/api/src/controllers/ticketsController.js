@@ -16,7 +16,7 @@ async function myTicketsController(req, res) {
 
         return res.status(200).json({ success: true, tickets: myTickets })
     } catch (error) {
-        return res.status(204).json({ success: false, message: error })
+        return res.status(204).json({ success: false, message: error.message })
     }
 }
 
@@ -26,7 +26,7 @@ async function myDepartmentTicketsController(req, res) {
 
         return res.status(200).json({ success: true, tickets: ticketsDepartment })
     } catch (error) {
-        return res.status(204).json({ success: false, message: error })
+        return res.status(204).json({ success: false, message: error.message })
     }
 }
 
@@ -36,7 +36,7 @@ async function cancelMyTicketController(req, res) {
 
         return res.status(200).json({ success: true, message: '[TMSYSTEM] Chamado cancelado com sucesso.' })
     } catch (error) {
-        return res.status(401).json({ success: false, message: error })
+        return res.status(401).json({ success: false, message: error.message })
     }
 }
 

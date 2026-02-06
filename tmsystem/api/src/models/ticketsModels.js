@@ -88,6 +88,14 @@ const ticket = {
             ORDER BY t.created_at DESC;`, [id]
         )
         return result || null
+    },
+
+    deleteTicket: async (id) => {
+        const result = await query(
+            `DELETE FROM tickets
+            WHERE id = ?`, [id]
+        )
+        return result || null
     }
 }
 

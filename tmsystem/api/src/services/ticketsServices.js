@@ -64,21 +64,14 @@ async function cancelMyTicketService(token, ticket_id) {
         const userToken = await jwttokens.verifyAccessToken(access_token)
         const userDepartment = await usermodels.findById(userToken.userId)
 
-        console.log('Ticket a ser cancelado:', ticket.requester_id, ticket.created_by, ticket.assigned_to, ticket.departmentTickets)
-        console.log('Demais informações do respectivo ticket a cancelar o ticket:', ticket)
-
-        console.log('======================================')
-
-        console.log('Usuário a cancelar o ticket:', userToken.userId)
-        console.log('Demais informações do usuário a cancelar o ticket:', userDepartment)
-
         if (userToken.userId !== ticket.requester_id ||
             userToken.userId !== ticket.created_by ||
-            userToken.userId !== ticket.assigned_to) throw new Error('[TMSYSTEM] Impossível cancelar chamado.')
-
-        if (userDepartment.department_id !== ticket.department_id) throw new Error('[TMSYSTEM] Impossível cancelar chamado.')
-
-        console.log('[SUCESSO NA EXCLUXÃO]')
+            userToken.userId !== ticket.assigned_to ||
+            userDepartment.department_id === ticket.department_id) {
+            await ticketsmodels.deleteTicket(ticket.id)
+        } else {
+            throw new Error('[TMSYSTEM] Impossível cancelar chamado.')
+        }
     } catch (error) {
         throw error
     }
