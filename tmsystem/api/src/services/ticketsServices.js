@@ -1,7 +1,6 @@
 const jwttokens = require('../utils/jwt')
 const usermodels = require('../models/userModels')
 const ticketsmodels = require('../models/ticketsModels')
-const user = require('../models/userModels')
 
 async function createTicketService(token, dataForm) {
     const { access_token } = token
@@ -37,6 +36,8 @@ async function myTicketsService(token) {
 
         const tickets = await ticketsmodels.myTickets(accessVerify.userId)
 
+        if (!tickets) throw new Error('[TMSYSTEM] Você não tem nenhum ticket aberto.')
+
         return tickets
     } catch (error) {
         throw error
@@ -51,7 +52,21 @@ async function myDepartmentTicketsService(token) {
         const departmentUser = await usermodels.findById(accessVerify.userId)
         const departmentTickets = await ticketsmodels.myDepartmentTickets(departmentUser.department_id)
 
+        if (!departmentTickets) throw new Error('[TMSYSTEM] Sem tickets para atendimento.')
+
         return departmentTickets
+    } catch (error) {
+        throw error
+    }
+}
+
+async function detailsTicketService(ticket_id) {
+    try {
+        const ticketInfo = await ticketsmodels.detailsTicket(ticket_id)
+
+        if (!ticketInfo) throw new Error('[TMSYSTEM] Ticket inexistente.')
+
+        return ticketInfo
     } catch (error) {
         throw error
     }
@@ -81,5 +96,6 @@ module.exports = {
     createTicketService,
     myTicketsService,
     myDepartmentTicketsService,
+    detailsTicketService,
     cancelMyTicketService
 }

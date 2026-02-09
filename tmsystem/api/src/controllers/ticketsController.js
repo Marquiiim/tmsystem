@@ -1,3 +1,4 @@
+const ticket = require('../models/ticketsModels')
 const { createTicketService, myTicketsService, myDepartmentTicketsService, cancelMyTicketService } = require('../services/ticketsServices')
 
 async function createTicketController(req, res) {
@@ -30,6 +31,16 @@ async function myDepartmentTicketsController(req, res) {
     }
 }
 
+async function detailsTicketController(req, res) {
+    try {
+        const ticket = await detailsTicketService(req.body.ticket_id)
+
+        return res.status(200).json({ success: true, ticket: ticket })
+    } catch (error) {
+        return res.status(404).json({ success: false, message: error.message })
+    }
+}
+
 async function cancelMyTicketController(req, res) {
     try {
         await cancelMyTicketService(req.cookies, req.body.ticket_id)
@@ -44,5 +55,6 @@ module.exports = {
     createTicketController,
     myTicketsController,
     myDepartmentTicketsController,
+    detailsTicketController,
     cancelMyTicketController
 }

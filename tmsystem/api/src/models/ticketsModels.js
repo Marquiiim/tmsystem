@@ -90,6 +90,30 @@ const ticket = {
         return result || null
     },
 
+    detailsTicket: async (id) => {
+        const result = await query(
+            `SELECT 
+                t.id AS ticket_id,
+                t.description,
+                t.category,
+                t.subcategory,
+                t.priority,
+                t.status,
+                t.department_id,
+                t.requester_id,
+                t.assigned_to,
+                t.created_by,
+                t.anydesk_id,
+                t.created_at,
+                t.updated_at,
+                t.closed_at
+            FROM tickets t
+            WHERE t.id = ?`, [id]
+        )
+
+        return result || null
+    },
+
     deleteTicket: async (id) => {
         const result = await query(
             `DELETE FROM tickets

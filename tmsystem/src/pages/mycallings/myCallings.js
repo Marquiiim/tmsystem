@@ -8,6 +8,7 @@ function MyCallings() {
     const navigate = useNavigate()
     const [typeEndpoint, setTypeEndpoint] = useState('/department-tickets')
     const [ticketsData, setTicketsData] = useState([])
+    const [refresh, setRefresh] = useState(0)
 
     useEffect(() => {
         async function searchTicket() {
@@ -19,12 +20,12 @@ function MyCallings() {
             }
         }
         searchTicket()
-    }, [typeEndpoint])
+    }, [typeEndpoint, refresh])
 
     const cancelTicket = async (ticket_id) => {
         try {
-            const response = await axios.post(`http://localhost:5000/api/tickets/cancel-ticket`, { ticket_id: ticket_id }, { withCredentials: true })
-            console.log(response)
+            await axios.post(`http://localhost:5000/api/tickets/cancel-ticket`, { ticket_id: ticket_id }, { withCredentials: true })
+            setRefresh(refresh + 1)
         }
         catch (error) {
             console.log(error)
@@ -115,9 +116,11 @@ function MyCallings() {
                                 <span className={styles.date}>
                                     {new Date(ticket.created_at).toLocaleDateString('pt-BR')}
                                 </span>
-                                <button className={styles.viewButton}>
-                                    Ver detalhes
-                                </button>
+                                {typeEndpoint !== '/my-tickets' &&
+                                    <button onClick={() => navigate(`/mycallings/${ticket.ticket_id}`)} className={styles.viewButton}>
+                                        Ver detalhes
+                                    </button>
+                                }
                                 <button onClick={() => cancelTicket(ticket.ticket_id)} className={styles.viewButton}>
                                     Cancelar
                                 </button>

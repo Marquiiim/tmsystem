@@ -1,0 +1,269 @@
+@charset "UTF-8";
+.detailsTicket {
+  background: #f8fafc;
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(109, 40, 217, 0.1);
+}
+
+.ticketHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(109, 40, 217, 0.1);
+}
+
+.headerMain {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.ticketTitle {
+  font-size: 28px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.ticketTitle .ticketId {
+  color: #6d28d9;
+  font-weight: 700;
+  margin-right: 8px;
+  background: rgba(109, 40, 217, 0.08);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 20px;
+}
+
+.anydeskSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.anydeskSection .anydeskLabel {
+  color: #1a1a2e;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.8;
+}
+.anydeskSection .anydeskCode {
+  background: rgba(139, 92, 246, 0.1);
+  color: #8b5cf6;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-family: "Monaco", "Courier New", monospace;
+  font-size: 14px;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.statusContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 200px;
+}
+
+.statusGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.statusGroup .statusLabel,
+.statusGroup .priorityLabel {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(26, 26, 46, 0.6);
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 120px;
+}
+.statusBadge[data-status=aberto] {
+  background: rgba(34, 197, 94, 0.1);
+  color: #059669;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+.statusBadge[data-status=em_andamento] {
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563eb;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+.statusBadge[data-status=fechado] {
+  background: rgba(107, 114, 128, 0.1);
+  color: #6b7280;
+  border: 1px solid rgba(107, 114, 128, 0.2);
+}
+.statusBadge[data-status=cancelado] {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.priorityBadge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 120px;
+}
+.priorityBadge[data-priority=urgente] {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+.priorityBadge[data-priority=alto] {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+.priorityBadge[data-priority=médio] {
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563eb;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+.priorityBadge[data-priority=baixo] {
+  background: rgba(34, 197, 94, 0.1);
+  color: #059669;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.infoCard {
+  background: rgba(248, 250, 252, 0.95);
+  border-radius: 14px;
+  border: 1px solid rgba(109, 40, 217, 0.08);
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+.infoCard:hover {
+  border-color: rgba(109, 40, 217, 0.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.infoHeader {
+  background: linear-gradient(135deg, rgba(109, 40, 217, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+  padding: 18px 24px;
+  border-bottom: 1px solid rgba(109, 40, 217, 0.08);
+}
+.infoHeader .infoTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #6d28d9;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.infoContent {
+  padding: 20px 24px;
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(109, 40, 217, 0.05);
+}
+.infoRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.infoRow:first-child {
+  padding-top: 0;
+}
+
+.infoLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(26, 26, 46, 0.7);
+  min-width: 120px;
+}
+
+.infoValue {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a2e;
+  text-align: right;
+  flex: 1;
+  padding-left: 16px;
+}
+
+.additionalInfo .additionalCard {
+  background: rgba(248, 250, 252, 0.95);
+  border-radius: 14px;
+  border: 1px solid rgba(109, 40, 217, 0.08);
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+.additionalInfo .additionalTitle {
+  background: linear-gradient(135deg, rgba(109, 40, 217, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+  padding: 18px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #6d28d9;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(109, 40, 217, 0.08);
+}
+
+.additionalContent {
+  padding: 20px 24px;
+}
+
+.additionalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(109, 40, 217, 0.05);
+}
+.additionalRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.additionalRow:first-child {
+  padding-top: 0;
+}
+
+.additionalLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(26, 26, 46, 0.7);
+  min-width: 160px;
+}
+
+.additionalValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a2e;
+  text-align: right;
+  flex: 1;
+  padding-left: 16px;
+}
+.additionalValue::first-letter {
+  text-transform: uppercase;
+}/*# sourceMappingURL=detailsTicket.module.css.map */

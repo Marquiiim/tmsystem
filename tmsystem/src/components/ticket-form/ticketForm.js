@@ -2,7 +2,7 @@ import styles from './ticketForm.module.css'
 import Layout from '../../layout/layout'
 
 import { useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 
 import PriorityInput from '../inputs/PriorityInput'
@@ -12,8 +12,13 @@ import DescriptionInput from '../inputs/DescriptionInput'
 
 function TicketForm() {
     const location = useLocation()
+    const formRef = useRef(null)
     const { category, department, department_id } = location.state
     const [config, setConfig] = useState(null)
+    const [notice, setNotice] = useState({
+        message: '',
+        type: ''
+    })
     const [formData, setFormData] = useState({
         department_id: department_id,
         category: category,
@@ -53,9 +58,10 @@ function TicketForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setNotice('')
 
         try {
-            await axios.post('http://localhost:5000/api/tickets/create',
+            const response = await axios.post('http://localhost:5000/api/tickets/create',
                 {
                     department_id: formData.department_id,
                     category: formData.category,
@@ -66,15 +72,28 @@ function TicketForm() {
                 },
                 { withCredentials: true })
 
+            if (response.data?.success) setNotice({ message: response.data?.message, type: 'success' })
+
+            if (formRef.current) formRef.current.reset()
+
+            setFormData({
+                department_id: department_id,
+                category: category,
+                subcategory: '',
+                priority: '',
+                anydesk: '',
+                description: ''
+            })
+
         } catch (error) {
-            console.log(error)
+            setNotice({ message: error.response.data?.error, type: 'error' })
         }
     }
 
     return (
         <Layout>
             <section className={styles.container}>
-                <form className={styles.content} onSubmit={handleSubmit}>
+                <form className={styles.content} onSubmit={handleSubmit} ref={formRef}>
                     <div className={styles.titles_content}>
                         <h3 className={styles.title_form}>
                             CENTRAL DE CHAMADOS - {department.toUpperCase()}
@@ -83,6 +102,12 @@ function TicketForm() {
                             CATEGORIA: {category.toUpperCase()}
                         </p>
                     </div>
+
+                    {notice.message && notice.message.trim() !== '' && (
+                        <span className={styles.notices_form} data-type={notice.type}>
+                            {notice.message}
+                        </span>
+                    )}
 
                     <TypeTicketInput value={formData.subcategory} onChange={(value) => handleChange('subcategory', value)} />
 
