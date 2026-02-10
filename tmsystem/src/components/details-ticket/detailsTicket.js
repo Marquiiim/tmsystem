@@ -6,20 +6,31 @@ import styles from './detailsTicket.module.css';
 
 function DetailsTicket() {
     const { ticket_id } = useParams()
+    const [loading, setLoading] = useState(true)
     const [ticket, setTicket] = useState(null)
 
     useEffect(() => {
         async function fetchTicketDetails() {
             try {
                 const response = await axios.post('http://localhost:5000/api/tickets/details-ticket', { ticket_id: ticket_id }, { withCredentials: true })
-                console.log(response)
+                setTicket(response.data.ticket)
             } catch (error) {
                 console.log(error)
+            } finally {
+                setLoading(false)
             }
         }
-
         fetchTicketDetails()
     }, [ticket_id])
+
+    if (loading) {
+        return (
+            <div className="loader">
+                <div className="justify-content-center jimu-primary-loading"></div>
+            </div>
+        )
+    }
+
     return (
         <div className={styles.detailsTicket}>
             <div className={styles.ticketHeader}>

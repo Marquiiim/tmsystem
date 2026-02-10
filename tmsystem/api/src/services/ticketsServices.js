@@ -72,6 +72,19 @@ async function detailsTicketService(ticket_id) {
     }
 }
 
+async function assumeTicketService(token, ticket_id) {
+    const { access_token } = token
+    try {
+        const accessVerify = await jwttokens.verifyAccessToken(access_token)
+        const userInfo = await usermodels.findById(accessVerify.userId)
+        const assumeTicket = await ticketsmodels.assumeTicket(ticket_id, accessVerify.userId, userInfo.department_id)
+
+        console.log(assumeTicket)
+    } catch (error) {
+        throw error
+    }
+}
+
 async function cancelMyTicketService(token, ticket_id) {
     const { access_token } = token
     try {
@@ -83,7 +96,7 @@ async function cancelMyTicketService(token, ticket_id) {
             userToken.userId !== ticket.created_by ||
             userToken.userId !== ticket.assigned_to ||
             userDepartment.department_id === ticket.department_id) {
-            await ticketsmodels.deleteTicket(ticket.id)
+            await ticketsmodels.cancelTicket(ticket.id)
         } else {
             throw new Error('[TMSYSTEM] Impossível cancelar chamado.')
         }
@@ -97,5 +110,6 @@ module.exports = {
     myTicketsService,
     myDepartmentTicketsService,
     detailsTicketService,
+    assumeTicketService,
     cancelMyTicketService
 }

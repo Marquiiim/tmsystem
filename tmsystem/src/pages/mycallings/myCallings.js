@@ -8,6 +8,7 @@ function MyCallings() {
     const navigate = useNavigate()
     const [typeEndpoint, setTypeEndpoint] = useState('/department-tickets')
     const [ticketsData, setTicketsData] = useState([])
+    const [loading, setLoading] = useState(true)
     const [refresh, setRefresh] = useState(0)
 
     useEffect(() => {
@@ -17,19 +18,44 @@ function MyCallings() {
                 setTicketsData(response.data.tickets)
             } catch (error) {
                 console.log(error)
+            } finally {
+                setLoading(false)
             }
         }
         searchTicket()
     }, [typeEndpoint, refresh])
 
-    const cancelTicket = async (ticket_id) => {
+    const takeTicket = async (ticket_id) => {
+        setLoading(true)
         try {
-            await axios.post(`http://localhost:5000/api/tickets/cancel-ticket`, { ticket_id: ticket_id }, { withCredentials: true })
+            await axios.post('http://localhost:5000/api/tickets/assume-ticket', { ticket_id: ticket_id }, { withCredentials: true })
+            setRefresh(refresh + 1)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    const cancelTicket = async (ticket_id) => {
+        setLoading(true)
+        try {
+            await axios.post('http://localhost:5000/api/tickets/cancel-ticket', { ticket_id: ticket_id }, { withCredentials: true })
             setRefresh(refresh + 1)
         }
         catch (error) {
             console.log(error)
+        } finally {
+            setLoading(false)
         }
+    }
+
+    if (loading) {
+        return (
+            <div className="loader">
+                <div className="justify-content-center jimu-primary-loading"></div>
+            </div>
+        )
     }
 
     return (
@@ -119,6 +145,11 @@ function MyCallings() {
                                 {typeEndpoint !== '/my-tickets' &&
                                     <button onClick={() => navigate(`/mycallings/${ticket.ticket_id}`)} className={styles.viewButton}>
                                         Ver detalhes
+                                    </button>
+                                }
+                                {typeEndpoint === '/department-tickets' &&
+                                    <button onClick={() => takeTicket(ticket.ticket_id)} className={styles.viewButton}>
+                                        Assumir
                                     </button>
                                 }
                                 <button onClick={() => cancelTicket(ticket.ticket_id)} className={styles.viewButton}>

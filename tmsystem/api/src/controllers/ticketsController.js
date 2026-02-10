@@ -1,5 +1,9 @@
-const ticket = require('../models/ticketsModels')
-const { createTicketService, myTicketsService, myDepartmentTicketsService, cancelMyTicketService } = require('../services/ticketsServices')
+const { createTicketService,
+    myTicketsService,
+    myDepartmentTicketsService,
+    detailsTicketService,
+    assumeTicketService,
+    cancelMyTicketService } = require('../services/ticketsServices')
 
 async function createTicketController(req, res) {
     try {
@@ -41,6 +45,16 @@ async function detailsTicketController(req, res) {
     }
 }
 
+async function assumeTicketController(req, res) {
+    try {
+        await assumeTicketService(req.cookies, req.body.ticket_id)
+
+        return res.status(200).json({ success: true, message: '[TMSYSTEM] Chamado assumido para seu usuário com sucesso.' })
+    } catch (error) {
+        return res.status(401).json({ success: false, message: error.message })
+    }
+}
+
 async function cancelMyTicketController(req, res) {
     try {
         await cancelMyTicketService(req.cookies, req.body.ticket_id)
@@ -56,5 +70,6 @@ module.exports = {
     myTicketsController,
     myDepartmentTicketsController,
     detailsTicketController,
+    assumeTicketController,
     cancelMyTicketController
 }

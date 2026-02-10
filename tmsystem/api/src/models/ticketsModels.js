@@ -85,6 +85,7 @@ const ticket = {
                 LEFT JOIN users uc ON t.created_by = uc.id
             WHERE t.status NOT IN ('fechado', 'resolvido', 'cancelado')
                 AND t.department_id = ?
+                AND t.assigned_to IS NULL
             ORDER BY t.created_at DESC;`, [id]
         )
         return result || null
@@ -95,10 +96,10 @@ const ticket = {
             `SELECT 
                 t.id AS ticket_id,
                 t.description,
+                t.status,
+                t.priority,
                 t.category,
                 t.subcategory,
-                t.priority,
-                t.status,
                 t.department_id,
                 t.requester_id,
                 t.assigned_to,
@@ -106,15 +107,60 @@ const ticket = {
                 t.anydesk_id,
                 t.created_at,
                 t.updated_at,
-                t.closed_at
+                d.name AS department_name,
+                ur.name AS requester_name,
+                ua.name AS assigned_to_name,
+                uc.name AS created_by_name
             FROM tickets t
+            LEFT JOIN departments d ON t.department_id = d.id
+            LEFT JOIN users ur ON t.requester_id = ur.id
+            LEFT JOIN users ua ON t.assigned_to = ua.id
+            LEFT JOIN users uc ON t.created_by = uc.id
             WHERE t.id = ?`, [id]
         )
+
+        return result[0] || null
+    },
+
+    assumeTicket: async (ticketId, userId, userDepartmentId) => {
+        const ticketInfo = await query(
+            `SELECT 
+                t.*,
+                d.name AS department_name
+            FROM tickets t
+            LEFT JOIN departments d on t.department_id = d.id
+            WHERE t.id = ?`, [ticketId]
+        )
+
+        if (!ticketInfo || ticketInfo.length === 0) throw new Error('[TMSYSTEM] Chamado não encontrado.')
+
+        const ticket = ticketInfo[0]
+
+        if (ticket.assigned_to) throw new Error('[TMSYSTEM] Este chamado já está atribuído a um usuário.')
+
+        if (ticket.department_id !== userDepartmentId) throw new Error('[TMSYSTEM] Você não pertence ao departamento desse chamado.')
+
+        const invalidStatuses = ['em_andamento', 'pendente', 'resolvido', 'fechado', 'cancelado']
+
+        if (invalidStatuses.includes((ticket.status || '').toLowerCase())) throw new Error(`[TMSYSTEM] Não é possível assumir esse status, pois seu status é de: ${ticket.status}`)
+
+        const result = await query(
+            `UPDATE tickets 
+             SET assigned_to = ?, 
+                status = 'em_andamento',
+                updated_at = CURRENT_TIMESTAMP 
+             WHERE id = ?
+                AND assigned_to IS NULL
+                AND status = ?`,
+            [userId, ticketId, ticket.status]
+        )
+
+        if (result.affectedRows === 0) throw new Error('[TMSYTEM] Nenhum registro atualizado.')
 
         return result || null
     },
 
-    deleteTicket: async (id) => {
+    cancelTicket: async (id) => {
         const result = await query(
             `DELETE FROM tickets
             WHERE id = ?`, [id]
