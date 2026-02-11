@@ -15,6 +15,7 @@ function MyCallings() {
         async function searchTicket() {
             try {
                 const response = await axios.post(`http://localhost:5000/api/tickets${typeEndpoint}`, {}, { withCredentials: true })
+                console.log(response.data.tickets)
                 setTicketsData(response.data.tickets)
             } catch (error) {
                 console.log(error)
@@ -68,7 +69,7 @@ function MyCallings() {
                     <li onClick={() => setTypeEndpoint('/my-tickets')}>
                         Meus chamados abertos
                     </li>
-                    <li onClick={() => setTypeEndpoint('/')}>
+                    <li onClick={() => setTypeEndpoint('/assumed-tickets')}>
                         Chamados assumidos por mim
                     </li>
                     <li onClick={() => navigate('/home', { replace: true })}>

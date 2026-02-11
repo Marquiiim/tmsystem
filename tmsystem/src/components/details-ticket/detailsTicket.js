@@ -36,14 +36,14 @@ function DetailsTicket() {
             <div className={styles.ticketHeader}>
                 <div className={styles.headerMain}>
                     <h1 className={styles.ticketTitle}>
-                        <span className={styles.ticketId}>#{ticket.ticket_id}</span>
-                        {ticket.description}
+                        <span className={styles.ticketId}>#{ticket.ticket_id || 'N/A'}</span>
+                        {ticket.description || 'N/A'}
                     </h1>
 
                     {ticket.anydesk_id && (
                         <div className={styles.anydeskSection}>
                             <span className={styles.anydeskLabel}>Anydesk ID:</span>
-                            <code className={styles.anydeskCode}>{ticket.anydesk_id}</code>
+                            <code className={styles.anydeskCode}>{ticket.anydesk_id || 'N/A'}</code>
                         </div>
                     )}
                 </div>
@@ -55,7 +55,7 @@ function DetailsTicket() {
                             className={styles.statusBadge}
                             data-status={ticket.status.toLowerCase()}
                         >
-                            {ticket.status}
+                            {ticket.status || 'N/A'}
                         </span>
                     </div>
 
@@ -65,7 +65,7 @@ function DetailsTicket() {
                             className={styles.priorityBadge}
                             data-priority={ticket.priority.toLowerCase()}
                         >
-                            {ticket.priority}
+                            {ticket.priority || 'N/A'}
                         </span>
                     </div>
                 </div>
@@ -82,7 +82,7 @@ function DetailsTicket() {
                         <div className={styles.infoRow}>
                             <span className={styles.infoLabel}>Categoria:</span>
                             <span className={styles.infoValue}>
-                                {ticket.category}
+                                {ticket.category || 'N/A'}
                             </span>
                         </div>
                         <div className={styles.infoRow}>
@@ -94,7 +94,7 @@ function DetailsTicket() {
                         <div className={styles.infoRow}>
                             <span className={styles.infoLabel}>Setor:</span>
                             <span className={styles.infoValue}>
-                                {ticket.department}
+                                {ticket.department_name || 'N/A'}
                             </span>
                         </div>
                     </div>
@@ -110,7 +110,7 @@ function DetailsTicket() {
                         <div className={styles.infoRow}>
                             <span className={styles.infoLabel}>Solicitante:</span>
                             <span className={styles.infoValue}>
-                                {ticket.requester}
+                                {ticket.requester_name || 'N/A'}
                             </span>
                         </div>
                         <div className={styles.infoRow}>
@@ -122,7 +122,7 @@ function DetailsTicket() {
                         <div className={styles.infoRow}>
                             <span className={styles.infoLabel}>Criado por:</span>
                             <span className={styles.infoValue}>
-                                {ticket.created_by || 'Sistema'}
+                                {ticket.created_by_name || 'N/A'}
                             </span>
                         </div>
                     </div>

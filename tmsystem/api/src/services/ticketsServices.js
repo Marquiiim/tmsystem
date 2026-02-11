@@ -77,9 +77,21 @@ async function assumeTicketService(token, ticket_id) {
     try {
         const accessVerify = await jwttokens.verifyAccessToken(access_token)
         const userInfo = await usermodels.findById(accessVerify.userId)
-        const assumeTicket = await ticketsmodels.assumeTicket(ticket_id, accessVerify.userId, userInfo.department_id)
+        await ticketsmodels.assumeTicket(ticket_id, accessVerify.userId, userInfo.department_id)
 
-        console.log(assumeTicket)
+    } catch (error) {
+        throw error
+    }
+}
+
+async function assumedTicketService(token) {
+    const { access_token } = token
+    try {
+        const accessVerify = await jwttokens.verifyAccessToken(access_token)
+        const userInfo = await usermodels.findById(accessVerify.userId)
+        const assumedTickets = await ticketsmodels.assumedTicket(userInfo.id)
+
+        return assumedTickets
     } catch (error) {
         throw error
     }
@@ -111,5 +123,6 @@ module.exports = {
     myDepartmentTicketsService,
     detailsTicketService,
     assumeTicketService,
+    assumedTicketService,
     cancelMyTicketService
 }

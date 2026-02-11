@@ -22,6 +22,8 @@ const ticket = {
             ticketData.anydesk_id]
         )
 
+        if (result.affectedRows === 0) throw new Error('[TMSYSTEM] Erro ao abrir chamado, tente novamente.')
+
         return result || null
     },
 
@@ -59,7 +61,10 @@ const ticket = {
                 AND t.requester_id = ?
             ORDER BY t.created_at DESC;`, [id]
         )
-        return result || null
+
+        if (!result || result.length === 0) throw new Error('[TMSYSTEM] Você não tem chamados abertos.')
+
+        return result || []
     },
 
     myDepartmentTickets: async (id) => {
@@ -88,6 +93,9 @@ const ticket = {
                 AND t.assigned_to IS NULL
             ORDER BY t.created_at DESC;`, [id]
         )
+
+        if (!result || result.length === 0) throw new Error('[TMSYSTEM] Não há chamados abertos no seu departamento.')
+
         return result || null
     },
 
@@ -118,6 +126,8 @@ const ticket = {
             LEFT JOIN users uc ON t.created_by = uc.id
             WHERE t.id = ?`, [id]
         )
+
+        if (!result || result.length === 0) throw new Error('[TMSYSTEM] Chamado não encontrado.')
 
         return result[0] || null
     },
@@ -156,6 +166,43 @@ const ticket = {
         )
 
         if (result.affectedRows === 0) throw new Error('[TMSYTEM] Nenhum registro atualizado.')
+
+        return result || null
+    },
+
+    assumedTicket: async (id) => {
+        const result = await query(
+            `SELECT 
+                t.id AS ticket_id,
+                t.description,
+                t.status,
+                t.priority,
+                t.category,
+                t.subcategory,
+                t.department_id,
+                t.requester_id,
+                t.assigned_to,
+                t.created_by,
+                t.anydesk_id,
+                t.created_at,
+                t.updated_at,
+                d.name AS department_name,
+                ur.name AS requester_name,
+                ua.name AS assigned_to_name,
+                uc.name AS created_by_name
+            FROM tickets t
+            LEFT JOIN departments d ON t.department_id = d.id
+            LEFT JOIN users ur ON t.requester_id = ur.id
+            LEFT JOIN users ua ON t.assigned_to = ua.id
+            LEFT JOIN users uc ON t.created_by = uc.id
+            WHERE t.assigned_to = ?
+                AND t.status NOT IN ('resolvido','fechado','cancelado')  // ❌ ERRO: WHERE ausente!
+            ORDER BY 
+                t.updated_at DESC, 
+                t.created_at DESC`, [id]
+        )
+
+        if (!result || result.length === 0) throw new Error('[TMSYSTEM] Você não tem chamados assumidos para seu usuário.')
 
         return result || null
     },
