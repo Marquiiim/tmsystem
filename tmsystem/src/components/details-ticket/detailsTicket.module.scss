@@ -9,9 +9,10 @@ $frost-white-transparent: rgba(248, 250, 252, 0.95);
 .detailsTicket {
     background: $frost-white;
     border-radius: 16px;
-    padding: 30px;
+    padding: 40px;
     max-width: 1000px;
-    margin: 0 auto;
+    width: 1000px;
+    margin: 20px auto;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
     border: 1px solid rgba($purple-primary, 0.1);
 }
@@ -295,4 +296,14 @@ $frost-white-transparent: rgba(248, 250, 252, 0.95);
     &::first-letter {
         text-transform: uppercase;
     }
+}
+
+.detailsWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e9edf5 100%);
+    box-sizing: border-box;
 }

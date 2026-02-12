@@ -13,12 +13,15 @@ function MyCallings() {
 
     useEffect(() => {
         async function searchTicket() {
+            setTicketsData([])
             try {
                 const response = await axios.post(`http://localhost:5000/api/tickets${typeEndpoint}`, {}, { withCredentials: true })
-                console.log(response.data.tickets)
-                setTicketsData(response.data.tickets)
+
+                if (response.data?.success && Array.isArray(response.data.tickets)) setTicketsData(response.data.tickets)
+
             } catch (error) {
-                console.log(error)
+                console.log(error.message)
+                setTicketsData([])
             } finally {
                 setLoading(false)
             }
@@ -123,18 +126,18 @@ function MyCallings() {
 
                                 <div className={styles.detailRow}>
                                     <span className={styles.detailLabel}>Setor:</span>
-                                    <span className={styles.detailValue}>{ticket.department}</span>
+                                    <span className={styles.detailValue}>{ticket.department_name}</span>
                                 </div>
 
                                 <div className={styles.detailRow}>
                                     <span className={styles.detailLabel}>Solicitante:</span>
-                                    <span className={styles.detailValue}>{ticket.requester}</span>
+                                    <span className={styles.detailValue}>{ticket.requester_name}</span>
                                 </div>
 
                                 <div className={styles.detailRow}>
                                     <span className={styles.detailLabel}>Atribuído:</span>
                                     <span className={styles.detailValue}>
-                                        {ticket.assigned_to || 'Aguardando suporte...'}
+                                        {ticket.assigned_to_name || 'Aguardando suporte...'}
                                     </span>
                                 </div>
                             </div>

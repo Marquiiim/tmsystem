@@ -45,10 +45,10 @@ const ticket = {
                 t.priority,
                 t.category,
                 t.subcategory,
-                d.name AS department,
-                ur.name AS requester,
-                ua.name AS assigned_to,
-                uc.name AS created_by,
+                d.name AS department_name,
+                ur.name AS requester_name,
+                ua.name AS assigned_to_name,
+                uc.name AS created_by_name,
                 t.created_at,
                 t.updated_at,
                 t.anydesk_id
@@ -76,10 +76,10 @@ const ticket = {
                 t.priority,
                 t.category,
                 t.subcategory,
-                d.name AS department,
-                ur.name AS requester,
-                ua.name AS assigned_to,
-                uc.name AS created_by,
+                d.name AS department_name,
+                ur.name AS requester_name,
+                ua.name AS assigned_to_name,
+                uc.name AS created_by_name,
                 t.created_at,
                 t.updated_at,
                 t.anydesk_id
@@ -196,7 +196,7 @@ const ticket = {
             LEFT JOIN users ua ON t.assigned_to = ua.id
             LEFT JOIN users uc ON t.created_by = uc.id
             WHERE t.assigned_to = ?
-                AND t.status NOT IN ('resolvido','fechado','cancelado')  // ❌ ERRO: WHERE ausente!
+                AND t.status NOT IN ('resolvido','fechado','cancelado')
             ORDER BY 
                 t.updated_at DESC, 
                 t.created_at DESC`, [id]

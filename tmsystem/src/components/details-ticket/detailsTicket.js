@@ -116,13 +116,7 @@ function DetailsTicket() {
                         <div className={styles.infoRow}>
                             <span className={styles.infoLabel}>Responsável:</span>
                             <span className={styles.infoValue}>
-                                {ticket.assigned_to || 'Aguardando atribuição'}
-                            </span>
-                        </div>
-                        <div className={styles.infoRow}>
-                            <span className={styles.infoLabel}>Criado por:</span>
-                            <span className={styles.infoValue}>
-                                {ticket.created_by_name || 'N/A'}
+                                {ticket.assigned_to_name || 'Aguardando atribuição'}
                             </span>
                         </div>
                     </div>
