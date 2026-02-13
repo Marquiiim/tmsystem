@@ -1,9 +1,16 @@
+$primary-gradient-start: #6a11cb;
+$primary-gradient-end: #2575fc;
+$background-start: #f5f7fa;
+$background-end: #e4e8f0;
+$text-primary: #333;
+$white: #ffffff;
+
 .container {
     display: flex;
     justify-self: center;
     align-items: center;
     flex-direction: column;
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    background: linear-gradient(135deg, $background-start 0%, $background-end 100%);
     width: 100%;
     min-height: 100vh;
 
@@ -11,14 +18,13 @@
         margin: 0 auto;
         padding: 2rem;
     }
-
 }
 
 .title_home {
     font-size: 2rem;
     font-weight: bold;
     padding: 1rem 3.5rem;
-    color: #333;
+    color: $text-primary;
     text-align: center;
     position: relative;
     text-transform: uppercase;
@@ -31,7 +37,7 @@
         transform: translateX(-50%);
         width: 200px;
         height: 3px;
-        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        background: linear-gradient(135deg, $primary-gradient-start 0%, $primary-gradient-end 100%);
         border-radius: 2px;
     }
 }

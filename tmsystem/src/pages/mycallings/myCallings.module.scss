@@ -120,11 +120,14 @@ $frost-white-transparent: rgba(248, 250, 252, 0.95);
 .callings__list {
     max-width: 1400px;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
 
     ul {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
         gap: 1.5rem;
+        width: 100%;
     }
 }
 
@@ -363,5 +366,138 @@ $frost-white-transparent: rgba(248, 250, 252, 0.95);
 
     &:active {
         transform: translateY(0);
+    }
+}
+
+.toggleStatusButton {
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    border: 2px solid rgba($dark-gray, 0.2);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    min-height: 48px;
+    background: $frost-white;
+    color: $dark-gray;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236d28d9' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px;
+    padding-right: 2.5rem;
+    min-width: 180px;
+
+    option {
+        background: $frost-white;
+        color: $dark-gray;
+        padding: 12px 16px;
+        font-size: 0.95rem;
+
+        &:first-child {
+            color: rgba($dark-gray, 0.5);
+            font-style: italic;
+            background: rgba($dark-gray, 0.03);
+        }
+
+        &:hover {
+            background: linear-gradient(135deg, rgba($purple-primary, 0.1) 0%, rgba($purple-secondary, 0.1) 100%);
+        }
+
+        &:checked {
+            background: linear-gradient(135deg, rgba($purple-primary, 0.15) 0%, rgba($purple-secondary, 0.15) 100%);
+            font-weight: 700;
+        }
+
+        &[value="em_andamento"] {
+            border-left: 4px solid #f59e0b;
+
+            &:hover,
+            &:checked {
+                background: rgba(245, 158, 11, 0.15);
+                color: #f59e0b;
+            }
+        }
+
+        &[value="resolvido"] {
+            border-left: 4px solid #10b981;
+
+            &:hover,
+            &:checked {
+                background: rgba(16, 185, 129, 0.15);
+                color: #10b981;
+            }
+        }
+
+        &[value="fechado"] {
+            border-left: 4px solid $purple-primary;
+
+            &:hover,
+            &:checked {
+                background: rgba($purple-primary, 0.15);
+                color: $purple-primary;
+            }
+        }
+
+        &[value="cancelado"] {
+            border-left: 4px solid $dark-gray;
+
+            &:hover,
+            &:checked {
+                background: rgba($dark-gray, 0.15);
+                color: $dark-gray;
+            }
+        }
+    }
+}
+
+.ticketsNotFound {
+    background: $frost-white;
+    border-radius: 24px;
+    padding: 50px 30px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba($purple-primary, 0.1);
+    max-width: 500px;
+    margin: 40px auto;
+
+    .emoji {
+        font-size: 64px;
+        margin-bottom: 20px;
+        display: block;
+        filter: grayscale(0.5);
+        opacity: 0.7;
+    }
+
+    h3 {
+        color: $dark-gray;
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+
+    p {
+        color: rgba($dark-gray, 0.6);
+        font-size: 16px;
+        line-height: 1.6;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
+    .actionButton {
+        margin-top: 30px;
+        padding: 12px 30px;
+        background: linear-gradient(135deg, $purple-primary, $purple-secondary);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba($purple-primary, 0.3);
+        }
     }
 }

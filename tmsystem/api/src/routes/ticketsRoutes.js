@@ -8,6 +8,7 @@ const { createTicketController,
     detailsTicketController,
     assumeTicketController,
     assumedTicketController,
+    toggleStatusTicketController,
     cancelMyTicketController } = require('../controllers/ticketsController')
 
 router.post('/create', createTicketMiddleware, createTicketController)
@@ -16,6 +17,7 @@ router.post('/department-tickets', ticketsMiddlewareGlobal, myDepartmentTicketsC
 router.post('/details-ticket', ticketsMiddlewareGlobal, detailsTicketController)
 router.post('/assume-ticket', ticketsMiddlewareGlobal, assumeTicketController)
 router.post('/assumed-tickets', ticketsMiddlewareGlobal, assumedTicketController)
+router.post('/toggle-status', ticketsMiddlewareGlobal, toggleStatusTicketController)
 router.post('/cancel-ticket', ticketsMiddlewareGlobal, cancelMyTicketController)
 
 module.exports = router

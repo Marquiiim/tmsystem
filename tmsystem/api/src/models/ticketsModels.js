@@ -64,7 +64,7 @@ const ticket = {
 
         if (!result || result.length === 0) throw new Error('[TMSYSTEM] Você não tem chamados abertos.')
 
-        return result || []
+        return result || null
     },
 
     myDepartmentTickets: async (id) => {
@@ -157,7 +157,7 @@ const ticket = {
         const result = await query(
             `UPDATE tickets 
              SET assigned_to = ?, 
-                status = 'em_andamento',
+                status = 'pendente',
                 updated_at = CURRENT_TIMESTAMP 
              WHERE id = ?
                 AND assigned_to IS NULL
@@ -203,6 +203,41 @@ const ticket = {
         )
 
         if (!result || result.length === 0) throw new Error('[TMSYSTEM] Você não tem chamados assumidos para seu usuário.')
+
+        return result || null
+    },
+
+    toogleStatusTicket: async (userId, selectedStatus) => {
+        const ticketInfo = await query(
+            `SELECT
+                t.id,
+                t.assigned_to,
+                t.department_id,
+                t.status
+            FROM tickets t
+            WHERE t.id = ?`, []
+        )
+
+        if (!ticketInfo || ticketInfo.length === 0) throw new Error('[TMSYSTEM] Esse chamado não existe.')
+
+        const userInfo = await query(
+            `SELECT
+                u.id,    
+                u.user_id,
+                u.department_id
+            FROM user_department u
+            WHERE u.user_id = ?`, []
+        )
+
+        if (userInfo[0].userId !== ticketInfo[0].assigned_to &&
+            userInfo[0].department_id !== ticketInfo[0].department_id) throw new Error('[TMSYSTEM] Você não tem permissão para alterar o status desse chamado')
+
+        const result = await query(
+            `UPDATE tickets
+                SET status = ?,
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = ?`, [-]
+        )
 
         return result || null
     },

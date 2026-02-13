@@ -8,7 +8,6 @@ async function createTicketService(token, dataForm) {
 
     try {
         const accessVerify = await jwttokens.verifyAccessToken(access_token)
-
         const user = await usermodels.findById(accessVerify.userId)
 
         const ticketData = {
@@ -77,7 +76,7 @@ async function assumeTicketService(token, ticket_id) {
     try {
         const accessVerify = await jwttokens.verifyAccessToken(access_token)
         const userInfo = await usermodels.findById(accessVerify.userId)
-        await ticketsmodels.assumeTicket(ticket_id, accessVerify.userId, userInfo.department_id)
+        await ticketsmodels.assumeTicket(ticket_id, userInfo.id, userInfo.department_id)
 
     } catch (error) {
         throw error
@@ -95,6 +94,17 @@ async function assumedTicketService(token) {
     } catch (error) {
         throw error
     }
+}
+
+async function toggleStatusTicketService(token, data) {
+    const { access_token } = token
+    const { selectedStatus } = data
+
+    const accessVerify = await jwttokens.verifyAccessToken(access_token)
+    const userInfo = await usermodels.findById(accessVerify.userId)
+    const toggle = await ticketsmodels.toogleStatusTicket(userInfo.id, selectedStatus)
+
+    console.log(toggle)
 }
 
 async function cancelMyTicketService(token, ticket_id) {
@@ -124,5 +134,6 @@ module.exports = {
     detailsTicketService,
     assumeTicketService,
     assumedTicketService,
+    toggleStatusTicketService,
     cancelMyTicketService
 }

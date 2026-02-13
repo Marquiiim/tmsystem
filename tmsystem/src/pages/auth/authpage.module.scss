@@ -1,3 +1,23 @@
+// Variáveis de cores
+$primary-start: #6a11cb;
+$primary-end: #2575fc;
+$primary-gradient: linear-gradient(135deg, $primary-start 0%, $primary-end 100%);
+$primary-gradient-horizontal: linear-gradient(to right, $primary-start, $primary-end);
+
+$white: #ffffff;
+$white-transparent: rgba(255, 255, 255, 0.98);
+$white-border: rgba(255, 255, 255, 0.4);
+
+$text-primary: #2d3436;
+$text-secondary: #adb5bd;
+$border-color: #e0e0e0;
+$input-bg: #f8f9fa;
+
+$error-bg: #fef2f2;
+$error-border: #fecaca;
+$error-border-left: #ef4444;
+$error-text: #dc2626;
+
 .container {
     display: flex;
     flex-direction: column;
@@ -5,17 +25,16 @@
     justify-content: center;
     min-height: 100vh;
     padding: 1.5rem;
-    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    background: $primary-gradient;
 
     .container_form {
         display: flex;
         flex-direction: column;
-        background: rgba(255, 255, 255, 0.98);
+        background: $white-transparent;
         backdrop-filter: blur(10px);
         padding: 2rem;
         border-radius: 18px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
-        border: 1px solid rgba(255, 255, 255, 0.4);
+        border: 1px solid $white-border;
         width: 90%;
         max-width: 400px;
         max-height: 92vh;
@@ -26,7 +45,7 @@
         }
 
         &::-webkit-scrollbar-thumb {
-            background: rgba(106, 17, 203, 0.3);
+            background: rgba($primary-start, 0.3);
             border-radius: 10px;
         }
     }
@@ -36,9 +55,9 @@
     font-size: 1.7rem;
     font-weight: 700;
     margin-bottom: 1.2rem;
-    color: #2d3436;
+    color: $text-primary;
     text-align: center;
-    background: linear-gradient(to right, #6a11cb, #2575fc);
+    background: $primary-gradient-horizontal;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -49,16 +68,14 @@
     display: block;
     padding: 1rem 1.25rem;
     margin: 1rem 0;
-    background-color: #fef2f2;
-    border: 1px solid #fecaca;
-    border-left: 4px solid #ef4444;
+    background-color: $error-bg;
+    border: 1px solid $error-border;
+    border-left: 4px solid $error-border-left;
     border-radius: 0.5rem;
-    color: #dc2626;
+    color: $error-text;
     font-size: 0.95rem;
     font-weight: 500;
     line-height: 1.5;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    animation: fadeIn 0.3s ease-out;
 
     &::before {
         content: "⚠ ";
@@ -81,23 +98,22 @@
     input {
         padding: 0.8rem 1rem;
         font-size: 1rem;
-        border: 2px solid #e0e0e0;
+        border: 2px solid $border-color;
         border-radius: 12px;
         width: 100%;
-        background: #f8f9fa;
-        color: #2d3436;
+        background: $input-bg;
+        color: $text-primary;
         transition: all 0.2s ease;
         min-height: 46px;
 
         &:focus {
             outline: none;
-            border-color: #6a11cb;
-            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.15);
-            background: #ffffff;
+            border-color: $primary-start;
+            background: $white;
         }
 
         &::placeholder {
-            color: #adb5bd;
+            color: $text-secondary;
             font-size: 0.95rem;
         }
     }
@@ -132,13 +148,11 @@
         min-height: 48px;
 
         &:first-child {
-            background: linear-gradient(to right, #6a11cb, #2575fc);
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(106, 17, 203, 0.25);
+            background: $primary-gradient-horizontal;
+            color: $white;
 
             &:hover {
                 transform: translateY(-2px);
-                box-shadow: 0 6px 20px rgba(106, 17, 203, 0.35);
             }
 
             &:active {
@@ -148,11 +162,11 @@
 
         &:last-child {
             background: transparent;
-            color: #6a11cb;
-            border: 2px solid #6a11cb;
+            color: $primary-start;
+            border: 2px solid $primary-start;
 
             &:hover {
-                background: rgba(106, 17, 203, 0.08);
+                background: rgba($primary-start, 0.08);
             }
         }
     }

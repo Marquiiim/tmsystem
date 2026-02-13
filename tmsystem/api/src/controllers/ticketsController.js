@@ -4,6 +4,7 @@ const { createTicketService,
     detailsTicketService,
     assumeTicketService,
     assumedTicketService,
+    toggleStatusTicketService,
     cancelMyTicketService } = require('../services/ticketsServices')
 
 async function createTicketController(req, res) {
@@ -66,6 +67,16 @@ async function assumedTicketController(req, res) {
     }
 }
 
+async function toggleStatusTicketController(req, res) {
+    try {
+        await toggleStatusTicketService(req.cookies, req.body)
+
+        return res.status(200).json({ success: true, message: '[TMSYSTEM] Status alterado com sucesso.' })
+    } catch (error) {
+        return res.status(401).json({ success: false, message: '[TMSYSTEM] Erro ao alterar status do chamado.' })
+    }
+}
+
 async function cancelMyTicketController(req, res) {
     try {
         await cancelMyTicketService(req.cookies, req.body.ticket_id)
@@ -83,5 +94,6 @@ module.exports = {
     detailsTicketController,
     assumeTicketController,
     assumedTicketController,
+    toggleStatusTicketController,
     cancelMyTicketController
 }
