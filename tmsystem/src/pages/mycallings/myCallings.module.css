@@ -9,8 +9,7 @@
   max-width: 1000px;
   margin: 0 auto;
   background: rgba(248, 250, 252, 0.95);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border-radius: 24px;
   padding: 2rem;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(139, 92, 246, 0.1);
@@ -108,8 +107,7 @@
 
 .ticketCard {
   background: rgba(248, 250, 252, 0.95);
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 1.75rem;
   transition: all 0.3s ease;
