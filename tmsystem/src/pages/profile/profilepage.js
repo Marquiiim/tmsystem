@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 
 import Layout from '../../layout/layout'
 import styles from './profilepage.module.css'
-import axios from 'axios'
+import api from '../../service/api'
 
 function ProfilePage() {
 
@@ -13,7 +13,7 @@ function ProfilePage() {
     useEffect(() => {
         const fetchUserProfile = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/users/search-profile', { withCredentials: true })
+                const response = await api.get('http://localhost:5000/api/users/search-profile')
                 setUserData(response.data.user)
             } catch (error) {
                 console.log(error)

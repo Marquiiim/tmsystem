@@ -98,13 +98,11 @@ async function assumedTicketService(token) {
 
 async function toggleStatusTicketService(token, data) {
     const { access_token } = token
-    const { selectedStatus } = data
+    const { ticket_id, newStatus } = data
 
     const accessVerify = await jwttokens.verifyAccessToken(access_token)
     const userInfo = await usermodels.findById(accessVerify.userId)
-    const toggle = await ticketsmodels.toogleStatusTicket(userInfo.id, selectedStatus)
-
-    console.log(toggle)
+    await ticketsmodels.toogleStatusTicket(userInfo.id, ticket_id, newStatus)
 }
 
 async function cancelMyTicketService(token, ticket_id) {

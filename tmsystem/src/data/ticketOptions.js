@@ -41,467 +41,94 @@ export const departmentOptions = {
                     value: 'computador',
                     label: 'Computador/Notebook',
                     requiresDescription: true,
-                    requireAnyDesk: true,
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'problem',
-                            label: 'O que está acontecendo?',
-                            required: true,
-                            options: [
-                                { value: 'notTurningOn', label: 'Não liga' },
-                                { value: 'verySlow', label: 'Está muito lento' },
-                                { value: 'blueScreen', label: 'Aparece tela azul' },
-                                { value: 'noImage', label: 'Liga mas não mostra imagem' },
-                                { value: 'strangeNoise', label: 'Faz barulho estranho' },
-                                { value: 'other', label: 'Outro problema' }
-                            ]
-                        },
-                        {
-                            type: 'text',
-                            name: 'computerLocation',
-                            label: 'Onde está o computador?',
-                            placeholder: 'Ex: Sala 2, Mesa do João'
-                        },
-                        {
-                            type: 'checkbox',
-                            name: 'tried',
-                            label: 'O que já tentou fazer?',
-                            options: [
-                                { value: 'restart', label: 'Reiniciar o computador' },
-                                { value: 'checkCables', label: 'Verificar cabos' },
-                                { value: 'differentOutlet', label: 'Trocar de tomada' },
-                                { value: 'nothing', label: 'Nada ainda' }
-                            ]
-                        }
-                    ]
+                    requireAnyDesk: true
                 },
                 {
                     value: 'impressora',
                     label: 'Impressora',
-                    requiresDescription: true,
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'problem',
-                            label: 'Qual o problema?',
-                            required: true,
-                            options: [
-                                { value: 'paperJam', label: 'Papel preso' },
-                                { value: 'noInk', label: 'Acabou a tinta' },
-                                { value: 'notPrinting', label: 'Não imprime nada' },
-                                { value: 'poorQuality', label: 'Imprime tudo borrado' },
-                                { value: 'notConnecting', label: 'Não aparece no computador' }
-                            ]
-                        },
-                        {
-                            type: 'text',
-                            name: 'printerLocation',
-                            label: 'Onde está a impressora?',
-                            placeholder: 'Ex: Perto da recepção, Sala de reuniões'
-                        },
-                        {
-                            type: 'text',
-                            name: 'printerModel',
-                            label: 'Qual o modelo? (se souber)',
-                            placeholder: 'Ex: HP, Epson, Brother...'
-                        }
-                    ]
+                    requiresDescription: true
                 },
                 {
                     value: 'monitor',
                     label: 'Monitor/Tela',
-                    requiresDescription: true,
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'problem',
-                            label: 'O que acontece?',
-                            required: true,
-                            options: [
-                                { value: 'noImage', label: 'Não mostra imagem' },
-                                { value: 'flickering', label: 'Fica piscando' },
-                                { value: 'lines', label: 'Aparecem listras/linhas' },
-                                { value: 'spots', label: 'Tem manchas/pontos' },
-                                { value: 'broken', label: 'Está quebrado/trincado' }
-                            ]
-                        },
-                        {
-                            type: 'select',
-                            name: 'size',
-                            label: 'Qual o tamanho?',
-                            options: [
-                                { value: 'small', label: 'Pequeno (até 20")' },
-                                { value: 'médio', label: 'Médio (21" a 24")' },
-                                { value: 'large', label: 'Grande (mais de 24")' },
-                                { value: 'dontKnow', label: 'Não sei' }
-                            ]
-                        }
-                    ]
+                    requiresDescription: true
                 },
                 {
                     value: 'periféricos',
-                    label: 'Mouse, Teclado ou Outros',
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'device',
-                            label: 'O que não funciona?',
-                            required: true,
-                            options: [
-                                { value: 'mouse', label: 'Mouse' },
-                                { value: 'keyboard', label: 'Teclado' },
-                                { value: 'headset', label: 'Fone de ouvido' },
-                                { value: 'webcam', label: 'Câmera' },
-                                { value: 'speakers', label: 'Caixa de som' },
-                                { value: 'other', label: 'Outro dispositivo' }
-                            ]
-                        },
-                        {
-                            type: 'text',
-                            name: 'problemDescription',
-                            label: 'O que está acontecendo?',
-                            placeholder: 'Ex: O mouse para de funcionar, Teclado não digita...'
-                        }
-                    ]
+                    label: 'Mouse, Teclado ou Outros'
                 }
             ],
             software: [
                 {
                     value: 'os',
                     label: 'Windows/Computador',
-                    requiresDescription: true,
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'problem',
-                            label: 'O que acontece?',
-                            required: true,
-                            options: [
-                                { value: 'notStarting', label: 'Não liga/não inicia' },
-                                { value: 'verySlow', label: 'Está extremamente lento' },
-                                { value: 'updateProblem', label: 'Problema com atualização' },
-                                { value: 'errorMessages', label: 'Aparecem mensagens de erro' },
-                                { value: 'restarting', label: 'Reinicia sozinho' }
-                            ]
-                        },
-                        {
-                            type: 'checkbox',
-                            name: 'whenHappens',
-                            label: 'Quando acontece?',
-                            options: [
-                                { value: 'always', label: 'Sempre' },
-                                { value: 'sometimes', label: 'Às vezes' },
-                                { value: 'specificAction', label: 'Quando faço algo específico' },
-                                { value: 'recently', label: 'Começou recentemente' }
-                            ]
-                        }
-                    ]
+                    requiresDescription: true
                 },
                 {
                     value: 'office',
                     label: 'Word, Excel ou Outlook',
-                    requireAnyDesk: true,
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'program',
-                            label: 'Qual programa?',
-                            required: true,
-                            options: [
-                                { value: 'word', label: 'Word' },
-                                { value: 'excel', label: 'Excel' },
-                                { value: 'outlook', label: 'Outlook (E-mail)' },
-                                { value: 'powerpoint', label: 'PowerPoint' },
-                                { value: 'all', label: 'Todos' }
-                            ]
-                        },
-                        {
-                            type: 'select',
-                            name: 'problem',
-                            label: 'Qual o problema?',
-                            options: [
-                                { value: 'notOpening', label: 'Não abre' },
-                                { value: 'crashing', label: 'Fecha sozinho' },
-                                { value: 'slow', label: 'Está lento' },
-                                { value: 'saving', label: 'Não salva os arquivos' },
-                                { value: 'license', label: 'Pedindo licença/ativação' }
-                            ]
-                        }
-                    ]
+                    requireAnyDesk: true
                 },
                 {
                     value: 'antivirus',
                     label: 'Antivírus/Segurança',
-                    requireAnyDesk: true,
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'problem',
-                            label: 'O que acontece?',
-                            required: true,
-                            options: [
-                                { value: 'notUpdating', label: 'Não atualiza' },
-                                { value: 'blocking', label: 'Bloqueia programas que uso' },
-                                { value: 'warning', label: 'Mostra avisos de vírus' },
-                                { value: 'expired', label: 'Diz que expirou' },
-                                { value: 'notWorking', label: 'Não funciona/não abre' }
-                            ]
-                        }
-                    ]
+                    requireAnyDesk: true
                 },
                 {
                     value: 'especifico',
                     label: 'Outro Programa',
                     requiresDescription: true,
-                    requireAnyDesk: true,
-                    dynamicFields: [
-                        {
-                            type: 'text',
-                            name: 'programName',
-                            label: 'Qual o nome do programa?',
-                            required: true,
-                            placeholder: 'Ex: AutoCAD, Photoshop, Sistema da empresa...'
-                        },
-                        {
-                            type: 'text',
-                            name: 'problemDescription',
-                            label: 'O que acontece?',
-                            placeholder: 'Ex: Não abre, Travou, Não salva...'
-                        }
-                    ]
+                    requireAnyDesk: true
                 }
             ],
             rede: [
                 {
                     value: 'internet',
                     label: 'Internet',
-                    requiresDescription: true,
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'problem',
-                            label: 'Como está a internet?',
-                            required: true,
-                            options: [
-                                { value: 'noInternet', label: 'Sem internet nenhuma' },
-                                { value: 'verySlow', label: 'Está muito lenta' },
-                                { value: 'onAndOff', label: 'Vai e volta (instável)' },
-                                { value: 'specificSites', label: 'Alguns sites não abrem' }
-                            ]
-                        },
-                        {
-                            type: 'checkbox',
-                            name: 'whoAffected',
-                            label: 'Quem está com problema?',
-                            options: [
-                                { value: 'justMe', label: 'Só eu' },
-                                { value: 'myTeam', label: 'Minha equipe' },
-                                { value: 'entireOffice', label: 'Todo o escritório' },
-                                { value: 'dontKnow', label: 'Não sei' }
-                            ]
-                        }
-                    ]
+                    requiresDescription: true
                 },
                 {
                     value: 'wifi',
                     label: 'Wi-Fi',
-                    requiresDescription: true,
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'problem',
-                            label: 'Problema com Wi-Fi',
-                            required: true,
-                            options: [
-                                { value: 'noSignal', label: 'Não pega sinal' },
-                                { value: 'weakSignal', label: 'Sinal muito fraco' },
-                                { value: 'password', label: 'Não aceita a senha' },
-                                { value: 'drops', label: 'Conecta mas cai toda hora' }
-                            ]
-                        },
-                        {
-                            type: 'text',
-                            name: 'location',
-                            label: 'Onde está com problema?',
-                            placeholder: 'Ex: Sala de reuniões, Copa, Meu posto...'
-                        }
-                    ]
+                    requiresDescription: true
                 },
                 {
                     value: 'vpn',
-                    label: 'VPN (Trabalhar de casa)',
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'problem',
-                            label: 'O que acontece?',
-                            options: [
-                                { value: 'notConnecting', label: 'Não conecta' },
-                                { value: 'slow', label: 'Conecta mas fica lento' },
-                                { value: 'dropping', label: 'Cai toda hora' },
-                                { value: 'password', label: 'Esqueci a senha' }
-                            ]
-                        },
-                        {
-                            type: 'checkbox',
-                            name: 'workLocation',
-                            label: 'Onde está tentando conectar?',
-                            options: [
-                                { value: 'home', label: 'De casa' },
-                                { value: 'travel', label: 'Em viagem' },
-                                { value: 'otherOffice', label: 'Outra filial' }
-                            ]
-                        }
-                    ]
+                    label: 'VPN (Trabalhar de casa)'
                 }
             ],
             acesso: [
                 {
                     value: 'senha',
-                    label: 'Esqueci minha senha',
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'whatPassword',
-                            label: 'Qual senha esqueceu?',
-                            required: true,
-                            options: [
-                                { value: 'computer', label: 'Senha do computador' },
-                                { value: 'email', label: 'Senha do e-mail' },
-                                { value: 'system', label: 'Senha de algum sistema' },
-                                { value: 'vpn', label: 'Senha da VPN' },
-                                { value: 'multiple', label: 'Mais de uma senha' }
-                            ]
-                        },
-                        {
-                            type: 'text',
-                            name: 'username',
-                            label: 'Qual seu usuário?',
-                            placeholder: 'Ex: joao.silva, 12345'
-                        }
-                    ]
+                    label: 'Esqueci minha senha'
                 },
                 {
                     value: 'conta',
-                    label: 'Preciso de um novo acesso',
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'forWho',
-                            label: 'Para quem é o acesso?',
-                            required: true,
-                            options: [
-                                { value: 'myself', label: 'Para mim (novo funcionário)' },
-                                { value: 'newEmployee', label: 'Para novo funcionário' },
-                                { value: 'temporary', label: 'Acesso temporário' }
-                            ]
-                        },
-                        {
-                            type: 'text',
-                            name: 'personName',
-                            label: 'Nome da pessoa',
-                            required: true,
-                            placeholder: 'Ex: Maria Santos, Carlos Oliveira'
-                        }
-                    ]
+                    label: 'Preciso de um novo acesso'
                 },
                 {
                     value: 'email',
-                    label: 'Problema com E-mail',
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'problem',
-                            label: 'O que acontece?',
-                            required: true,
-                            options: [
-                                { value: 'notSending', label: 'Não consigo enviar e-mails' },
-                                { value: 'notReceiving', label: 'Não chegam e-mails' },
-                                { value: 'full', label: 'Caixa de entrada cheia' },
-                                { value: 'spam', label: 'Meus e-mails vão para spam' },
-                                { value: 'outlook', label: 'Outlook não funciona' }
-                            ]
-                        }
-                    ]
+                    label: 'Problema com E-mail'
                 },
                 {
                     value: 'block',
-                    label: 'Minha conta está bloqueada',
-                    dynamicFields: [
-                        {
-                            type: 'text',
-                            name: 'username',
-                            label: 'Qual seu usuário?',
-                            required: true,
-                            placeholder: 'Ex: maria.santos'
-                        },
-                        {
-                            type: 'text',
-                            name: 'whatHappened',
-                            label: 'O que estava fazendo quando bloqueou?',
-                            placeholder: 'Ex: Digitando senha, Tentando acessar VPN...'
-                        }
-                    ]
+                    label: 'Minha conta está bloqueada'
                 }
             ],
             sistema: [
                 {
                     value: 'func',
-                    label: 'Atualizar meu cargo/função',
-                    dynamicFields: [
-                        {
-                            type: 'text',
-                            name: 'employeeName',
-                            label: 'Nome do funcionário',
-                            required: true,
-                            placeholder: 'Ex: Ana Paula Rodrigues'
-                        },
-                        {
-                            type: 'text',
-                            name: 'newPosition',
-                            label: 'Novo cargo/função',
-                            required: true,
-                            placeholder: 'Ex: Analista Sênior, Gerente...'
-                        }
-                    ]
+                    label: 'Atualizar meu cargo/função'
                 },
                 {
                     value: 'erp',
                     label: 'ERP (Sistema principal)',
-                    requiresDescription: true,
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'problem',
-                            label: 'O que acontece?',
-                            options: [
-                                { value: 'notOpening', label: 'Não abre' },
-                                { value: 'slow', label: 'Está lento' },
-                                { value: 'error', label: 'Mostra erro' },
-                                { value: 'missingData', label: 'Dados sumiram' },
-                                { value: 'feature', label: 'Preciso de nova funcionalidade' }
-                            ]
-                        }
-                    ]
+                    requiresDescription: true
                 },
                 {
                     value: 'crm',
                     label: 'CRM (Clientes)',
-                    requiresDescription: true,
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'problem',
-                            label: 'Qual problema?',
-                            options: [
-                                { value: 'notOpening', label: 'Não abre' },
-                                { value: 'cantSave', label: 'Não salva clientes' },
-                                { value: 'noData', label: 'Não mostra informações' },
-                                { value: 'report', label: 'Relatórios não funcionam' }
-                            ]
-                        }
-                    ]
+                    requiresDescription: true
                 }
             ]
         }
@@ -547,152 +174,46 @@ export const departmentOptions = {
                 {
                     value: 'salário',
                     label: 'Salário errado/atrasado',
-                    requiresDescription: true,
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'problem',
-                            label: 'Qual o problema?',
-                            required: true,
-                            options: [
-                                { value: 'wrongAmount', label: 'Valor errado' },
-                                { value: 'late', label: 'Atrasou' },
-                                { value: 'missing', label: 'Não caiu' },
-                                { value: 'deduction', label: 'Desconto errado' }
-                            ]
-                        },
-                        {
-                            type: 'text',
-                            name: 'month',
-                            label: 'De qual mês?',
-                            placeholder: 'Ex: Novembro, Dezembro/2024'
-                        }
-                    ]
+                    requiresDescription: true
                 },
                 {
                     value: 'horas extras',
                     label: 'Horas extras',
-                    requiresDescription: true,
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'need',
-                            label: 'O que precisa?',
-                            options: [
-                                { value: 'calculate', label: 'Calcular horas' },
-                                { value: 'pay', label: 'Receber horas extras' },
-                                { value: 'missing', label: 'Horas não pagas' },
-                                { value: 'approve', label: 'Aprovar horas' }
-                            ]
-                        }
-                    ]
+                    requiresDescription: true
                 }
             ],
             benefícios: [
                 {
                     value: 'plano de saúde',
                     label: 'Plano de Saúde',
-                    requiresDescription: true,
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'need',
-                            label: 'O que precisa?',
-                            options: [
-                                { value: 'include', label: 'Incluir dependente' },
-                                { value: 'card', label: 'Emitir carteirinha' },
-                                { value: 'reimburse', label: 'Reembolso' },
-                                { value: 'change', label: 'Mudar plano' }
-                            ]
-                        }
-                    ]
+                    requiresDescription: true
                 },
                 {
                     value: 'vale refeição',
-                    label: 'Vale Refeição/Alimentação',
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'problem',
-                            label: 'Qual problema?',
-                            options: [
-                                { value: 'notReceived', label: 'Não recebi' },
-                                { value: 'notWorking', label: 'Cartão não funciona' },
-                                { value: 'lost', label: 'Perdi o cartão' },
-                                { value: 'balance', label: 'Saldo errado' }
-                            ]
-                        }
-                    ]
+                    label: 'Vale Refeição/Alimentação'
                 }
             ],
             documentação: [
                 {
                     value: 'carteira de trabalho',
-                    label: 'Carteira de Trabalho',
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'need',
-                            label: 'O que precisa?',
-                            options: [
-                                { value: 'first', label: 'Primeira via' },
-                                { value: 'renew', label: 'Renovar' },
-                                { value: 'annotation', label: 'Fazer anotação' },
-                                { value: 'copy', label: 'Cópia/segunda via' }
-                            ]
-                        }
-                    ]
+                    label: 'Carteira de Trabalho'
                 }
             ],
             férias_licenças: [
                 {
                     value: 'agendar férias',
-                    label: 'Agendar férias',
-                    dynamicFields: [
-                        {
-                            type: 'text',
-                            name: 'preferredPeriod',
-                            label: 'Quando quer tirar férias?',
-                            placeholder: 'Ex: Janeiro/2025, entre 10 e 25 de março'
-                        }
-                    ]
+                    label: 'Agendar férias'
                 },
                 {
                     value: 'atestado médico',
-                    label: 'Atestado Médico',
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'action',
-                            label: 'O que fazer?',
-                            options: [
-                                { value: 'deliver', label: 'Entregar atestado' },
-                                { value: 'justify', label: 'Justificar falta' },
-                                { value: 'doubt', label: 'Dúvida sobre atestado' }
-                            ]
-                        }
-                    ]
+                    label: 'Atestado Médico'
                 }
             ],
             admissão: [
                 {
                     value: 'integração',
                     label: 'Sou novo na empresa',
-                    requiresDescription: true,
-                    dynamicFields: [
-                        {
-                            type: 'text',
-                            name: 'startDate',
-                            label: 'Quando começou?',
-                            placeholder: 'Ex: 15/01/2025'
-                        },
-                        {
-                            type: 'text',
-                            name: 'position',
-                            label: 'Qual seu cargo?',
-                            placeholder: 'Ex: Analista, Assistente...'
-                        }
-                    ]
+                    requiresDescription: true
                 }
             ]
         }
@@ -732,94 +253,31 @@ export const departmentOptions = {
             inspeção: [
                 {
                     value: 'Vistoria',
-                    label: 'Vistoria de rotina',
-                    dynamicFields: [
-                        {
-                            type: 'text',
-                            name: 'location',
-                            label: 'Onde precisa vistoriar?',
-                            placeholder: 'Ex: Almoxarifado, Galpão 3, Escada do 2º andar'
-                        }
-                    ]
+                    label: 'Vistoria de rotina'
                 }
             ],
             epi: [
                 {
                     value: 'solicitar',
-                    label: 'Preciso de EPI novo',
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'epiType',
-                            label: 'Qual EPI precisa?',
-                            required: true,
-                            options: [
-                                { value: 'helmet', label: 'Capacete' },
-                                { value: 'gloves', label: 'Luvas' },
-                                { value: 'glasses', label: 'Óculos de proteção' },
-                                { value: 'boots', label: 'Botas' },
-                                { value: 'earProtection', label: 'Protetor auricular' },
-                                { value: 'mask', label: 'Máscara/respirador' }
-                            ]
-                        },
-                        {
-                            type: 'text',
-                            name: 'size',
-                            label: 'Qual tamanho? (se souber)',
-                            placeholder: 'Ex: M, 42, P'
-                        }
-                    ]
+                    label: 'Preciso de EPI novo'
                 },
                 {
                     value: 'defeito',
                     label: 'EPI com defeito/estragou',
-                    requiresDescription: true,
-                    dynamicFields: [
-                        {
-                            type: 'text',
-                            name: 'whatHappened',
-                            label: 'O que aconteceu?',
-                            placeholder: 'Ex: A alça quebrou, O plástico rachou...'
-                        }
-                    ]
+                    requiresDescription: true
                 }
             ],
             acidente: [
                 {
                     value: 'registrar',
                     label: 'Registrar acidente',
-                    requiresDescription: true,
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'accidentType',
-                            label: 'Tipo de ocorrência',
-                            options: [
-                                { value: 'withInjury', label: 'Com ferimento/lesão' },
-                                { value: 'noInjury', label: 'Sem ferimento (quase acidente)' },
-                                { value: 'material', label: 'Só dano material' }
-                            ]
-                        }
-                    ]
+                    requiresDescription: true
                 }
             ],
             saúde: [
                 {
                     value: 'exames médicos',
-                    label: 'Exames Médicos',
-                    dynamicFields: [
-                        {
-                            type: 'select',
-                            name: 'examType',
-                            label: 'Qual exame?',
-                            options: [
-                                { value: 'admission', label: 'Admissional' },
-                                { value: 'periodic', label: 'Periódico' },
-                                { value: 'return', label: 'Retorno ao trabalho' },
-                                { value: 'dismissal', label: 'Demissional' }
-                            ]
-                        }
-                    ]
+                    label: 'Exames Médicos'
                 }
             ]
         }

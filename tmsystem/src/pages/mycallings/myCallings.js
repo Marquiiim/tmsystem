@@ -1,75 +1,90 @@
 import styles from './myCallings.module.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import api from '../../service/api'
+
+const ENDPOINTS = {
+    DEPARTMENT: '/department-tickets',
+    MY_TICKETS: '/my-tickets',
+    ASSUMED: '/assumed-tickets'
+}
+
+const MODULE_TITLES = {
+    [ENDPOINTS.DEPARTMENT]: 'CHAMADOS DO MEU SETOR',
+    [ENDPOINTS.MY_TICKETS]: 'MEUS CHAMADOS ABERTOS',
+    [ENDPOINTS.ASSUMED]: 'CHAMADOS ASSUMIDOS POR MIM'
+}
 
 function MyCallings() {
-
     const navigate = useNavigate()
-    const [typeEndpoint, setTypeEndpoint] = useState('/department-tickets')
+    const [typeEndpoint, setTypeEndpoint] = useState(ENDPOINTS.DEPARTMENT)
     const [ticketsData, setTicketsData] = useState([])
-    const [selectedStatus, setSelectedStatus] = useState({})
     const [loading, setLoading] = useState(true)
     const [refresh, setRefresh] = useState(0)
 
+
     useEffect(() => {
-        async function searchTicket() {
-            setTicketsData([])
+        const searchTicket = async () => {
+            setLoading(true)
             try {
-                const response = await axios.post(`http://localhost:5000/api/tickets${typeEndpoint}`, {}, { withCredentials: true })
+                const response = await api.post(`/api/tickets${typeEndpoint}`, {})
 
-                if (response.data?.success && Array.isArray(response.data.tickets)) setTicketsData(response.data.tickets)
-
+                if (response.data?.success && Array.isArray(response.data.tickets)) {
+                    setTicketsData(response.data.tickets)
+                } else {
+                    setTicketsData([])
+                }
             } catch (error) {
-                console.log(error.message)
+                alert(error.response?.data?.message || '[TMSYSTEM] Erro ao processar solicitação')
                 setTicketsData([])
             } finally {
                 setLoading(false)
             }
         }
+
         searchTicket()
     }, [typeEndpoint, refresh])
 
-    const takeTicket = async (ticket_id) => {
+    const takeTicket = useCallback(async (ticket_id) => {
         setLoading(true)
         try {
-            await axios.post('http://localhost:5000/api/tickets/assume-ticket', { ticket_id: ticket_id }, { withCredentials: true })
-            setRefresh(refresh + 1)
+            await api.post('/api/tickets/assume-ticket', { ticket_id })
+            setRefresh(prev => prev + 1)
         } catch (error) {
-            console.log(error)
+            alert(error.response?.data?.message || '[TMSYSTEM] Erro ao processar solicitação')
         } finally {
             setLoading(false)
         }
-    }
+    }, [])
 
-    const toggleStatus = async (e, ticket_id) => {
-        setSelectedStatus(prev => ({
-            ...prev,
-            [ticket_id]: e.target.value
-        }))
+    const toggleStatus = useCallback(async (e, ticket_id) => {
+        if (!e?.target?.value) return
+
+        const newStatus = e.target.value
+
         try {
-            const response = await axios.post('http://localhost:5000/api/tickets/toggle-status', { selectedStatus }, { withCredentials: true })
-            console.log(response.data)
-            // setRefresh(refresh + 1)
+            await api.post('/api/tickets/toggle-status', { ticket_id, newStatus })
+            setRefresh(prev => prev + 1)
         } catch (error) {
-            console.log(error)
+            alert(error.response?.data?.message || '[TMSYSTEM] Erro ao processar solicitação')
+            e.target.value = ''
         }
-    }
+    }, [])
 
-    const cancelTicket = async (ticket_id) => {
+    const cancelTicket = useCallback(async (ticket_id) => {
         setLoading(true)
         try {
-            await axios.post('http://localhost:5000/api/tickets/cancel-ticket', { ticket_id: ticket_id }, { withCredentials: true })
-            setRefresh(refresh + 1)
+            await api.post('/api/tickets/cancel-ticket', { ticket_id })
+            setRefresh(prev => prev + 1)
         }
         catch (error) {
-            console.log(error)
+            alert(error.response?.data?.message || '[TMSYSTEM] Erro ao processar solicitação')
         } finally {
             setLoading(false)
         }
-    }
+    }, [])
 
-    if (loading) {
+    if (loading && ticketsData.length === 0) {
         return (
             <div className="loader">
                 <div className="justify-content-center jimu-primary-loading"></div>
@@ -77,30 +92,17 @@ function MyCallings() {
         )
     }
 
-    const selectedModule = () => {
-        switch (typeEndpoint) {
-            case '/department-tickets':
-                return <h2>CHAMADOS DO MEU SETOR</h2>
-            case '/my-tickets':
-                return <h2>MEUS CHAMADOS ABERTOS</h2>
-            case '/assumed-tickets':
-                return <h2>CHAMADOS ASSUMIDOS POR MIM</h2>
-            default:
-                return <></>
-        }
-    }
-
     return (
         <section className={styles.container}>
             <header className={styles.content}>
                 <ul className={styles.callings_type}>
-                    <li onClick={() => setTypeEndpoint('/department-tickets')}>
+                    <li onClick={() => setTypeEndpoint(ENDPOINTS.DEPARTMENT)}>
                         Chamados do meu setor
                     </li>
-                    <li onClick={() => setTypeEndpoint('/my-tickets')}>
+                    <li onClick={() => setTypeEndpoint(ENDPOINTS.MY_TICKETS)}>
                         Meus chamados abertos
                     </li>
-                    <li onClick={() => setTypeEndpoint('/assumed-tickets')}>
+                    <li onClick={() => setTypeEndpoint(ENDPOINTS.ASSUMED)}>
                         Chamados assumidos por mim
                     </li>
                     <li onClick={() => navigate('/home', { replace: true })}>
@@ -188,9 +190,8 @@ function MyCallings() {
                                     }
                                     {typeEndpoint === '/assumed-tickets' &&
                                         <select onChange={(e) => toggleStatus(e, ticket.ticket_id)}
-                                            value={selectedStatus}
                                             className={styles.toggleStatusButton}
-                                            defaultValue=''>
+                                            defaultValue={ticket?.status || ''}>
                                             <option value=''>Alterar status</option>
                                             <option value='em_andamento'>Em andamento</option>
                                             <option value='resolvido'>Resolvido</option>
@@ -207,7 +208,9 @@ function MyCallings() {
                     </ul>
                 ) : (
                     <div className={styles.ticketsNotFound}>
-                        {selectedModule()}
+                        <h2>
+                            {MODULE_TITLES[typeEndpoint]}
+                        </h2>
                         <span className={styles.emoji}>
                             📭
                         </span>

@@ -207,7 +207,8 @@ const ticket = {
         return result || null
     },
 
-    toogleStatusTicket: async (userId, selectedStatus) => {
+    toogleStatusTicket: async (userId, ticket_id, newStatus) => {
+
         const ticketInfo = await query(
             `SELECT
                 t.id,
@@ -215,7 +216,7 @@ const ticket = {
                 t.department_id,
                 t.status
             FROM tickets t
-            WHERE t.id = ?`, []
+            WHERE t.id = ?`, [ticket_id]
         )
 
         if (!ticketInfo || ticketInfo.length === 0) throw new Error('[TMSYSTEM] Esse chamado não existe.')
@@ -226,7 +227,7 @@ const ticket = {
                 u.user_id,
                 u.department_id
             FROM user_department u
-            WHERE u.user_id = ?`, []
+            WHERE u.user_id = ?`, [userId]
         )
 
         if (userInfo[0].userId !== ticketInfo[0].assigned_to &&
@@ -236,8 +237,10 @@ const ticket = {
             `UPDATE tickets
                 SET status = ?,
                 updated_at = CURRENT_TIMESTAMP
-            WHERE id = ?`, [-]
+            WHERE id = ?`, [newStatus, ticket_id]
         )
+
+        if (result.affectedRows === 0) throw new Error('[TMSYSTEM] Erro ao atualizar status do chamado, tente novamente.')
 
         return result || null
     },
