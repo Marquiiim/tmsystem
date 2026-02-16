@@ -2,8 +2,8 @@ import styles from './ticketForm.module.css'
 import Layout from '../../layout/layout'
 
 import { useLocation } from 'react-router-dom'
-import { useEffect, useState, useRef } from 'react'
-import axios from 'axios'
+import { useEffect, useState, useRef, useCallback } from 'react'
+import api from '../../service/api'
 
 import PriorityInput from '../inputs/PriorityInput'
 import TypeTicketInput from '../inputs/TypeTicketInput'
@@ -56,12 +56,12 @@ function TicketForm() {
         }))
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = useCallback(async (e) => {
         e.preventDefault()
         setNotice('')
 
         try {
-            const response = await axios.post('http://localhost:5000/api/tickets/create',
+            const response = await api.post('/api/tickets/create',
                 {
                     department_id: formData.department_id,
                     category: formData.category,
@@ -69,8 +69,7 @@ function TicketForm() {
                     priority: formData.priority,
                     description: formData.description,
                     anydesk: formData.anydesk
-                },
-                { withCredentials: true })
+                })
 
             if (response.data?.success) setNotice({ message: response.data?.message, type: 'success' })
 
@@ -88,7 +87,7 @@ function TicketForm() {
         } catch (error) {
             setNotice({ message: error.response.data?.error, type: 'error' })
         }
-    }
+    }, [formData, department_id, category])
 
     return (
         <Layout>

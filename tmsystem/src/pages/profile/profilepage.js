@@ -16,7 +16,7 @@ function ProfilePage() {
                 const response = await api.get('http://localhost:5000/api/users/search-profile')
                 setUserData(response.data.user)
             } catch (error) {
-                console.log(error)
+                alert(error.response?.data?.message || '[TMSYSTEM] Erro ao processar perfil de usuário')
             }
         }
         fetchUserProfile()

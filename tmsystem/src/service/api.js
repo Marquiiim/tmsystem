@@ -11,13 +11,6 @@ api.interceptors.request.use(
         if (process.env.NODE_ENV === 'development') {
             console.log(`${config.method?.toUpperCase()} ${config.url}`)
         }
-
-        if (config.method === 'get') {
-            config.params = {
-                ...config.params,
-                _t: Date.now()
-            }
-        }
         return config
     },
     error => {
@@ -27,12 +20,7 @@ api.interceptors.request.use(
 )
 
 api.interceptors.response.use(
-    response => {
-        if (process.env.NODE_ENV === 'development') {
-            console.log(`${response.config.method?.toUpperCase()} ${response.config.url}`, response.data)
-        }
-        return response
-    },
+    response => response,
     error => {
         if (!error.response) {
             alert('Erro de conexão.')

@@ -1,4 +1,5 @@
-import axios from 'axios'
+import api from '../../service/api';
+import { useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './header.module.css'
 
@@ -6,17 +7,16 @@ import { FiLogOut, FiHome, FiTag, FiSettings } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 
 function Header() {
-
     const navigate = useNavigate()
 
-    async function handleLogout() {
+    const handleLogout = useCallback(async () => {
         try {
-            const response = await axios.post('http://localhost:5000/api/sessions/logout', {}, { withCredentials: true })
+            const response = await api.post('/api/sessions/logout', {})
             if (response.status === 204) navigate('/auth', { replace: true })
         } catch (error) {
-            console.log(error)
+            alert(error.response?.data?.message || '[TMSYSTEM] Erro ao deslogar da conta.')
         }
-    }
+    }, [navigate])
 
     return (
         <header className={styles.container}>
