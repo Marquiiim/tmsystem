@@ -35,7 +35,7 @@ function MyCallings() {
                     setTicketsData([])
                 }
             } catch (error) {
-                alert(error.response?.data?.message || '[TMSYSTEM] Erro ao processar solicitação')
+                console.error(error.response?.data?.message || '[TMSYSTEM] Erro ao processar solicitação')
                 setTicketsData([])
             } finally {
                 setLoading(false)
@@ -59,7 +59,6 @@ function MyCallings() {
 
     const toggleStatus = useCallback(async (e, ticket_id) => {
         if (!e?.target?.value) return
-
         const newStatus = e.target.value
 
         try {

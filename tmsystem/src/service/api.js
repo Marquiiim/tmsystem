@@ -41,7 +41,7 @@ api.interceptors.response.use(
 
         if (error.response.status === 401) {
             alert('Sessão expirada. Faça o login novamente.')
-            window.location = '/auth'
+            window.location.replace('/auth')
         }
 
         if (error.response.status === 403) {
