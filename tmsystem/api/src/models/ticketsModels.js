@@ -208,7 +208,6 @@ const ticket = {
     },
 
     toogleStatusTicket: async (userId, ticket_id, newStatus) => {
-
         const ticketInfo = await query(
             `SELECT
                 t.id,
