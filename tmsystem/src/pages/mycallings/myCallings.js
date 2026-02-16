@@ -22,7 +22,6 @@ function MyCallings() {
     const [loading, setLoading] = useState(true)
     const [refresh, setRefresh] = useState(0)
 
-
     useEffect(() => {
         const searchTicket = async () => {
             setLoading(true)
