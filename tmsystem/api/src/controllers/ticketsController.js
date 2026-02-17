@@ -4,7 +4,7 @@ const { createTicketService,
     detailsTicketService,
     assumeTicketService,
     assumedTicketService,
-    toggleStatusTicketService,
+    changeStatusTicketService,
     cancelMyTicketService } = require('../services/ticketsServices')
 
 async function createTicketController(req, res) {
@@ -13,7 +13,7 @@ async function createTicketController(req, res) {
 
         return res.status(201).json({ success: true, message: '[TMSYSTEM] Chamado criado com sucesso.' })
     } catch (error) {
-        return res.status(400).json({ success: false, message: error })
+        return res.status(400).json({ success: false, message: error.message || '[TMSYSTEM] Erro ao criar chamado.' })
     }
 }
 
@@ -23,7 +23,7 @@ async function myTicketsController(req, res) {
 
         return res.status(200).json({ success: true, tickets: myTickets || [] })
     } catch (error) {
-        return res.status(204).json({ success: false, message: error.message })
+        return res.status(400).json({ success: false, message: error.message || '[TMSYSTEM] Erro ao buscar chamados.' })
     }
 }
 
@@ -33,7 +33,7 @@ async function myDepartmentTicketsController(req, res) {
 
         return res.status(200).json({ success: true, tickets: ticketsDepartment || [] })
     } catch (error) {
-        return res.status(204).json({ success: false, message: error.message })
+        return res.status(400).json({ success: false, message: error.message || '[TMSYSTEM] Erro ao buscar chamados.' })
     }
 }
 
@@ -41,9 +41,11 @@ async function detailsTicketController(req, res) {
     try {
         const ticket = await detailsTicketService(req.body.ticket_id)
 
+        if (!ticket) return res.status(404).json({ success: false, message: '[TMSYSTEM] Chamado não encontrado.' })
+
         return res.status(200).json({ success: true, ticket: ticket || [] })
     } catch (error) {
-        return res.status(404).json({ success: false, message: error.message })
+        return res.status(400).json({ success: false, message: error.message || '[TMSYSTEM] Erro ao buscar detalhes do chamado.' })
     }
 }
 
@@ -53,7 +55,7 @@ async function assumeTicketController(req, res) {
 
         return res.status(200).json({ success: true, message: '[TMSYSTEM] Chamado assumido para seu usuário com sucesso.' })
     } catch (error) {
-        return res.status(401).json({ success: false, message: error.message })
+        return res.status(403).json({ success: false, message: error.message || '[TMSYSTEM] Erro ao assumir chamado.' })
     }
 }
 
@@ -63,17 +65,17 @@ async function assumedTicketController(req, res) {
 
         return res.status(200).json({ success: true, tickets: assumedTickets || [] })
     } catch (error) {
-        return res.status(401).json({ success: false, message: error.message })
+        return res.status(204).json({ success: false, message: error.message || '[TMSYSTEM] Erro ao buscar chamados.' })
     }
 }
 
-async function toggleStatusTicketController(req, res) {
+async function changeStatusTicketController(req, res) {
     try {
-        await toggleStatusTicketService(req.cookies, req.body)
+        await changeStatusTicketService(req.cookies, req.body)
 
         return res.status(200).json({ success: true, message: '[TMSYSTEM] Status alterado com sucesso.' })
     } catch (error) {
-        return res.status(401).json({ success: false, message: '[TMSYSTEM] Erro ao alterar status do chamado.' })
+        return res.status(403).json({ success: false, message: error.message || '[TMSYSTEM] Erro ao mudar status do chamado.' })
     }
 }
 
@@ -83,7 +85,7 @@ async function cancelMyTicketController(req, res) {
 
         return res.status(200).json({ success: true, message: '[TMSYSTEM] Chamado cancelado com sucesso.' })
     } catch (error) {
-        return res.status(401).json({ success: false, message: error.message })
+        return res.status(403).json({ success: false, message: error.message })
     }
 }
 
@@ -94,6 +96,6 @@ module.exports = {
     detailsTicketController,
     assumeTicketController,
     assumedTicketController,
-    toggleStatusTicketController,
+    changeStatusTicketController,
     cancelMyTicketController
 }

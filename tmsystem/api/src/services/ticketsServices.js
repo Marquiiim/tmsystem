@@ -96,13 +96,13 @@ async function assumedTicketService(token) {
     }
 }
 
-async function toggleStatusTicketService(token, data) {
+async function changeStatusTicketService(token, data) {
     const { access_token } = token
-    const { ticket_id, newStatus } = data
+    const { ticket_id, newStatus, reason } = data
 
     const accessVerify = await jwttokens.verifyAccessToken(access_token)
     const userInfo = await usermodels.findById(accessVerify.userId)
-    await ticketsmodels.toogleStatusTicket(userInfo.id, ticket_id, newStatus)
+    await ticketsmodels.changeStatusTicket(userInfo.id, ticket_id, newStatus, reason)
 }
 
 async function cancelMyTicketService(token, ticket_id) {
@@ -132,6 +132,6 @@ module.exports = {
     detailsTicketService,
     assumeTicketService,
     assumedTicketService,
-    toggleStatusTicketService,
+    changeStatusTicketService,
     cancelMyTicketService
 }

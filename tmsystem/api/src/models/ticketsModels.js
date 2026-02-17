@@ -105,6 +105,7 @@ const ticket = {
                 t.id AS ticket_id,
                 t.description,
                 t.status,
+                t.status_reason,
                 t.priority,
                 t.category,
                 t.subcategory,
@@ -207,7 +208,7 @@ const ticket = {
         return result || null
     },
 
-    toogleStatusTicket: async (userId, ticket_id, newStatus) => {
+    changeStatusTicket: async (userId, ticket_id, newStatus, reason) => {
         const ticketInfo = await query(
             `SELECT
                 t.id,
@@ -235,8 +236,9 @@ const ticket = {
         const result = await query(
             `UPDATE tickets
                 SET status = ?,
+                status_reason = ?,
                 updated_at = CURRENT_TIMESTAMP
-            WHERE id = ?`, [newStatus, ticket_id]
+            WHERE id = ?`, [newStatus, reason, ticket_id]
         )
 
         if (result.affectedRows === 0) throw new Error('[TMSYSTEM] Erro ao atualizar status do chamado, tente novamente.')

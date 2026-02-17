@@ -2,6 +2,7 @@ import styles from './myCallings.module.css'
 import { useEffect, useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import api from '../../service/api'
+import Dialog from '../../components/modal-dialog-ticket/dialog'
 
 const ENDPOINTS = {
     DEPARTMENT: '/department-tickets',
@@ -22,6 +23,10 @@ function MyCallings() {
     const [loading, setLoading] = useState(true)
     const [refresh, setRefresh] = useState(0)
 
+    const [dialogOpen, setDialogOpen] = useState(false)
+    const [selectedTicket, setSelectedTicket] = useState(null)
+    const [selectedStatus, setSelectedStatus] = useState('')
+
     useEffect(() => {
         const searchTicket = async () => {
             setLoading(true)
@@ -40,7 +45,6 @@ function MyCallings() {
                 setLoading(false)
             }
         }
-
         searchTicket()
     }, [typeEndpoint, refresh])
 
@@ -56,18 +60,11 @@ function MyCallings() {
         }
     }, [])
 
-    const toggleStatus = useCallback(async (e, ticket_id) => {
-        if (!e?.target?.value) return
-        const newStatus = e.target.value
-
-        try {
-            await api.post('/api/tickets/toggle-status', { ticket_id, newStatus })
-            setRefresh(prev => prev + 1)
-        } catch (error) {
-            alert(error.response?.data?.message || '[TMSYSTEM] Erro ao processar solicitação')
-            e.target.value = ''
-        }
-    }, [])
+    const handleSelectedStatus = (e, ticket) => {
+        setSelectedStatus(e?.target?.value)
+        setSelectedTicket(ticket)
+        setDialogOpen(true)
+    }
 
     const cancelTicket = useCallback(async (ticket_id) => {
         setLoading(true)
@@ -187,7 +184,7 @@ function MyCallings() {
                                         </button>
                                     }
                                     {typeEndpoint === '/assumed-tickets' &&
-                                        <select onChange={(e) => toggleStatus(e, ticket.ticket_id)}
+                                        <select onChange={(e) => handleSelectedStatus(e, ticket)}
                                             className={styles.toggleStatusButton}
                                             defaultValue={ticket?.status || ''}>
                                             <option value=''>Alterar status</option>
@@ -197,9 +194,11 @@ function MyCallings() {
                                             <option value='cancelado'>Cancelado</option>
                                         </select>
                                     }
-                                    <button onClick={() => cancelTicket(ticket.ticket_id)} className={styles.viewButton}>
-                                        Cancelar
-                                    </button>
+                                    {typeEndpoint === '/my-tickets' &&
+                                        <button onClick={() => cancelTicket(ticket.ticket_id)} className={styles.viewButton}>
+                                            Cancelar
+                                        </button>
+                                    }
                                 </div>
                             </li>
                         ))}
@@ -221,6 +220,19 @@ function MyCallings() {
                     </div>
                 )}
             </div>
+
+            {dialogOpen && selectedStatus && (
+                <Dialog
+                    newStatus={selectedStatus}
+                    ticketInfo={selectedTicket}
+                    onClose={() => {
+                        setDialogOpen(false)
+                        setSelectedTicket(null)
+                        setSelectedStatus('')
+                    }}
+                    onSuccess={() => setRefresh(prev => prev + 1)} />
+
+            )}
         </section>
     )
 }

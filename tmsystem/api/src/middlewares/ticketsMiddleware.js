@@ -29,6 +29,19 @@ function createTicketMiddleware(req, res, next) {
     next()
 }
 
+function changeStatusTicketMiddleware(req, res, next) {
+    const { access_token, refresh_token } = req.cookies
+    const { reason } = req.body
+
+    if (!access_token || !refresh_token) return res.status(401).json({ error: '[TMSYSTEM] Sessão expirada, tente recarregar a página.' })
+
+    if (typeof reason !== 'string') return res.status(400).json({ error: '[TMSYSTEM] Os dados informados não correspondem aos tipos esperados para cada campo.' })
+    if (!reason) return res.status(400).json({ error: '[TMSYSTEM] Preencha o motivo da alteração dos status.' })
+    if (reason.trim() === '') return res.status(400).json({ error: '[TMSYSTEM] Os campos não podem ser vazios.' })
+
+    next()
+}
+
 function ticketsMiddlewareGlobal(req, res, next) {
     const { access_token, refresh_token } = req.cookies
 
@@ -39,5 +52,6 @@ function ticketsMiddlewareGlobal(req, res, next) {
 
 module.exports = {
     createTicketMiddleware,
+    changeStatusTicketMiddleware,
     ticketsMiddlewareGlobal
 }
