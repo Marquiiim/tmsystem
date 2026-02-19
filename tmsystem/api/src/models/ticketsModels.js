@@ -57,8 +57,7 @@ const ticket = {
                 LEFT JOIN users ur ON t.requester_id = ur.id
                 LEFT JOIN users ua ON t.assigned_to = ua.id
                 LEFT JOIN users uc ON t.created_by = uc.id
-            WHERE t.status NOT IN ('fechado', 'resolvido', 'cancelado')
-                AND t.requester_id = ?
+            WHERE t.requester_id = ?
             ORDER BY t.created_at DESC;`, [id]
         )
 
@@ -88,7 +87,7 @@ const ticket = {
                 LEFT JOIN users ur ON t.requester_id = ur.id
                 LEFT JOIN users ua ON t.assigned_to = ua.id
                 LEFT JOIN users uc ON t.created_by = uc.id
-            WHERE t.status NOT IN ('fechado', 'resolvido', 'cancelado')
+            WHERE t.status NOT IN ('em_andamento', 'pendente', 'aguardando_validacao')
                 AND t.department_id = ?
                 AND t.assigned_to IS NULL
             ORDER BY t.created_at DESC;`, [id]
@@ -233,17 +232,35 @@ const ticket = {
         if (userInfo[0].userId !== ticketInfo[0].assigned_to &&
             userInfo[0].department_id !== ticketInfo[0].department_id) throw new Error('[TMSYSTEM] Você não tem permissão para alterar o status desse chamado')
 
-        const result = await query(
-            `UPDATE tickets
-                SET status = ?,
-                status_reason = ?,
-                updated_at = CURRENT_TIMESTAMP
-            WHERE id = ?`, [newStatus, reason, ticket_id]
-        )
+        const tickets_closure = ['resolvido', 'fechado', 'cancelado']
 
-        if (result.affectedRows === 0) throw new Error('[TMSYSTEM] Erro ao atualizar status do chamado, tente novamente.')
+        if (tickets_closure.includes(newStatus)) {
+            const resultClosure = await query(
+                `INSERT INTO tickets_closure (ticket_id,
+                old_status,
+                new_status,
+                status_reason,
+                changed_by)
+                VALUES (?, ? ,?, ?, ?)`,
+                [ticketInfo[0].id,
+                ticketInfo[0].status,
+                    newStatus,
+                    reason,
+                    userId]
+            )
 
-        return result || null
+            await query(
+                `UPDATE tickets
+                    SET status = ?,
+                    status_reason = ?,
+                    updated_at = CURRENT_TIMESTAMP
+                WHERE id = ?`, ['aguardando_validacao', reason, ticket_id]
+            )
+
+            if (resultClosure.affectedRows === 0) throw new Error('[TMSYSTEM] Erro ao atualizar status do chamado, tente novamente.')
+
+            return resultClosure || null
+        }
     },
 
     cancelTicket: async (id) => {

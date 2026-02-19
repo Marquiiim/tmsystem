@@ -262,6 +262,11 @@ $frost-white-transparent: rgba(248, 250, 252, 0.95);
         background: linear-gradient(135deg, #ef4444, #f87171);
         color: white;
     }
+
+    &[data-status="aguardando_validacao"] {
+        background: linear-gradient(135deg, #b45309, #d97706);
+        color: white;
+    }
 }
 
 .priorityBadge {

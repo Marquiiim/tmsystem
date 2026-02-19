@@ -9,8 +9,80 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(109, 40, 217, 0.1);
 }
-
-.ticketHeader {
+.detailsTicket .statusBadge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 120px;
+}
+.detailsTicket .statusBadge[data-status=aberto] {
+  background: rgba(34, 197, 94, 0.1);
+  color: #059669;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+.detailsTicket .statusBadge[data-status=em_andamento] {
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563eb;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+.detailsTicket .statusBadge[data-status=resolvido] {
+  background: rgba(16, 185, 129, 0.1);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+.detailsTicket .statusBadge[data-status=fechado] {
+  background: rgba(107, 114, 128, 0.1);
+  color: #6b7280;
+  border: 1px solid rgba(107, 114, 128, 0.2);
+}
+.detailsTicket .statusBadge[data-status=cancelado] {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+.detailsTicket .statusBadge[data-status=pendente] {
+  background: rgba(239, 68, 68, 0.1);
+  color: #b91c1c;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+.detailsTicket .statusBadge[data-status=aguardando_validacao] {
+  background: rgba(245, 158, 11, 0.08);
+  color: #b45309;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+.detailsTicket .priorityBadge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 120px;
+}
+.detailsTicket .priorityBadge[data-priority=urgente] {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+.detailsTicket .priorityBadge[data-priority=alto] {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+.detailsTicket .priorityBadge[data-priority=médio] {
+  background: rgba(59, 130, 246, 0.1);
+  color: #2563eb;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+.detailsTicket .priorityBadge[data-priority=baixo] {
+  background: rgba(34, 197, 94, 0.1);
+  color: #059669;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+.detailsTicket .ticketHeader {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -18,20 +90,18 @@
   padding-bottom: 24px;
   border-bottom: 1px solid rgba(109, 40, 217, 0.1);
 }
-
-.headerMain {
+.detailsTicket .ticketHeader .headerMain {
   flex: 1;
   padding-right: 20px;
 }
-
-.ticketTitle {
+.detailsTicket .ticketHeader .headerMain .ticketTitle {
   font-size: 28px;
   font-weight: 600;
   color: #1a1a2e;
   margin-bottom: 12px;
   line-height: 1.3;
 }
-.ticketTitle .ticketId {
+.detailsTicket .ticketHeader .headerMain .ticketTitle .ticketId {
   color: #6d28d9;
   font-weight: 700;
   margin-right: 8px;
@@ -40,20 +110,19 @@
   border-radius: 20px;
   font-size: 20px;
 }
-
-.anydeskSection {
+.detailsTicket .ticketHeader .headerMain .anydeskSection {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-top: 8px;
 }
-.anydeskSection .anydeskLabel {
+.detailsTicket .ticketHeader .headerMain .anydeskSection .anydeskLabel {
   color: #1a1a2e;
   font-size: 14px;
   font-weight: 500;
   opacity: 0.8;
 }
-.anydeskSection .anydeskCode {
+.detailsTicket .ticketHeader .headerMain .anydeskSection .anydeskCode {
   background: rgba(139, 92, 246, 0.1);
   color: #8b5cf6;
   padding: 6px 12px;
@@ -62,113 +131,48 @@
   font-size: 14px;
   border: 1px solid rgba(139, 92, 246, 0.2);
 }
-
-.statusContainer {
+.detailsTicket .ticketHeader .statusContainer {
   display: flex;
   flex-direction: column;
   gap: 12px;
   min-width: 200px;
 }
-
-.statusGroup {
+.detailsTicket .ticketHeader .statusContainer .statusGroup {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
-.statusGroup .statusLabel,
-.statusGroup .priorityLabel {
+.detailsTicket .ticketHeader .statusContainer .statusGroup .statusLabel,
+.detailsTicket .ticketHeader .statusContainer .statusGroup .priorityLabel {
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   color: rgba(26, 26, 46, 0.6);
 }
-
-.statusBadge {
-  display: inline-block;
-  padding: 8px 16px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  min-width: 120px;
-}
-.statusBadge[data-status=aberto] {
-  background: rgba(34, 197, 94, 0.1);
-  color: #059669;
-  border: 1px solid rgba(34, 197, 94, 0.2);
-}
-.statusBadge[data-status=em_andamento] {
-  background: rgba(59, 130, 246, 0.1);
-  color: #2563eb;
-  border: 1px solid rgba(59, 130, 246, 0.2);
-}
-.statusBadge[data-status=fechado] {
-  background: rgba(107, 114, 128, 0.1);
-  color: #6b7280;
-  border: 1px solid rgba(107, 114, 128, 0.2);
-}
-.statusBadge[data-status=cancelado] {
-  background: rgba(239, 68, 68, 0.1);
-  color: #dc2626;
-  border: 1px solid rgba(239, 68, 68, 0.2);
-}
-
-.priorityBadge {
-  display: inline-block;
-  padding: 8px 16px;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  min-width: 120px;
-}
-.priorityBadge[data-priority=urgente] {
-  background: rgba(239, 68, 68, 0.1);
-  color: #dc2626;
-  border: 1px solid rgba(239, 68, 68, 0.2);
-}
-.priorityBadge[data-priority=alto] {
-  background: rgba(245, 158, 11, 0.1);
-  color: #d97706;
-  border: 1px solid rgba(245, 158, 11, 0.2);
-}
-.priorityBadge[data-priority=médio] {
-  background: rgba(59, 130, 246, 0.1);
-  color: #2563eb;
-  border: 1px solid rgba(59, 130, 246, 0.2);
-}
-.priorityBadge[data-priority=baixo] {
-  background: rgba(34, 197, 94, 0.1);
-  color: #059669;
-  border: 1px solid rgba(34, 197, 94, 0.2);
-}
-
-.infoGrid {
+.detailsTicket .infoGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
   margin-bottom: 32px;
 }
-
-.infoCard {
+.detailsTicket .infoGrid .infoCard {
   background: rgba(248, 250, 252, 0.95);
   border-radius: 14px;
   border: 1px solid rgba(109, 40, 217, 0.08);
   overflow: hidden;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
-.infoCard:hover {
+.detailsTicket .infoGrid .infoCard:hover {
   border-color: rgba(109, 40, 217, 0.15);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
 }
-
-.infoHeader {
+.detailsTicket .infoGrid .infoCard .infoHeader {
   background: linear-gradient(135deg, rgba(109, 40, 217, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
   padding: 18px 24px;
   border-bottom: 1px solid rgba(109, 40, 217, 0.08);
 }
-.infoHeader .infoTitle {
+.detailsTicket .infoGrid .infoCard .infoHeader .infoTitle {
   font-size: 16px;
   font-weight: 600;
   color: #6d28d9;
@@ -176,34 +180,30 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
-
-.infoContent {
+.detailsTicket .infoGrid .infoCard .infoContent {
   padding: 20px 24px;
 }
-
-.infoRow {
+.detailsTicket .infoGrid .infoCard .infoContent .infoRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 12px 0;
   border-bottom: 1px solid rgba(109, 40, 217, 0.05);
 }
-.infoRow:last-child {
+.detailsTicket .infoGrid .infoCard .infoContent .infoRow:last-child {
   border-bottom: none;
   padding-bottom: 0;
 }
-.infoRow:first-child {
+.detailsTicket .infoGrid .infoCard .infoContent .infoRow:first-child {
   padding-top: 0;
 }
-
-.infoLabel {
+.detailsTicket .infoGrid .infoCard .infoContent .infoRow .infoLabel {
   font-size: 14px;
   font-weight: 500;
   color: rgba(26, 26, 46, 0.7);
   min-width: 120px;
 }
-
-.infoValue {
+.detailsTicket .infoGrid .infoCard .infoContent .infoRow .infoValue {
   font-size: 15px;
   font-weight: 600;
   color: #1a1a2e;
@@ -211,15 +211,19 @@
   flex: 1;
   padding-left: 16px;
 }
-
-.additionalInfo .additionalCard {
+.detailsTicket .feedbackCompact {
   background: rgba(248, 250, 252, 0.95);
   border-radius: 14px;
   border: 1px solid rgba(109, 40, 217, 0.08);
   overflow: hidden;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  margin-bottom: 32px;
 }
-.additionalInfo .additionalTitle {
+.detailsTicket .feedbackCompact:hover {
+  border-color: rgba(109, 40, 217, 0.15);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+.detailsTicket .feedbackCompact .feedbackTitle {
   background: linear-gradient(135deg, rgba(109, 40, 217, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
   padding: 18px 24px;
   font-size: 16px;
@@ -230,34 +234,95 @@
   letter-spacing: 0.5px;
   border-bottom: 1px solid rgba(109, 40, 217, 0.08);
 }
-
-.additionalContent {
+.detailsTicket .feedbackCompact .feedbackContent {
   padding: 20px 24px;
 }
-
-.additionalRow {
+.detailsTicket .feedbackCompact .feedbackContent .feedbackRow {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(109, 40, 217, 0.05);
+  gap: 16px;
+}
+.detailsTicket .feedbackCompact .feedbackContent .feedbackRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.detailsTicket .feedbackCompact .feedbackContent .feedbackRow:first-child {
+  padding-top: 0;
+}
+.detailsTicket .feedbackCompact .feedbackContent .feedbackRow .feedbackLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(26, 26, 46, 0.7);
+  min-width: 70px;
+  white-space: nowrap;
+}
+.detailsTicket .feedbackCompact .feedbackContent .feedbackRow .feedbackValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a1a2e;
+  flex: 1;
+  line-height: 1.5;
+  word-break: break-word;
+  background: rgba(109, 40, 217, 0.02);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(109, 40, 217, 0.08);
+}
+.detailsTicket .feedbackCompact .feedbackContent .feedbackRow .feedbackValue:empty::before {
+  content: "Nenhum motivo registrado";
+  color: rgba(26, 26, 46, 0.4);
+  font-style: italic;
+  font-weight: 400;
+}
+.detailsTicket .feedbackCompact .feedbackContent .feedbackRow .statusBadge {
+  min-width: 100px;
+  padding: 6px 12px;
+  font-size: 13px;
+}
+.detailsTicket .additionalInfo .additionalCard {
+  background: rgba(248, 250, 252, 0.95);
+  border-radius: 14px;
+  border: 1px solid rgba(109, 40, 217, 0.08);
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+.detailsTicket .additionalInfo .additionalCard .additionalTitle {
+  background: linear-gradient(135deg, rgba(109, 40, 217, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+  padding: 18px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #6d28d9;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(109, 40, 217, 0.08);
+}
+.detailsTicket .additionalInfo .additionalCard .additionalContent {
+  padding: 20px 24px;
+}
+.detailsTicket .additionalInfo .additionalCard .additionalContent .additionalRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 14px 0;
   border-bottom: 1px solid rgba(109, 40, 217, 0.05);
 }
-.additionalRow:last-child {
+.detailsTicket .additionalInfo .additionalCard .additionalContent .additionalRow:last-child {
   border-bottom: none;
   padding-bottom: 0;
 }
-.additionalRow:first-child {
+.detailsTicket .additionalInfo .additionalCard .additionalContent .additionalRow:first-child {
   padding-top: 0;
 }
-
-.additionalLabel {
+.detailsTicket .additionalInfo .additionalCard .additionalContent .additionalRow .additionalLabel {
   font-size: 14px;
   font-weight: 500;
   color: rgba(26, 26, 46, 0.7);
   min-width: 160px;
 }
-
-.additionalValue {
+.detailsTicket .additionalInfo .additionalCard .additionalContent .additionalRow .additionalValue {
   font-size: 14px;
   font-weight: 600;
   color: #1a1a2e;
@@ -265,7 +330,7 @@
   flex: 1;
   padding-left: 16px;
 }
-.additionalValue::first-letter {
+.detailsTicket .additionalInfo .additionalCard .additionalContent .additionalRow .additionalValue::first-letter {
   text-transform: uppercase;
 }
 

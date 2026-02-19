@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios'
+import api from '../../service/api';
 
 import styles from './detailsTicket.module.css';
 
@@ -12,10 +12,11 @@ function DetailsTicket() {
     useEffect(() => {
         async function fetchTicketDetails() {
             try {
-                const response = await axios.post('http://localhost:5000/api/tickets/details-ticket', { ticket_id: ticket_id }, { withCredentials: true })
+                const response = await api.post('/api/tickets/details-ticket', { ticket_id })
+                console.log(response.data.ticket)
                 setTicket(response.data.ticket)
             } catch (error) {
-                console.log(error)
+                alert(error.response?.data?.message || '[TMSYSTEM] Erro ao processar solicitação')
             } finally {
                 setLoading(false)
             }
@@ -119,6 +120,31 @@ function DetailsTicket() {
                                 {ticket.assigned_to_name || 'Aguardando atribuição'}
                             </span>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className={styles.feedbackCompact}>
+                <h3 className={styles.feedbackTitle}>
+                    Feedback Técnico
+                </h3>
+
+                <div className={styles.feedbackContent}>
+                    <div className={styles.feedbackRow}>
+                        <span className={styles.feedbackLabel}>Status:</span>
+                        <span
+                            className={styles.statusBadge}
+                            data-status={ticket.status?.toLowerCase()}
+                        >
+                            {'N/A'}
+                        </span>
+                    </div>
+
+                    <div className={styles.feedbackRow}>
+                        <span className={styles.feedbackLabel}>Motivo:</span>
+                        <span className={styles.feedbackValue}>
+                            {ticket.status_reason || 'Nenhum motivo registrado'}
+                        </span>
                     </div>
                 </div>
             </div>

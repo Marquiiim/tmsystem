@@ -183,7 +183,7 @@ function MyCallings() {
                                             Assumir
                                         </button>
                                     }
-                                    {typeEndpoint === '/assumed-tickets' &&
+                                    {typeEndpoint === '/assumed-tickets' && ticket.status !== 'aguardando_validacao' &&
                                         <select onChange={(e) => handleSelectedStatus(e, ticket)}
                                             className={styles.toggleStatusButton}
                                             defaultValue={ticket?.status || ''}>

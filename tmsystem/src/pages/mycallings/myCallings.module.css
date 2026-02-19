@@ -222,6 +222,10 @@
   background: linear-gradient(135deg, #ef4444, #f87171);
   color: white;
 }
+.statusBadge[data-status=aguardando_validacao] {
+  background: linear-gradient(135deg, #b45309, #d97706);
+  color: white;
+}
 
 .priorityBadge {
   padding: 0.5rem 1rem;
