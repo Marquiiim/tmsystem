@@ -115,6 +115,7 @@ const ticket = {
                 t.anydesk_id,
                 t.created_at,
                 t.updated_at,
+                tc.new_status,
                 d.name AS department_name,
                 ur.name AS requester_name,
                 ua.name AS assigned_to_name,
@@ -124,6 +125,7 @@ const ticket = {
             LEFT JOIN users ur ON t.requester_id = ur.id
             LEFT JOIN users ua ON t.assigned_to = ua.id
             LEFT JOIN users uc ON t.created_by = uc.id
+            LEFT JOIN tickets_closure tc ON t.id = tc.ticket_id
             WHERE t.id = ?`, [id]
         )
 
@@ -261,6 +263,12 @@ const ticket = {
 
             return resultClosure || null
         }
+    },
+
+    reopenTicket: async (userData, ticket_id) => {
+        const ticketInfo = await query(
+            
+        )
     },
 
     cancelTicket: async (id) => {

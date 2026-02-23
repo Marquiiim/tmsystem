@@ -173,9 +173,12 @@ function MyCallings() {
                                     <span className={styles.date}>
                                         {new Date(ticket.created_at).toLocaleDateString('pt-BR')}
                                     </span>
-                                    {typeEndpoint !== '/my-tickets' &&
-                                        <button onClick={() => navigate(`/mycallings/${ticket.ticket_id}`)} className={styles.viewButton}>
-                                            Ver detalhes
+                                    <button onClick={() => navigate(`/mycallings/${ticket.ticket_id}`)} className={styles.viewButton}>
+                                        Ver detalhes
+                                    </button>
+                                    {typeEndpoint === '/my-tickets' &&
+                                        <button className={styles.viewButton}>
+                                            Reabrir chamado
                                         </button>
                                     }
                                     {typeEndpoint === '/department-tickets' &&

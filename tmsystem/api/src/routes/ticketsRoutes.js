@@ -9,6 +9,7 @@ const { createTicketController,
     assumeTicketController,
     assumedTicketController,
     changeStatusTicketController,
+    reopenTicketController,
     cancelMyTicketController } = require('../controllers/ticketsController')
 
 router.post('/create', createTicketMiddleware, createTicketController)
@@ -18,6 +19,7 @@ router.post('/details-ticket', ticketsMiddlewareGlobal, detailsTicketController)
 router.post('/assume-ticket', ticketsMiddlewareGlobal, assumeTicketController)
 router.post('/assumed-tickets', ticketsMiddlewareGlobal, assumedTicketController)
 router.post('/change-status', changeStatusTicketMiddleware, changeStatusTicketController)
+router.post('/reopen-ticket', ticketsMiddlewareGlobal, reopenTicketController)
 router.post('/cancel-ticket', ticketsMiddlewareGlobal, cancelMyTicketController)
 
 module.exports = router

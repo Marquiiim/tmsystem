@@ -136,7 +136,7 @@ function DetailsTicket() {
                             className={styles.statusBadge}
                             data-status={ticket.status?.toLowerCase()}
                         >
-                            {'N/A'}
+                            {ticket.new_status || 'N/A'}
                         </span>
                     </div>
 

@@ -5,6 +5,7 @@ const { createTicketService,
     assumeTicketService,
     assumedTicketService,
     changeStatusTicketService,
+    reopenTicketService,
     cancelMyTicketService } = require('../services/ticketsServices')
 
 async function createTicketController(req, res) {
@@ -79,13 +80,23 @@ async function changeStatusTicketController(req, res) {
     }
 }
 
+async function reopenTicketController(req, res) {
+    try {
+        await reopenTicketService(req.cookies, req.body.ticket_id)
+
+        return res.status(200).json({ success: true, message: '[TMSYSTEM] Chamado reaberto com sucesso.' })
+    } catch (error) {
+        return res.status().json({ success: false, message: error.message || '[TMSYSTEM] Não foi possível reabrir esse chamado.' })
+    }
+}
+
 async function cancelMyTicketController(req, res) {
     try {
         await cancelMyTicketService(req.cookies, req.body.ticket_id)
 
         return res.status(200).json({ success: true, message: '[TMSYSTEM] Chamado cancelado com sucesso.' })
     } catch (error) {
-        return res.status(403).json({ success: false, message: error.message })
+        return res.status(403).json({ success: false, message: error.message || '[TMSYSTEM] Não foi possível cancelar esse chamado.' })
     }
 }
 
@@ -97,5 +108,6 @@ module.exports = {
     assumeTicketController,
     assumedTicketController,
     changeStatusTicketController,
+    reopenTicketController,
     cancelMyTicketController
 }
