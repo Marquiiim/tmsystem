@@ -212,23 +212,23 @@ const ticket = {
     changeStatusTicket: async (userId, ticket_id, newStatus, reason) => {
         const ticketInfo = await query(
             `SELECT
-                t.id,
-                t.assigned_to,
-                t.department_id,
-                t.status
-            FROM tickets t
-            WHERE t.id = ?`, [ticket_id]
+                id,
+                assigned_to,
+                department_id,
+                status
+            FROM tickets
+            WHERE id = ?`, [ticket_id]
         )
 
         if (!ticketInfo || ticketInfo.length === 0) throw new Error('[TMSYSTEM] Esse chamado não existe.')
 
         const userInfo = await query(
             `SELECT
-                u.id,    
-                u.user_id,
-                u.department_id
-            FROM user_department u
-            WHERE u.user_id = ?`, [userId]
+                id,    
+                user_id,
+                department_id
+            FROM user_department 
+            WHERE user_id = ?`, [userId]
         )
 
         if (userInfo[0].userId !== ticketInfo[0].assigned_to &&
@@ -260,15 +260,37 @@ const ticket = {
             )
 
             if (resultClosure.affectedRows === 0) throw new Error('[TMSYSTEM] Erro ao atualizar status do chamado, tente novamente.')
-
-            return resultClosure || null
         }
     },
 
     reopenTicket: async (userData, ticket_id) => {
         const ticketInfo = await query(
-            
+            `SELECT
+                id,
+                requester_id,
+                created_by
+            FROM tickets
+            WHERE id = ?`, [ticket_id]
         )
+
+        if (!ticketInfo || ticketInfo.length === 0) throw new Error('[TMSYSTEM] Chamado não encontrado')
+
+        if (userData.id !== ticketInfo[0].requester_id && userData.id !== ticketInfo[0].created_by) throw new Error('[TMSYSTEM] Você não tem permissão para reabrir esse chamado.')
+
+        await query(
+            `DELETE FROM tickets_closure
+            WHERE ticket_id = ?`, [ticket_id]
+        )
+
+        const updatedTicket = await query(
+            `UPDATE tickets
+                set status = ?,
+                called_reopened = ?,
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = ?`, ['reaberto', true, ticket_id]
+        )
+
+        if (updatedTicket.affectedRows === 0) throw new Error('[TMSYSTEM] Erro ao tentar reabrir o chamado.')
     },
 
     cancelTicket: async (id) => {
@@ -276,7 +298,8 @@ const ticket = {
             `DELETE FROM tickets
             WHERE id = ?`, [id]
         )
-        return result || null
+
+        if (result.affectedRows === 0) throw new Error('[TMSYSTEM] Erro ao cancelar chamado.')
     }
 }
 

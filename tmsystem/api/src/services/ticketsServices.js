@@ -92,9 +92,7 @@ async function reopenTicketService(token, ticket_id) {
     try {
         const accessVerify = await jwttokens.verifyAccessToken(access_token)
         const userInfo = await usermodels.findById(accessVerify.userId)
-        const reopen = await ticketsmodels.reopenTicket(userInfo, ticket_id)
-
-
+        await ticketsmodels.reopenTicket(userInfo, ticket_id)
     } catch (error) {
         throw error
     }

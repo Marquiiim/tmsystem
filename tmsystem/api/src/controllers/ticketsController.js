@@ -86,7 +86,7 @@ async function reopenTicketController(req, res) {
 
         return res.status(200).json({ success: true, message: '[TMSYSTEM] Chamado reaberto com sucesso.' })
     } catch (error) {
-        return res.status().json({ success: false, message: error.message || '[TMSYSTEM] Não foi possível reabrir esse chamado.' })
+        return res.status(403).json({ success: false, message: error.message || '[TMSYSTEM] Não foi possível reabrir esse chamado.' })
     }
 }
 

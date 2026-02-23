@@ -226,6 +226,10 @@
   background: linear-gradient(135deg, #b45309, #d97706);
   color: white;
 }
+.statusBadge[data-status=reaberto] {
+  background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+  color: white;
+}
 
 .priorityBadge {
   padding: 0.5rem 1rem;

@@ -66,6 +66,18 @@ function MyCallings() {
         setDialogOpen(true)
     }
 
+    const reopenTicket = useCallback(async (ticket_id) => {
+        setLoading(true)
+        try {
+            await api.post('api/tickets/reopen-ticket', { ticket_id })
+            setRefresh(prev => prev + 1)
+        } catch (error) {
+            alert(error.response?.data?.message || '[TMSYSTEM] Erro ao processar solicitação')
+        } finally {
+            setLoading(false)
+        }
+    }, [])
+
     const cancelTicket = useCallback(async (ticket_id) => {
         setLoading(true)
         try {
@@ -176,8 +188,8 @@ function MyCallings() {
                                     <button onClick={() => navigate(`/mycallings/${ticket.ticket_id}`)} className={styles.viewButton}>
                                         Ver detalhes
                                     </button>
-                                    {typeEndpoint === '/my-tickets' &&
-                                        <button className={styles.viewButton}>
+                                    {typeEndpoint === '/my-tickets' && ticket.status === 'aguardando_validacao' &&
+                                        <button onClick={() => reopenTicket(ticket.ticket_id)} className={styles.viewButton}>
                                             Reabrir chamado
                                         </button>
                                     }
