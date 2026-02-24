@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from 'axios'
+import api from '../../service/api';
 import './protectedRoutes.css'
 
 const ProtectedRoutes = () => {
@@ -11,7 +11,7 @@ const ProtectedRoutes = () => {
     useEffect(() => {
         const verifyToken = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/sessions/private-routes', { withCredentials: true })
+                const response = await api.get('/api/sessions/private-routes')
                 setIsAuthenticated(response?.data?.valid || false)
             } catch (error) {
                 setIsAuthenticated(false)
